@@ -2,15 +2,22 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
+use JbSilva\Router\Router;
+use JbSilva\DI\Resolver;
+
 $path_info = $_SERVER['PATH_INFO'] ?? '/';
 $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 
-$router = new JbSilva\Router\Router($path_info, $method);
+$router = new Router($path_info, $method);
 
-$router->get('/hello/{nome}', function ($params) {
-   return "Meu nome é " . $params[0];
-});
+require __DIR__ . '/router.php';
 
 $result = $router->run();
-$result['callback']($result['params']);
+
+$data = (new Resolver)->method($result['callback'], [
+    'params' => $result['params']
+]);
+
+
+
 
