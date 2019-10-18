@@ -2,10 +2,6 @@
 
 namespace JbSilva\DI;
 
-use Exception;
-use ReflectionClass;
-use ReflectionFunction;
-
 class Resolver
 {
     private $dependencies;
@@ -14,7 +10,7 @@ class Resolver
     {
         $this->dependencies = $dependencies;
 
-        $info = new ReflectionFunction($method);
+        $info = new \ReflectionFunction($method);
         $parameters = $info->getParameters();
         $parameters = $this->resolveParameters($parameters);
 
@@ -42,10 +38,10 @@ class Resolver
     {
         $this->dependencies = $dependencies;
 
-        $class = new ReflectionClass($class);
+        $class = new \ReflectionClass($class);
 
         if (!$class->isInstantiable()) {
-            throw new Exception("{$class} não é instaciável.");
+            throw new \Exception("{$class} não é instaciável.");
         }
 
         $constructor = $class->getConstructor();
@@ -70,6 +66,6 @@ class Resolver
             return $parameter->getDefaultValue();
         }
 
-        throw new Exception("{$parameter->nme} não recebeu um valor válido.");
+        throw new \Exception("{$parameter->nme} não recebeu um valor válido.");
     }
 }

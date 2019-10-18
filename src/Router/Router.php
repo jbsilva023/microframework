@@ -55,7 +55,7 @@ class Router
 
     private function checkUrl(string $toFind, $subject)
     {
-        \preg_match_all('/\{({[^\}]*)\}/', $toFind, $variables);
+        \preg_match_all('/\{([^\}]*)\}/', $toFind, $variables);
 
         $regex = \str_replace('/', '\/', $toFind);
 
@@ -68,6 +68,6 @@ class Router
         $regex = \preg_replace('/{([a-zA-Z]+)}/', '([a-zA-Z0-9+])', $regex);
         $result = \preg_match('/^' . $regex . '$/', $subject, $params);
 
-        return compact('result','params');
+        return compact('result', 'params');
     }
 }
