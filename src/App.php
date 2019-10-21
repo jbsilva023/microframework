@@ -5,6 +5,7 @@ namespace JbSilva;
 use JbSilva\Router\Router;
 use JbSilva\DI\Resolver;
 use JbSilva\Rederer\PHPRedererInterface;
+use Dotenv\Dotenv;
 
 class App
 {

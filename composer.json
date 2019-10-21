@@ -3,7 +3,8 @@
     "description": "Micro framework jbsilva",
     "type": "project",
     "require": {
-        "jenssegers/blade": "^1.2"
+        "jenssegers/blade": "^1.2",
+        "vlucas/phpdotenv": "^3.6"
     },
     "autoload": {
         "psr-4": {
