@@ -1,8 +1,8 @@
 <?php
 
-namespace JbSilva\Controllers;
+namespace App\Controllers;
 
-class HomeController
+class HomeController extends Controller
 {
     private $params;
 
@@ -13,6 +13,6 @@ class HomeController
 
     public function index()
     {
-        return $this->params;
+        return $this->view('inicio', ['name' => 'Jonas Barbosa']);
     }
 }

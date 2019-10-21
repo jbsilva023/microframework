@@ -3,12 +3,12 @@
     "description": "Micro framework jbsilva",
     "type": "project",
     "require": {
-        "illuminate/support": "^6.3",
-        "philo/laravel-blade": "3.*"
+        "jenssegers/blade": "^1.2"
     },
     "autoload": {
         "psr-4": {
-            "JbSilva\\": "src"
+            "JbSilva\\": "src",
+            "App\\": "app"
         }
     },
     "require-dev": {

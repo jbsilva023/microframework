@@ -1,0 +1,6 @@
+vendor
+.idea/workspace.xml
+.idea
+.env
+.gitignore
+app/cache/*.php

@@ -47,7 +47,7 @@ class App
             }
 
             $controller = $resolver->class(
-                'JbSilva\Controllers\\' . $controllerAction[0],
+                'App\Controllers\\' . $controllerAction[0],
                 ['params' => $route['params']]
             );
 
