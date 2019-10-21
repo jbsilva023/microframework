@@ -23,30 +23,34 @@ abstract class Model
 
     public function save()
     {
-        $this->getDriver()
+        return $this->getDriver()
             ->save($this)
             ->exec();
     }
 
     public function findAll(array $conditions = [])
     {
-        $this->getDriver()
+        $data = $this->getDriver()
             ->select($conditions)
             ->exec()
             ->all();
+
+        return $this->collection_objects($data);
     }
 
     public function find($id)
     {
-        $this->getDriver()
+        $data = $this->getDriver()
             ->select(['id' => $id])
             ->exec()
             ->first();
+
+        return $this->collection_objects($data);
     }
 
     public function delete()
     {
-        $this->getDriver()
+        return $this->getDriver()
             ->delete(['id' => $this->id])
             ->exec();
     }
@@ -59,5 +63,16 @@ abstract class Model
         }
 
         return null;
+    }
+
+    protected function collection_objects(array $collection)
+    {
+        $objects_collection = [];
+
+        foreach ($collection as $item) {
+            $objects_collection[] = (object) $item;
+        }
+
+        return $objects_collection;
     }
 }

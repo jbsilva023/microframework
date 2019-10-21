@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Models\Users;
+
 class HomeController extends Controller
 {
     private $params;
@@ -13,6 +15,9 @@ class HomeController extends Controller
 
     public function index()
     {
-        return $this->view('inicio', ['name' => 'Jonas Barbosa']);
+        $user = new Users;
+        $users = $user->findAll();
+
+        return $this->view('inicio', ['users' => $users]);
     }
 }
