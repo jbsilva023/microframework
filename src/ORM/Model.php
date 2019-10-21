@@ -5,13 +5,14 @@ namespace JbSilva\ORM;
 
 use JbSilva\ORM\Drivers\DriverStrategy;
 
-class Model
+abstract class Model
 {
     protected $driver;
 
     public function setDriver(DriverStrategy $driver)
     {
         $this->driver = $driver;
+        $this->driver->setTable($this->table);
         return $this;
     }
 
@@ -48,5 +49,15 @@ class Model
         $this->getDriver()
             ->delete(['id' => $this->id])
             ->exec();
+    }
+
+    public function __get($variable)
+    {
+        if ($variable === 'table') {
+            $table = explode('\\', get_class($this));
+            return strtolower(array_pop($table));
+        }
+
+        return null;
     }
 }
