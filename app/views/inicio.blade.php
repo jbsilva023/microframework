@@ -2,7 +2,19 @@
 
 @section('content')
     <div class="container">
-        <table class="table table-responsive-lg table-hover">
+        <div class="row">
+            <form method="post" action="/arquivo/importar" enctype=multipart/form-data class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <label class="file-upload btn btn-primary">
+                            <i class="fas fa-upload"></i> <input type="file" />
+                        </label>
+                        <input type="submit" class="btn btn-success" vlaue="enviar">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <table class="table table-responsive-lg table-hover mt-10">
             <thead>
             <tr>
                 <th>Nome</th>
@@ -20,8 +32,8 @@
                     <td>{{ $user->documento }}</td>
                     <td>{{ $user->email }}</td>
                     <td>
-                        <a href="#" class="btn btn-primary"><i class=""></i> Atualizar</a>
-                        <a href="#" class="btn btn-danger"><i class=""></i> Deletar</a>
+                        <a href="#" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
             @empty

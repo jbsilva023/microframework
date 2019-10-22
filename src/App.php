@@ -5,9 +5,6 @@ namespace JbSilva;
 use JbSilva\Router\Router;
 use JbSilva\DI\Resolver;
 use JbSilva\Rederer\PHPRedererInterface;
-use JbSilva\ORM\Connection;
-use JbSilva\ORM\Drivers\MysqlPdo;
-use JbSilva\ORM\Model;
 
 class App
 {
