@@ -3,16 +3,33 @@
 
 namespace JbSilva\ORM;
 
-use JbSilva\ORM\Drivers\DriverStrategy;
+use JbSilva\ORM\QueryBuilder\Select;
+use JbSilva\ORM\Drivers\DriverInterface;
 
 abstract class Model
 {
+    protected $data;
     protected $driver;
 
-    public function setDriver(DriverStrategy $driver)
+    public function setAll(array $data)
+    {
+        $this->data = $data;
+    }
+
+    public function getAll()
+    {
+        return $this->data;
+    }
+
+    /*public function getTable() : string
+    {
+        return 'users';
+    }
+
+    public function setDriver(DriverInterface $driver)
     {
         $this->driver = $driver;
-        $this->driver->setTable($this->table);
+        //$this->driver->setTable($this->table);
         return $this;
     }
 
@@ -28,14 +45,16 @@ abstract class Model
             ->exec();
     }
 
-    public function findAll(array $conditions = [])
+    public function all(array $conditions = [])
     {
         $data = $this->getDriver()
-            ->select($conditions)
+            ->setQueryBuilder(new Select($this->getTable()))
             ->exec()
-            ->all();
+            ->first();
 
-        return $this->collection_objects($data);
+        $this->setAll($data);
+
+        return $this;
     }
 
     public function find($id)
@@ -45,7 +64,7 @@ abstract class Model
             ->exec()
             ->first();
 
-        return $this->collection_objects($data);
+        return $data;
     }
 
     public function delete()
@@ -62,17 +81,6 @@ abstract class Model
             return strtolower(array_pop($table));
         }
 
-        return null;
-    }
-
-    protected function collection_objects(array $collection)
-    {
-        $objects_collection = [];
-
-        foreach ($collection as $item) {
-            $objects_collection[] = (object) $item;
-        }
-
-        return $objects_collection;
-    }
+        return $this->data[$name] ?? null;
+    }*/
 }

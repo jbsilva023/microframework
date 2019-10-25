@@ -16,7 +16,7 @@ class HomeController extends Controller
     public function index()
     {
         $user = new Users;
-        $users = $user->findAll();
+        $users = $user->all();
 
         return $this->view('inicio', ['users' => $users]);
     }

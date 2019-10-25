@@ -4,13 +4,61 @@
 namespace JbSilva\ORM\Drivers;
 
 use JbSilva\ORM\Model;
+use JbSilva\ORM\Connection;
+use JbSilva\ORM\QueryBuilder\QueryBuilderInterface;
+use JbSilva\ORM\QueryBuilder\Select;
 
-class MysqlPdo implements DriverStrategy
+class Mysql implements DriverInterface
 {
     protected $pdo;
-    protected $table;
+    protected $query;
+    protected $stmt;
+    //protected $table;
 
-    public function __construct(\PDO $pdo)
+    public function __construct()
+    {
+        $this->pdo = Connection::init();
+    }
+    public function connect()
+    {
+        $this->pod = Connection::init();
+    }
+
+    public function close()
+    {
+        $this->pdo = null;
+    }
+
+    public function setQueryBuilder(QueryBuilderInterface $query)
+    {
+        $this->query =  $query;
+        return $this;
+    }
+
+    public function exec(string $query = null)
+    {
+        $this->stmt = $this->pdo->prepare((string)$this->query);
+        $this->stmt->execute();
+        return $this;
+    }
+
+    public function lastInsertedId()
+    {
+        // TODO: Implement lastInsertedId() method.
+    }
+
+    public function first()
+    {
+        return $this->stmt->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    public function all()
+    {
+        return $this->stmt->fetchall(\PDO::FETCH_ASSOC);
+    }
+
+
+    /*public function __construct(\PDO $pdo)
     {
         $this->pdo = $pdo;
     }
@@ -138,4 +186,14 @@ class MysqlPdo implements DriverStrategy
             $this->query->bindValue($field, $value);
         }
     }
+
+    public function join(Model $data, $table_name_relationship, $relationship_id, $other_relationship_id)
+    {
+        $query = 'SELECT * FROM ' . $this->table . ' INNER JOIN ' . $table_name_relationship .
+            ' ON ' . $this->table . '.id=' . $table_name_relationship . '.' . $relationship_id
+        . ' WHERE ' . $this->table . '.id=' . $this->id;
+
+        $this->query = $this->pdo->prepare($query);
+        return $this;
+    }*/
 }
