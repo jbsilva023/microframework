@@ -17,16 +17,17 @@ class HomeController extends Controller
     {
         $user = new Users;
         $users = $user->all();
+        /*$user = $user->find(1);
 
-        /*$user->nome = 'João Barbosa';
-        $user->tabeliao = 'Jonas Barbosa';
-        $user->email = 'joao.silva023@gmail.com';
+        $user->nome = 'Jonas Barbosa da Silva';
+        $user->tabeliao = 'João Felipe Ibiapina';
+        $user->email = 'jbsilva023@gmail.com';
         $user->documento = '02551049105';
-        $user->telefone = '6192251021';
-        $user->razao = '2º Serventia de teste';
+        $user->telefone = '6196470708';
+        $user->razao = '1º Serventia de teste';
 
         $user = $user->save();
-        var_dump($user); die;*/
+        var_dump($user->id); die;*/
 
         return $this->view('inicio', ['users' => $users]);
     }

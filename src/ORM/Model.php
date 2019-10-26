@@ -5,6 +5,7 @@ namespace JbSilva\ORM;
 
 use JbSilva\ORM\Drivers\Mysql;
 use JbSilva\ORM\QueryBuilder\Insert;
+use JbSilva\ORM\QueryBuilder\Update;
 use JbSilva\ORM\QueryBuilder\Select;
 use JbSilva\ORM\QueryBuilder\Delete;
 use JbSilva\ORM\Drivers\DriverInterface;
@@ -29,7 +30,7 @@ abstract class Model
         return $this->data;
     }
 
-    public function getTable() : string
+    public function getTable(): string
     {
         if (empty($this->table)) {
             $table = explode('\\', get_class($this));
@@ -46,11 +47,11 @@ abstract class Model
 
     public function save()
     {
-        return $this->driver
-            ->setQueryBuilder(new Insert($this->getTable(), $this))
-            ->exec();
+        if (!is_null($this->id)) {
+            return $this->update();
+        }
 
-        return $this->find($this->driver->lastInsertedId());
+        return $this->insert();
     }
 
     public function all(array $conditions = [])
@@ -93,6 +94,26 @@ abstract class Model
         return $this->driver
             ->setQueryBuilder(new Delete($this->getTable(), $conditions))
             ->exec();
+    }
+
+    public function insert()
+    {
+        return $this->driver
+            ->setQueryBuilder(new Insert($this->getTable(), $this))
+            ->exec();
+
+        return $this->find($this->driver->lastInsertedId());
+    }
+
+    public function update()
+    {
+        $conditions[] = ['id', $this->id];
+
+        $this->driver
+            ->setQueryBuilder(new Update($this->getTable(), $this, $conditions))
+            ->exec();
+
+        return $this->find($this->id);
     }
 
     public function __get($name)
