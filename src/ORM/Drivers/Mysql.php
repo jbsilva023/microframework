@@ -3,25 +3,23 @@
 
 namespace JbSilva\ORM\Drivers;
 
-use JbSilva\ORM\Model;
 use JbSilva\ORM\Connection;
 use JbSilva\ORM\QueryBuilder\QueryBuilderInterface;
-use JbSilva\ORM\QueryBuilder\Select;
 
 class Mysql implements DriverInterface
 {
     protected $pdo;
     protected $query;
     protected $stmt;
-    //protected $table;
 
     public function __construct()
     {
-        $this->pdo = Connection::init();
+        $this->connect();
     }
+
     public function connect()
     {
-        $this->pod = Connection::init();
+        $this->pdo = Connection::init();
     }
 
     public function close()
@@ -38,13 +36,13 @@ class Mysql implements DriverInterface
     public function exec(string $query = null)
     {
         $this->stmt = $this->pdo->prepare((string)$this->query);
-        $this->stmt->execute();
+        $this->stmt->execute($this->query->getValues());
         return $this;
     }
 
     public function lastInsertedId()
     {
-        // TODO: Implement lastInsertedId() method.
+        return $this->pdo->lastInsertId();
     }
 
     public function first()
@@ -56,7 +54,6 @@ class Mysql implements DriverInterface
     {
         return $this->stmt->fetchall(\PDO::FETCH_ASSOC);
     }
-
 
     /*public function __construct(\PDO $pdo)
     {

@@ -3,7 +3,6 @@
 
 namespace JbSilva\ORM\QueryBuilder;
 
-
 interface QueryBuilderInterface
 {
     public function getvalues() :array;

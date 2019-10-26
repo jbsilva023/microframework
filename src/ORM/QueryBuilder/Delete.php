@@ -5,7 +5,7 @@ namespace JbSilva\ORM\QueryBuilder;
 
 use JbSilva\ORM\Filters\Where;
 
-class Select implements QueryBuilderInterface
+class Delete implements QueryBuilderInterface
 {
     use Where;
 
@@ -19,7 +19,7 @@ class Select implements QueryBuilderInterface
 
     private function makeSql($table, $conditions)
     {
-        $sql = sprintf('SELECT * FROM %s', $table);
+        $sql = sprintf('DELETE FROM %s', $table);
 
         if ($conditions) {
             $sql .= $this->makeWhere($conditions);

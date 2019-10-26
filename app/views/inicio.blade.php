@@ -7,7 +7,7 @@
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <label class="file-upload btn btn-primary">
-                            <i class="fas fa-upload"></i> <input type="file" />
+                            <i class="fas fa-upload"></i> Upload XML<input type="file" />
                         </label>
                         <input type="submit" class="btn btn-success" vlaue="enviar">
                     </div>
@@ -20,7 +20,8 @@
                 <th>Nome</th>
                 <th>Razão</th>
                 <th>Documeto</th>
-                <th>CEP</th>
+                <th>telefone</th>
+                <th>E-mail</th>
                 <th>Ações</th>
             </tr>
             </thead>
@@ -30,10 +31,11 @@
                     <td>{{ $user->nome }}</td>
                     <td>{{ $user->razao }}</td>
                     <td>{{ $user->documento }}</td>
+                    <td>{{ $user->telefone }}</td>
                     <td>{{ $user->email }}</td>
                     <td>
-                        <a href="#" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                        <a href="#" class="btn btn-primary" data-iduser="{{ $user->id }}"><i class="fas fa-edit"></i></a>
+                        <a href="#" class="btn btn-danger" data-iduser="{{ $user->id }}"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
             @empty
