@@ -1,16 +1,15 @@
 <?php
 
-require __DIR__ . '/vendor/autoload.php';
+$views = __DIR__ . '/views';
+$cache = __DIR__ . '/cache';
 
-$path_info = $_SERVER['PATH_INFO'] ?? '/';
-$method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
+$app = new JbSilva\App;
+$app->setRenderer(new JbSilva\Rederer\PHPRenderer);
 
-$router = new JbSilva\Router\Router($path_info, $method);
+require __DIR__ . '/router.php';
 
-$router->get('/hello/{nome}', function ($params) {
-   return "Meu nome é " . $params[0];
-});
+$app->run();
 
-$result = $router->run();
-$result['callback']($result['params']);
+
+
 

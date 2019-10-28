@@ -3,11 +3,15 @@
     "description": "Micro framework jbsilva",
     "type": "project",
     "require": {
-        "illuminate/support": "^6.3"
+        "jenssegers/blade": "^1.2",
+        "vlucas/phpdotenv": "^3.6",
+        "twbs/bootstrap": "4.0.0",
+        "components/jquery": "^3.3"
     },
     "autoload": {
         "psr-4": {
-            "JbSilva\\": "src"
+            "JbSilva\\": "src",
+            "App\\": "app"
         }
     },
     "require-dev": {

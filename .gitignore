@@ -1,0 +1,5 @@
+vendor
+.idea
+.idea/*.xml
+.gitignore
+app/cache/*.php
