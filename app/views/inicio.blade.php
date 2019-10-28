@@ -3,11 +3,11 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <form method="post" action="/arquivo/importar" enctype=multipart/form-data class="form-horizontal">
+            <form method="post" action="/arquivo/importar" enctype="multipart/form-data" class="form-horizontal">
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <label class="file-upload btn btn-primary">
-                            <i class="fas fa-upload"></i> Upload XML<input type="file" />
+                            <i class="fas fa-upload"></i> Upload XML<input type="file" name="arquivo"/>
                         </label>
                         <input type="submit" class="btn btn-success" vlaue="enviar">
                     </div>
