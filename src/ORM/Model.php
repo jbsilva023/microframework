@@ -121,12 +121,13 @@ abstract class Model
         $model = new $table;
         $foreingKey = $foreingKey ?? substr($this->getTable(), 0, strlen($this->getTable()) -1)  . '_id';
 
+        $conditions[] = ["{$this->getTable()}.id", $this->id];
         $junctions[] = [$model->getTable(), $foreingKey, $otherkey];
-        $conditions[] = [$this->getTable() .'.id', $this->id];
 
         return $this->driver
             ->setQueryBuilder(new Select($this->getTable(), $conditions, $junctions, $this))
-            ->exec();
+            ->exec()
+            ->all();
     }
 
     public function __get($name)

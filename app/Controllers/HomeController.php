@@ -17,7 +17,7 @@ class HomeController extends Controller
     {
         $user = new Users;
 //        $users = $user->all();
-//        $user = $user->find(4);
+        $user = $user->find(1);
 
         /*$user->nome = 'João da Silva';
         $user->tabeliao = 'Jonas Barbosa';
