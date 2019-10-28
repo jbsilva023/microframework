@@ -24,10 +24,10 @@ CREATE TABLE enderecos (
     uf CHAR(2) NOT NULL,
     bairro VARCHAR (100) NOT NULL,
     cidade VARCHAR (100) NOT NULL,
-    usuario_id INT UNSIGNED NOT NULL
+    user_id INT UNSIGNED NOT NULL
 );
 
-ALTER TABLE enderecos ADD CONSTRAINT fk_usuario FOREIGN KEY (usuario_id) REFERENCES users (id);
+ALTER TABLE enderecos ADD CONSTRAINT fk_users FOREIGN KEY (user_id) REFERENCES users (id);
 
 --INSERT INTO users (nome, tabeliao, email, documento, telefone, razao) VALUES ( 'Jonas Barbosa da Silva', 'João Felipe', 'jbsilva023@gmail.com', '02551049105', '61996470708', '1º Serventia de teste');
-INSERT INTO enderecos (nome, cep, uf, bairro, cidade, usuario_id) VALUES ( 'QD 23 CJ K', '71572311', 'DF', 'PARANOÁ', 'BRASILIA', 1);
+INSERT INTO enderecos (nome, cep, uf, bairro, cidade, user_id) VALUES ( 'QD 23 CJ K', '71572311', 'DF', 'PARANOÁ', 'BRASILIA', 1);

@@ -16,19 +16,21 @@ class HomeController extends Controller
     public function index()
     {
         $user = new Users;
-        $users = $user->all();
-        /*$user = $user->find(1);
+//        $users = $user->all();
+//        $user = $user->find(4);
 
-        $user->nome = 'Jonas Barbosa da Silva';
-        $user->tabeliao = 'João Felipe Ibiapina';
-        $user->email = 'jbsilva023@gmail.com';
-        $user->documento = '02551049105';
-        $user->telefone = '6196470708';
-        $user->razao = '1º Serventia de teste';
+        /*$user->nome = 'João da Silva';
+        $user->tabeliao = 'Jonas Barbosa';
+        $user->email = 'joao.silva@gmail.com';
+        $user->documento = '02551049100';
+        $user->telefone = '6196400223';
+        $user->razao = '4º Serventia de teste';*/
 
-        $user = $user->save();
-        var_dump($user->id); die;*/
+//        $user = $user->endereco;
+//       $user = $user->delete();
+var_dump($user->endereco()); die;
+//        $users = $user->all();
 
-        return $this->view('inicio', ['users' => $users]);
+//        return $this->view('inicio', ['users' => $users]);
     }
 }

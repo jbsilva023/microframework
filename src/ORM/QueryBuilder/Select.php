@@ -3,23 +3,29 @@
 
 namespace JbSilva\ORM\QueryBuilder;
 
+use JbSilva\ORM\Filters\Join;
 use JbSilva\ORM\Filters\Where;
 
 class Select implements QueryBuilderInterface
 {
     use Where;
+    use Join;
 
     private $query;
     private $values = [];
 
-    public function __construct(string $table, array $conditions = [])
+    public function __construct(string $table, array $conditions = [], $junctions = [], $model = null)
     {
-        $this->query = $this->makeSql($table, $conditions);
+        $this->query = $this->makeSql($table, $conditions, $junctions, $model);
     }
 
-    private function makeSql($table, $conditions)
+    private function makeSql($table, $conditions, $junctions, $model)
     {
         $sql = sprintf('SELECT * FROM %s', $table);
+
+        if ($junctions) {
+            $sql .= $this->makeJuntion($junctions, $model);
+        }
 
         if ($conditions) {
             $sql .= $this->makeWhere($conditions);

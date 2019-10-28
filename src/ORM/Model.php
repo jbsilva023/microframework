@@ -98,7 +98,7 @@ abstract class Model
 
     public function insert()
     {
-        return $this->driver
+        $this->driver
             ->setQueryBuilder(new Insert($this->getTable(), $this))
             ->exec();
 
@@ -114,6 +114,19 @@ abstract class Model
             ->exec();
 
         return $this->find($this->id);
+    }
+
+    public function hasMany($table, $foreingKey = null, $otherkey = null)
+    {
+        $model = new $table;
+        $foreingKey = $foreingKey ?? substr($this->getTable(), 0, strlen($this->getTable()) -1)  . '_id';
+
+        $junctions[] = [$model->getTable(), $foreingKey, $otherkey];
+        $conditions[] = [$this->getTable() .'.id', $this->id];
+
+        return $this->driver
+            ->setQueryBuilder(new Select($this->getTable(), $conditions, $junctions, $this))
+            ->exec();
     }
 
     public function __get($name)
