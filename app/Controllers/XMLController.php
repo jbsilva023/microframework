@@ -15,6 +15,8 @@ class XMLController extends Controller
 
     public function importar()
     {
+
+        var_dump($_FILES); die;
         $fileXML = simplexml_load_file($_FILES['arquivo']);
     }
 }
