@@ -66,6 +66,6 @@ class Resolver
             return $parameter->getDefaultValue();
         }
 
-        throw new \Exception("{$parameter->nme} não recebeu um valor válido.");
+        throw new \Exception("{$parameter->name} não recebeu um valor válido.");
     }
 }

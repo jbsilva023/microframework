@@ -3,76 +3,143 @@
 
 namespace JbSilva\ORM;
 
-use JbSilva\ORM\Drivers\DriverStrategy;
+use JbSilva\ORM\Drivers\Mysql;
+use JbSilva\ORM\QueryBuilder\Insert;
+use JbSilva\ORM\QueryBuilder\Update;
+use JbSilva\ORM\QueryBuilder\Select;
+use JbSilva\ORM\QueryBuilder\Delete;
+use JbSilva\ORM\Drivers\DriverInterface;
 
 abstract class Model
 {
+    protected $data;
     protected $driver;
 
-    public function setDriver(DriverStrategy $driver)
+    public function __construct()
     {
-        $this->driver = $driver;
-        $this->driver->setTable($this->table);
-        return $this;
+        $this->setDriver(new Mysql());
     }
 
-    public function getDriver()
+    public function setAll(array $data)
     {
-        return $this->driver;
+        $this->data = $data;
     }
 
-    public function save()
+    public function getAll()
     {
-        return $this->getDriver()
-            ->save($this)
-            ->exec();
+        return $this->data;
     }
 
-    public function findAll(array $conditions = [])
+    public function getTable(): string
     {
-        $data = $this->getDriver()
-            ->select($conditions)
-            ->exec()
-            ->all();
-
-        return $this->collection_objects($data);
-    }
-
-    public function find($id)
-    {
-        $data = $this->getDriver()
-            ->select(['id' => $id])
-            ->exec()
-            ->first();
-
-        return $this->collection_objects($data);
-    }
-
-    public function delete()
-    {
-        return $this->getDriver()
-            ->delete(['id' => $this->id])
-            ->exec();
-    }
-
-    public function __get($variable)
-    {
-        if ($variable === 'table') {
+        if (empty($this->table)) {
             $table = explode('\\', get_class($this));
             return strtolower(array_pop($table));
         }
 
-        return null;
+        return $this->table;
     }
 
-    protected function collection_objects(array $collection)
+    public function setDriver(DriverInterface $driver)
     {
-        $objects_collection = [];
+        $this->driver = $driver;
+    }
 
-        foreach ($collection as $item) {
-            $objects_collection[] = (object) $item;
+    public function save()
+    {
+        if (!is_null($this->id)) {
+            return $this->update();
         }
 
-        return $objects_collection;
+        return $this->insert();
+    }
+
+    public function all(array $conditions = [])
+    {
+        $collection = [];
+
+        $data = $this->driver
+            ->setQueryBuilder(new Select($this->getTable(), $conditions))
+            ->exec()
+            ->all();
+
+        foreach ($data as $given) {
+            $className = get_class($this);
+            $class = new $className;
+            $class->setAll($given);
+            $collection[] = $class;
+        }
+
+        return $collection;
+    }
+
+    public function find($id)
+    {
+        $conditions[] = ['id', $id];
+
+        $data = $this->driver
+            ->setQueryBuilder(new Select($this->getTable(), $conditions))
+            ->exec()
+            ->first();
+
+        $this->setAll($data);
+
+        return $this;
+    }
+
+    public function delete()
+    {
+        $conditions[] = ['id', $this->id];
+
+        return $this->driver
+            ->setQueryBuilder(new Delete($this->getTable(), $conditions))
+            ->exec();
+    }
+
+    public function insert()
+    {
+        return $this->driver
+            ->setQueryBuilder(new Insert($this->getTable(), $this))
+            ->exec();
+
+        return $this->find($this->driver->lastInsertedId());
+    }
+
+    public function update()
+    {
+        $conditions[] = ['id', $this->id];
+
+        $this->driver
+            ->setQueryBuilder(new Update($this->getTable(), $this, $conditions))
+            ->exec();
+
+        return $this->find($this->id);
+    }
+
+    public function __get($name)
+    {
+        $method = $this->methodName('get', $name);
+
+        if (method_exists($this, $method)) {
+            return $this->$method();
+        }
+
+        return $this->data[$name] ?? null;
+    }
+
+    public function __set($name, $value)
+    {
+        $method = $this->methodName('set', $name, $value);
+
+        if (method_exists($this, $method)) {
+            return $this->$method($value);
+        }
+
+        $this->data[$name] = $value;
+    }
+
+    private function methodName($prefix, $name)
+    {
+        return $prefix . str_replace(' ', '', ucwords(str_replace('_', ' ', $name)));
     }
 }

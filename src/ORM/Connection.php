@@ -5,14 +5,14 @@ namespace JbSilva\ORM;
 
 use Dotenv\Dotenv;
 
-
 abstract class Connection
 {
     public static $pdo;
 
     //método conexão abre a conexão com o Banco
-    public static function init() {
-        $dotenv = Dotenv::create( __DIR__ . '/../../' );
+    public static function init()
+    {
+        $dotenv = Dotenv::create(__DIR__ . '/../../');
         $dotenv->load();
 
         try {
@@ -28,16 +28,16 @@ abstract class Connection
             }
 
             return self::$pdo;
-
         } catch (PDOException $exc) {
             echo "ERRO: " . $exc->getMessage();
         }
     }//fim método conecta
 
     //método desconecta fecha a conexão com o Banco
-    public function close(){
-        if(isset(self::$pdo)){
-            self::$pdo = NULL;
+    public function close()
+    {
+        if (isset(self::$pdo)) {
+            self::$pdo = null;
         }
     }//fim metodo desconecta
 }

@@ -41,7 +41,7 @@
  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-(function ($) {
+$(function ($) {
     'use strict';
 
     var FileUpload = function (element) {
@@ -59,13 +59,11 @@
         
         this.element.on('change', ':file', function() {
             var input = $(this);
-            
+
             if (input.val()) {
                 var label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
                 $('.file-upload-text', $(this).parent('label')).text(label);
-            }
-            else {
-
+            } else {
                 $('.file-upload-text', $(this).parent('label')).text(defaultText);
             }
         });
