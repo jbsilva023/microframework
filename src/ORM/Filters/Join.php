@@ -3,7 +3,6 @@
 
 namespace JbSilva\ORM\Filters;
 
-
 trait Join
 {
     public function makeJunction(array $junctions, $model) :string
@@ -15,14 +14,13 @@ trait Join
             $foreignKey = $junction[1];
 
             if (isset($junction[2])) {
-                $foreignKey = $junction[1];;
+                $foreignKey = $junction[1];
             }
 
-            $sql .= $model->getTable() . '.id' . ' = ' . $table . '.' . $foreignKey;
-            //$sql .=  $table . '.' . $foreignKey . ' = ' . $model->getTable() . '.id';
+            $sql .= $model->table . '.id' . ' = ' . $table . '.' . $foreignKey;
         }
 
-        $join = sprintf(' INNER JOIN %s ON (%s)', $model->getTable(), $sql);
+        $join = sprintf(' INNER JOIN %s ON (%s)', $table, $sql);
         return $join;
     }
 }

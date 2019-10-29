@@ -16,8 +16,8 @@ class HomeController extends Controller
     public function index()
     {
         $user = new Users;
-//        $users = $user->all();
-        $user = $user->find(1);
+        $users = $user->all();
+//        $user = $user->find(1);
 
         /*$user->nome = 'João da Silva';
         $user->tabeliao = 'Jonas Barbosa';
@@ -28,9 +28,8 @@ class HomeController extends Controller
 
 //        $user = $user->endereco;
 //       $user = $user->delete();
-var_dump($user->endereco()); die;
-//        $users = $user->all();
 
-//        return $this->view('inicio', ['users' => $users]);
+
+        return $this->view('inicio', ['users' => $users]);
     }
 }

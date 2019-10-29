@@ -24,6 +24,7 @@ class Select implements QueryBuilderInterface
         $sql = sprintf('SELECT * FROM %s', $table);
 
         if ($junctions) {
+            $sql = sprintf('SELECT %s.* FROM %s', $model->table, $table);
             $sql .= $this->makeJunction($junctions, $model);
         }
 

@@ -7,7 +7,7 @@ use JbSilva\ORM\Model;
 
 class Users extends Model
 {
-    public function endereco()
+    public function enderecos()
     {
         return $this->hasMany(Enderecos::class);
     }

@@ -165,18 +165,28 @@ abstract class Model
      * @param null $otherkey
      * @return mixed
      */
-    public function hasMany($table, $foreingKey = null, $otherkey = null)
+    public function hasMany($className, $foreingKey = null, $otherkey = null)
     {
-        $model = new $table;
+        $collection = [];
+
+        $model = new $className;
         $foreingKey = $foreingKey ?? substr($this->getTable(), 0, strlen($this->getTable()) -1)  . '_id';
 
         $conditions[] = ["{$this->getTable()}.id", $this->id];
         $junctions[] = [$model->getTable(), $foreingKey, $otherkey];
 
-        return $this->driver
+        $data = $this->driver
             ->setQueryBuilder(new Select($this->getTable(), $conditions, $junctions, $model))
             ->exec()
             ->all();
+
+        foreach ($data as $given) {
+            $class = new $className;
+            $class->setAll($given);
+            $collection[] = $class;
+        }
+
+        return $collection;
     }
 
     /**

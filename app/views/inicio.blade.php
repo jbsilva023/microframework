@@ -22,6 +22,7 @@
                 <th>Documeto</th>
                 <th>telefone</th>
                 <th>E-mail</th>
+                <th>Endereco</th>
                 <th>Ações</th>
             </tr>
             </thead>
@@ -33,6 +34,12 @@
                     <td>{{ $user->documento }}</td>
                     <td>{{ $user->telefone }}</td>
                     <td>{{ $user->email }}</td>
+                    <td>
+                        @php
+                            $endereco = $user->enderecos()[0];
+                        @endphp
+                        {{ $endereco->nome }}, {{ $endereco->bairro }}, {{ $endereco->cidade }} - {{ $endereco->uf }}, {{ $endereco->cep }}
+                    </td>
                     <td>
                         <a href="#" class="btn btn-primary" data-iduser="{{ $user->id }}"><i class="fas fa-edit"></i></a>
                         <a href="#" class="btn btn-danger" data-iduser="{{ $user->id }}"><i class="fas fa-trash"></i></a>
