@@ -9,9 +9,12 @@ use JbSilva\ORM\QueryBuilder\Update;
 use JbSilva\ORM\QueryBuilder\Select;
 use JbSilva\ORM\QueryBuilder\Delete;
 use JbSilva\ORM\Drivers\DriverInterface;
+use JbSilva\ORM\Filters\RelationsShips;
 
 abstract class Model
 {
+    use RelationsShips;
+
     /**
      * @var $data
      * @param array
@@ -105,7 +108,7 @@ abstract class Model
 
     /**
      * @param $id
-     * @return $this
+     * @return Model
      */
     public function find($id)
     {
@@ -157,36 +160,6 @@ abstract class Model
             ->exec();
 
         return $this->find($this->id);
-    }
-
-    /**
-     * @param $table
-     * @param null $foreingKey
-     * @param null $otherkey
-     * @return mixed
-     */
-    public function hasMany($className, $foreingKey = null, $otherkey = null)
-    {
-        $collection = [];
-
-        $model = new $className;
-        $foreingKey = $foreingKey ?? substr($this->getTable(), 0, strlen($this->getTable()) -1)  . '_id';
-
-        $conditions[] = ["{$this->getTable()}.id", $this->id];
-        $junctions[] = [$model->getTable(), $foreingKey, $otherkey];
-
-        $data = $this->driver
-            ->setQueryBuilder(new Select($this->getTable(), $conditions, $junctions, $model))
-            ->exec()
-            ->all();
-
-        foreach ($data as $given) {
-            $class = new $className;
-            $class->setAll($given);
-            $collection[] = $class;
-        }
-
-        return $collection;
     }
 
     /**

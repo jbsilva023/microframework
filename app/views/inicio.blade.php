@@ -36,8 +36,9 @@
                     <td>{{ $user->email }}</td>
                     <td>
                         @php
-                            $endereco = $user->enderecos()[0];
+                        $endereco = $user->enderecos()[0];
                         @endphp
+
                         {{ $endereco->nome }}, {{ $endereco->bairro }}, {{ $endereco->cidade }} - {{ $endereco->uf }}, {{ $endereco->cep }}
                     </td>
                     <td>

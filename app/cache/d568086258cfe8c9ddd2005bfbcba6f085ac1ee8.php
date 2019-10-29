@@ -20,6 +20,7 @@
                 <th>Documeto</th>
                 <th>telefone</th>
                 <th>E-mail</th>
+                <th>Endereco</th>
                 <th>Ações</th>
             </tr>
             </thead>
@@ -31,6 +32,14 @@
                     <td><?php echo e($user->documento); ?></td>
                     <td><?php echo e($user->telefone); ?></td>
                     <td><?php echo e($user->email); ?></td>
+                    <td>
+                        <?php
+                        $endereco = $user->enderecos()[0];
+                        ?>
+
+                        <?php echo e($endereco->nome); ?>, <?php echo e($endereco->bairro); ?>, <?php echo e($endereco->cidade); ?> - <?php echo e($endereco->uf); ?>, <?php echo e($endereco->cep); ?>
+
+                    </td>
                     <td>
                         <a href="#" class="btn btn-primary" data-iduser="<?php echo e($user->id); ?>"><i class="fas fa-edit"></i></a>
                         <a href="#" class="btn btn-danger" data-iduser="<?php echo e($user->id); ?>"><i class="fas fa-trash"></i></a>

@@ -11,16 +11,17 @@ trait Join
 
         foreach ($junctions as $junction) {
             $table = $junction[0];
-            $foreignKey = $junction[1];
+            $primariKey = $junction[1];
+            $foreignKey = $junction[2];
 
-            if (isset($junction[2])) {
-                $foreignKey = $junction[1];
+            if (isset($junction[3])) {
+                $otherKey = $junction[3];
             }
 
-            $sql .= $model->table . '.id' . ' = ' . $table . '.' . $foreignKey;
+            $sql .=   $model->table . '.' . $foreignKey . ' = ' . $table . '.' . $primariKey;
         }
 
-        $join = sprintf(' INNER JOIN %s ON (%s)', $table, $sql);
+        $join = sprintf(' INNER JOIN %s ON (%s)', $model->table, $sql);
         return $join;
     }
 }

@@ -11,4 +11,9 @@ class Users extends Model
     {
         return $this->hasMany(Enderecos::class);
     }
+
+    public function endereco()
+    {
+        return $this->hasOne(Enderecos::class);
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Enderecos;
 use App\Models\Users;
 
 class HomeController extends Controller
@@ -16,9 +17,13 @@ class HomeController extends Controller
     public function index()
     {
         $user = new Users;
-        $users = $user->all();
-//        $user = $user->find(1);
+        $endereco = new Enderecos;
+        $endereco = $endereco->find(4);
+//        $users = $user->find(6);
+//        $users = $user->all();
 
+        var_dump($endereco->user()); die;
+//        var_dump($user->enderecos()); die;
         /*$user->nome = 'João da Silva';
         $user->tabeliao = 'Jonas Barbosa';
         $user->email = 'joao.silva@gmail.com';
