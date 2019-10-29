@@ -6,10 +6,9 @@ namespace JbSilva\ORM\Filters;
 
 trait Join
 {
-    public function makeJuntion(array $junctions, $model) :string
+    public function makeJunction(array $junctions, $model) :string
     {
         $sql = '';
-        $values = [];
 
         foreach ($junctions as $junction) {
             $table = $junction[0];
@@ -20,9 +19,10 @@ trait Join
             }
 
             $sql .= $model->getTable() . '.id' . ' = ' . $table . '.' . $foreignKey;
+            //$sql .=  $table . '.' . $foreignKey . ' = ' . $model->getTable() . '.id';
         }
 
-        $join = sprintf(' INNER JOIN %s ON (%s)', $table, $sql);
+        $join = sprintf(' INNER JOIN %s ON (%s)', $model->getTable(), $sql);
         return $join;
     }
 }

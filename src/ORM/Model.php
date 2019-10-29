@@ -12,24 +12,44 @@ use JbSilva\ORM\Drivers\DriverInterface;
 
 abstract class Model
 {
+    /**
+     * @var $data
+     * @param array
+     */
     protected $data;
+    /**
+     * @var $driver
+     * @param DriverInterface
+     */
     protected $driver;
 
+    /**
+     * Model constructor.
+     */
     public function __construct()
     {
         $this->setDriver(new Mysql());
     }
 
+    /**
+     * @param array $data
+     */
     public function setAll(array $data)
     {
         $this->data = $data;
     }
 
+    /**
+     * @return mixed
+     */
     public function getAll()
     {
         return $this->data;
     }
 
+    /**
+     * @return string
+     */
     public function getTable(): string
     {
         if (empty($this->table)) {
@@ -40,11 +60,17 @@ abstract class Model
         return $this->table;
     }
 
+    /**
+     * @param DriverInterface $driver
+     */
     public function setDriver(DriverInterface $driver)
     {
         $this->driver = $driver;
     }
 
+    /**
+     * @return Model
+     */
     public function save()
     {
         if (!is_null($this->id)) {
@@ -54,6 +80,10 @@ abstract class Model
         return $this->insert();
     }
 
+    /**
+     * @param array $conditions
+     * @return array
+     */
     public function all(array $conditions = [])
     {
         $collection = [];
@@ -73,6 +103,10 @@ abstract class Model
         return $collection;
     }
 
+    /**
+     * @param $id
+     * @return $this
+     */
     public function find($id)
     {
         $conditions[] = ['id', $id];
@@ -87,6 +121,9 @@ abstract class Model
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function delete()
     {
         $conditions[] = ['id', $this->id];
@@ -96,6 +133,9 @@ abstract class Model
             ->exec();
     }
 
+    /**
+     * @return Model
+     */
     public function insert()
     {
         $this->driver
@@ -105,6 +145,9 @@ abstract class Model
         return $this->find($this->driver->lastInsertedId());
     }
 
+    /**
+     * @return Model
+     */
     public function update()
     {
         $conditions[] = ['id', $this->id];
@@ -116,6 +159,12 @@ abstract class Model
         return $this->find($this->id);
     }
 
+    /**
+     * @param $table
+     * @param null $foreingKey
+     * @param null $otherkey
+     * @return mixed
+     */
     public function hasMany($table, $foreingKey = null, $otherkey = null)
     {
         $model = new $table;
@@ -125,11 +174,15 @@ abstract class Model
         $junctions[] = [$model->getTable(), $foreingKey, $otherkey];
 
         return $this->driver
-            ->setQueryBuilder(new Select($this->getTable(), $conditions, $junctions, $this))
+            ->setQueryBuilder(new Select($this->getTable(), $conditions, $junctions, $model))
             ->exec()
             ->all();
     }
 
+    /**
+     * @param $name
+     * @return |null
+     */
     public function __get($name)
     {
         $method = $this->methodName('get', $name);
@@ -141,6 +194,11 @@ abstract class Model
         return $this->data[$name] ?? null;
     }
 
+    /**
+     * @param $name
+     * @param $value
+     * @return mixed
+     */
     public function __set($name, $value)
     {
         $method = $this->methodName('set', $name, $value);
@@ -152,6 +210,11 @@ abstract class Model
         $this->data[$name] = $value;
     }
 
+    /**
+     * @param $prefix
+     * @param $name
+     * @return string
+     */
     private function methodName($prefix, $name)
     {
         return $prefix . str_replace(' ', '', ucwords(str_replace('_', ' ', $name)));

@@ -14,7 +14,7 @@ class Select implements QueryBuilderInterface
     private $query;
     private $values = [];
 
-    public function __construct(string $table, array $conditions = [], $junctions = [], $model = null)
+    public function __construct(string $table, array $conditions = [], array $junctions = [], $model = null)
     {
         $this->query = $this->makeSql($table, $conditions, $junctions, $model);
     }
@@ -24,7 +24,7 @@ class Select implements QueryBuilderInterface
         $sql = sprintf('SELECT * FROM %s', $table);
 
         if ($junctions) {
-            $sql .= $this->makeJuntion($junctions, $model);
+            $sql .= $this->makeJunction($junctions, $model);
         }
 
         if ($conditions) {
