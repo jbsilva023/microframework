@@ -19,7 +19,6 @@ class XMLController extends Controller
 
     public function importar()
     {
-
         $xml = simplexml_load_file($_FILES["arquivo"]['tmp_name']);
 
         foreach ($xml as $item) {
@@ -30,15 +29,16 @@ class XMLController extends Controller
             $cartorio->documento = $item->documento;
             $cartorio->tabeliao = $item->tabeliao;
             $cartorio->status = $item->ativo;
+            $cartorio = $cartorio->save();
 
-            if ($cartorio->save()) {
+            if ($cartorio->id) {
                 $endereco = new Enderecos;
                 $endereco->cep = $item->cep;
                 $endereco->nome = $item->endereco;
                 $endereco->bairro = $item->bairro;
                 $endereco->cidade = $item->cidade;
                 $endereco->uf = $item->uf;
-                $endereco->user_id = $cartorio->id;
+                $endereco->cartorio_id = $cartorio->id;
                 $endereco->save();
             }
         }

@@ -5,14 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d9086ac2-9d69-46e4-ac5c-af491fa7aed9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Models/Cartorios.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Controllers/HomeController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Controllers/XMLController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Controllers/XMLController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/cache/d568086258cfe8c9ddd2005bfbcba6f085ac1ee8.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/cache/d568086258cfe8c9ddd2005bfbcba6f085ac1ee8.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/inicio.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/inicio.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/banco.sql" beforeDir="false" afterPath="$PROJECT_DIR$/banco.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ORM/Filters/RelationsShips.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ORM/Filters/RelationsShips.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -119,8 +112,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Controllers/XMLController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="25" column="37" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
+            <state relative-caret-position="597">
+              <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
               <folding>
                 <element signature="e#37#62#0#PHP" expanded="true" />
               </folding>
@@ -391,7 +384,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="128346000" />
+    <option name="totallyTimeSpent" value="128777000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-1" width="1920" height="1040" extended-state="6" />
@@ -410,7 +403,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49946752" visible="true" weight="0.22637363" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49946752" weight="0.22637363" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5005325" side_tool="true" weight="0.37252748" />
       <window_info anchor="bottom" id="Database Console" order="12" weight="0.32919955" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -745,8 +738,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Controllers/XMLController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="25" column="37" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
+        <state relative-caret-position="597">
+          <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
           <folding>
             <element signature="e#37#62#0#PHP" expanded="true" />
           </folding>
