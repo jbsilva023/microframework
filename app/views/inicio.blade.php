@@ -27,31 +27,34 @@
             </tr>
             </thead>
             <tbody>
-            @forelse($users as $user)
+            @forelse($cartorios as $cartorio)
                 <tr>
-                    <td>{{ $user->nome }}</td>
-                    <td>{{ $user->razao }}</td>
-                    <td>{{ $user->documento }}</td>
-                    <td>{{ $user->telefone }}</td>
-                    <td>{{ $user->email }}</td>
+                    <td>{{ $cartorio->nome }}</td>
+                    <td>{{ $cartorio->razao }}</td>
+                    <td>{{ $cartorio->documento }}</td>
+                    <td>{{ $cartorio->telefone }}</td>
+                    <td>{{ $cartorio->email }}</td>
                     <td>
                         @php
-                        $endereco = $user->enderecos()[0];
+                            $endereco = $cartorio->enderecos()[0];
                         @endphp
 
-                        {{ $endereco->nome }}, {{ $endereco->bairro }}, {{ $endereco->cidade }} - {{ $endereco->uf }}, {{ $endereco->cep }}
+                        {{ $endereco->nome }}, {{ $endereco->bairro }}, {{ $endereco->cidade }} - {{ $endereco->uf }}
+                        , {{ $endereco->cep }}
                     </td>
                     <td>
-                        <a href="#" class="btn btn-primary" data-iduser="{{ $user->id }}"><i class="fas fa-edit"></i></a>
-                        <a href="#" class="btn btn-danger" data-iduser="{{ $user->id }}"><i class="fas fa-trash"></i></a>
+                        <a href="#" class="btn btn-primary" data-iduser="{{ $cartorio->id }}"><i
+                                    class="fas fa-edit"></i></a>
+                        <a href="#" class="btn btn-danger" data-iduser="{{ $cartorio->id }}"><i
+                                    class="fas fa-trash"></i></a>
                     </td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="4"></td>
+                    <td colspan="7"></td>
                 </tr>
             @endforelse
+            </tbody>
         </table>
-        </tbody>
     </div>
 @stop

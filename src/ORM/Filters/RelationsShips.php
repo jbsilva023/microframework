@@ -16,10 +16,13 @@ trait RelationsShips
     public function hasOne($table, $foreingKey = null, $otherkey = null)
     {
         $model = new $table;
-        $foreingKey = $foreingKey ?? substr($this->getTable(), 0, strlen($this->getTable()) -1)  . '_id';
 
-        $conditions[] = ["{$this->getTable()}.id", $this->id];
-        $junctions[] = [$this->getTable(), $foreingKey, $otherkey];
+        $keyReference = substr($this->getTable(), 0, strlen($this->getTable()) -1)  . '_id';
+        $foreingKey = $model->primariKey ?? $foreingKey ?? $keyReference;
+        $primariKey = $this->primariKey ?? 'id';
+
+        $conditions[] = ["{$this->getTable()}.{$primariKey}", $this->$primariKey];
+        $junctions[] = [$this->getTable(), $primariKey, $foreingKey, $otherkey];
 
         $data = $this->driver
             ->setQueryBuilder(new Select($this->getTable(), $conditions, $junctions, $model))
@@ -48,10 +51,13 @@ trait RelationsShips
         $collection = [];
 
         $model = new $table;
-        $foreingKey = $foreingKey ?? substr($this->getTable(), 0, strlen($this->getTable()) -1)  . '_id';
 
-        $conditions[] = ["{$this->getTable()}.id", $this->id];
-        $junctions[] = [$this->getTable(), $foreingKey, $otherkey];
+        $keyReference = substr($this->getTable(), 0, strlen($this->getTable()) -1)  . '_id';
+        $foreingKey = $model->primariKey ?? $foreingKey ?? $keyReference;
+        $primariKey = $this->primariKey ?? 'id';
+
+        $conditions[] = ["{$this->getTable()}.{$primariKey}", $this->$primariKey];
+        $junctions[] = [$this->getTable(), $primariKey, $foreingKey, $otherkey];
 
         $data = $this->driver
             ->setQueryBuilder(new Select($this->getTable(), $conditions, $junctions, $model))
@@ -82,13 +88,11 @@ trait RelationsShips
     public function belongsTo($table, $foreingKey = null, $otherkey = null)
     {
         $model = new $table;
-        $primariKey = 'id';
 
-        $foreingKey = $foreingKey ?? substr($this->getTable(), 0, strlen($this->getTable()) -1)  . '_id';
+        $keyReference = substr($model->getTable(), 0, strlen($model->getTable()) -1)  . '_id';
+        $foreingKey = $model->primariKey ?? $foreingKey ?? 'id';
+        $primariKey = $otherkey ?? $keyReference;
 
-        if (!is_null($this->primariKey)) {
-            $primariKey = $this->primariKey;
-        }
 
         $conditions[] = ["{$this->getTable()}.{$primariKey}", $this->$primariKey];
         $junctions[] = [$this->getTable(), $primariKey, $foreingKey, $otherkey];
@@ -115,7 +119,7 @@ trait RelationsShips
      * @param null $otherkey
      * @return mixed
      */
-    public function belongsToMany($table, $foreingKey = null, $otherkey = null)
+    public function belongsToMany($table, $table_center, $foreingKey, $otherkey)
     {
         $collection = [];
 

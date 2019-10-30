@@ -25,33 +25,37 @@
             </tr>
             </thead>
             <tbody>
-            <?php $__empty_1 = true; $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+            <?php $__empty_1 = true; $__currentLoopData = $cartorios; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cartorio): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                 <tr>
-                    <td><?php echo e($user->nome); ?></td>
-                    <td><?php echo e($user->razao); ?></td>
-                    <td><?php echo e($user->documento); ?></td>
-                    <td><?php echo e($user->telefone); ?></td>
-                    <td><?php echo e($user->email); ?></td>
+                    <td><?php echo e($cartorio->nome); ?></td>
+                    <td><?php echo e($cartorio->razao); ?></td>
+                    <td><?php echo e($cartorio->documento); ?></td>
+                    <td><?php echo e($cartorio->telefone); ?></td>
+                    <td><?php echo e($cartorio->email); ?></td>
                     <td>
                         <?php
-                        $endereco = $user->enderecos()[0];
+                            $endereco = $cartorio->enderecos()[0];
                         ?>
 
-                        <?php echo e($endereco->nome); ?>, <?php echo e($endereco->bairro); ?>, <?php echo e($endereco->cidade); ?> - <?php echo e($endereco->uf); ?>, <?php echo e($endereco->cep); ?>
+                        <?php echo e($endereco->nome); ?>, <?php echo e($endereco->bairro); ?>, <?php echo e($endereco->cidade); ?> - <?php echo e($endereco->uf); ?>
+
+                        , <?php echo e($endereco->cep); ?>
 
                     </td>
                     <td>
-                        <a href="#" class="btn btn-primary" data-iduser="<?php echo e($user->id); ?>"><i class="fas fa-edit"></i></a>
-                        <a href="#" class="btn btn-danger" data-iduser="<?php echo e($user->id); ?>"><i class="fas fa-trash"></i></a>
+                        <a href="#" class="btn btn-primary" data-iduser="<?php echo e($cartorio->id); ?>"><i
+                                    class="fas fa-edit"></i></a>
+                        <a href="#" class="btn btn-danger" data-iduser="<?php echo e($cartorio->id); ?>"><i
+                                    class="fas fa-trash"></i></a>
                     </td>
                 </tr>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                 <tr>
-                    <td colspan="4"></td>
+                    <td colspan="7"></td>
                 </tr>
             <?php endif; ?>
+            </tbody>
         </table>
-        </tbody>
     </div>
 <?php $__env->stopSection(); ?>
 
