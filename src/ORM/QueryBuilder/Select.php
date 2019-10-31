@@ -5,6 +5,7 @@ namespace JbSilva\ORM\QueryBuilder;
 
 use JbSilva\ORM\Filters\Join;
 use JbSilva\ORM\Filters\Where;
+use JbSilva\ORM\Filters\Pagination;
 
 class Select implements QueryBuilderInterface
 {
@@ -14,12 +15,12 @@ class Select implements QueryBuilderInterface
     private $query;
     private $values = [];
 
-    public function __construct(string $table, array $conditions = [], array $junctions = [], $model = null)
+    public function __construct(string $table, array $conditions = [], array $junctions = [], $model = null, $paginations)
     {
-        $this->query = $this->makeSql($table, $conditions, $junctions, $model);
+        $this->query = $this->makeSql($table, $conditions, $junctions, $model, $paginations);
     }
 
-    private function makeSql($table, $conditions, $junctions, $model)
+    private function makeSql($table, $conditions, $junctions, $model, $paginations)
     {
         $sql = sprintf('SELECT * FROM %s', $table);
 
@@ -30,6 +31,10 @@ class Select implements QueryBuilderInterface
 
         if ($conditions) {
             $sql .= $this->makeWhere($conditions);
+        }
+
+        if  ($paginations) {
+            $sql .= $this->makePagination($paginations);
         }
 
         return $sql;

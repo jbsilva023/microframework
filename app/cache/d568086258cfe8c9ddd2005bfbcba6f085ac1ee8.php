@@ -1,17 +1,21 @@
 <?php $__env->startSection('content'); ?>
     <div class="container">
         <div class="row">
-            <form method="post" action="/arquivo/importar" enctype="multipart/form-data" class="form-horizontal">
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <label class="file-upload btn btn-primary">
-                            <i class="fas fa-upload"></i> Upload XML<input type="file" name="arquivo"/>
-                        </label>
-                        <input type="submit" class="btn btn-success" vlaue="enviar">
+            <div class="col text-right">
+                <form name="importar-registros" method="post" action="/arquivo/importar"
+                      enctype=class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-12">
+                            <label class="file-upload btn btn-primary mt-2">
+                                Upload XML <input type="file" name="arquivo" id="arquivo"/>
+                            </label>
+                            <input type="submit" class="btn btn-success" vlaue="enviar">
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
+        <div class="preload"></div>
         <table class="table table-responsive-lg table-hover mt-10">
             <thead>
             <tr>
@@ -33,19 +37,17 @@
                     <td><?php echo e($cartorio->telefone); ?></td>
                     <td><?php echo e($cartorio->email); ?></td>
                     <td>
-                        <?php
-                            $endereco = $cartorio->enderecos()[0];
-                        ?>
+                        <?php echo e($cartorio->endereco()->nome); ?>, <?php echo e($cartorio->endereco()->bairro); ?>,
+                        <?php echo e($cartorio->endereco()->cidade); ?> - <?php echo e($cartorio->endereco()->uf); ?>
 
-                        <?php echo e($endereco->nome); ?>, <?php echo e($endereco->bairro); ?>, <?php echo e($endereco->cidade); ?> - <?php echo e($endereco->uf); ?>
-
-                        , <?php echo e($endereco->cep); ?>
+                        , <?php echo e($cartorio->endereco()->cep); ?>
 
                     </td>
                     <td>
-                        <a href="#" class="btn btn-primary" data-iduser="<?php echo e($cartorio->id); ?>"><i
+                        <a href="#" class="btn btn-primary" data-iduser="<?php echo e($cartorio->id); ?>"
+                           data-target="#update-cartorio" data-toggle="modal"><i
                                     class="fas fa-edit"></i></a>
-                        <a href="#" class="btn btn-danger" data-iduser="<?php echo e($cartorio->id); ?>"><i
+                        <a href="#" class="btn btn-danger delete-cartorio" data-iduser="<?php echo e($cartorio->id); ?>"><i
                                     class="fas fa-trash"></i></a>
                     </td>
                 </tr>

@@ -124,6 +124,28 @@ abstract class Model
         return $this;
     }
 
+    /*public function paginate(array $pagination = [])
+    {
+        $collection = [];
+        $conditions = [];
+        $junctions = [];
+        $model = null;
+
+        $data = $this->driver
+            ->setQueryBuilder(new Select($this->getTable(), $conditions, $junctions, $model, $pagination))
+            ->exec()
+            ->all();
+
+        foreach ($data as $given) {
+            $className = get_class($this);
+            $class = new $className;
+            $class->setAll($given);
+            $collection[] = $class;
+        }
+
+        return $collection;
+    }*/
+
     /**
      * @return mixed
      */

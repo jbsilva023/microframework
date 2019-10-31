@@ -10,6 +10,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="/vendor/twbs/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/app/public/css/file-upload.css"/>
+    <link rel="stylesheet" type="text/css" href="/app/public/css/app.css"/>
 
     <!-- JavaScript (Opcional) -->
     <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
@@ -20,7 +21,9 @@
     <script src="https://kit.fontawesome.com/be56a064b0.js" crossorigin="anonymous"></script>
     <script src="/vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
 
+    <script src="/app/public/js/sweetalert2.all.min.js"></script>
     <script src="/app/public/js/file-upload.js"></script>
+    <script src="/app/public/js/app/import-xml.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('.file-upload').file_upload();

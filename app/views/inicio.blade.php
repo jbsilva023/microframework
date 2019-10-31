@@ -3,17 +3,21 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <form method="post" action="/arquivo/importar" enctype="multipart/form-data" class="form-horizontal">
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <label class="file-upload btn btn-primary">
-                            <i class="fas fa-upload"></i> Upload XML<input type="file" name="arquivo"/>
-                        </label>
-                        <input type="submit" class="btn btn-success" vlaue="enviar">
+            <div class="col text-right">
+                <form name="importar-registros" method="post" action="/arquivo/importar"
+                      enctype=class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-12">
+                            <label class="file-upload btn btn-primary mt-2">
+                                Upload XML <input type="file" name="arquivo" id="arquivo"/>
+                            </label>
+                            <input type="submit" class="btn btn-success" vlaue="enviar">
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
+        <div class="preload"></div>
         <table class="table table-responsive-lg table-hover mt-10">
             <thead>
             <tr>
@@ -35,17 +39,15 @@
                     <td>{{ $cartorio->telefone }}</td>
                     <td>{{ $cartorio->email }}</td>
                     <td>
-                        @php
-                            $endereco = $cartorio->enderecos()[0];
-                        @endphp
-
-                        {{ $endereco->nome }}, {{ $endereco->bairro }}, {{ $endereco->cidade }} - {{ $endereco->uf }}
-                        , {{ $endereco->cep }}
+                        {{ $cartorio->endereco()->nome }}, {{ $cartorio->endereco()->bairro }},
+                        {{ $cartorio->endereco()->cidade }} - {{ $cartorio->endereco()->uf }}
+                        , {{ $cartorio->endereco()->cep }}
                     </td>
                     <td>
-                        <a href="#" class="btn btn-primary" data-iduser="{{ $cartorio->id }}"><i
+                        <a href="#" class="btn btn-primary" data-iduser="{{ $cartorio->id }}"
+                           data-target="#update-cartorio" data-toggle="modal"><i
                                     class="fas fa-edit"></i></a>
-                        <a href="#" class="btn btn-danger" data-iduser="{{ $cartorio->id }}"><i
+                        <a href="#" class="btn btn-danger delete-cartorio" data-iduser="{{ $cartorio->id }}"><i
                                     class="fas fa-trash"></i></a>
                     </td>
                 </tr>

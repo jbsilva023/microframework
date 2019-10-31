@@ -7,8 +7,8 @@ use JbSilva\ORM\Model;
 
 class Cartorios extends Model
 {
-    public function enderecos()
+    public function endereco()
     {
-        return $this->hasMany(Enderecos::class);
+        return $this->hasOne(Enderecos::class);
     }
 }

@@ -20,6 +20,6 @@ class HomeController extends Controller
         $cartorio = new Cartorios;
         $cartorios = $cartorio->all();
 
-        return $this->view('inicio', ['cartorio' => $cartorios]);
+        return $this->view('inicio', ['cartorios' => $cartorios]);
     }
 }

@@ -1,0 +1,14 @@
+.preload {
+    position: fixed;
+    z-index:99999;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    opacity:1;
+    background-color:#fff;
+    background:url(../img/double-ring-1.5s-200px.svg) center no-repeat rgba(255,255,255,0.7);
+    background-size:15%;
+    background-position:center;
+    background-repeat:no-repeat;
+}

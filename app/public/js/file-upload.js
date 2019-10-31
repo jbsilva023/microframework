@@ -52,7 +52,7 @@ $(function ($) {
         var input = $('input', this.element);
         
         this.element.text('');
-        this.element.append('<span class="file-upload-text"></span>');
+        this.element.append('<i class="fas fa-upload"></i> <span class="file-upload-text"></span>');
         $('.file-upload-text', this.element).text(label);
         
         this.element.append(input);
