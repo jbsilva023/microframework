@@ -1,5 +1,20 @@
+<<<<<<< HEAD
 vendor
 .idea
 .idea/*.xml
 .gitignore
 app/cache/*.php
+=======
+# Created by .ignore support plugin (hsz.mobi)
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+.idea
+.idea/*.xml
+vendor
+*.iml
+out
+gen
+.gitignore
+>>>>>>> ea2541cb73ea8dee94c3de6c04035d61f615da32
