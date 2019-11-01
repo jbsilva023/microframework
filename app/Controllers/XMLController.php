@@ -55,7 +55,7 @@ class XMLController extends Controller
         } catch (\Exception $e) {
             return [
                 'title' => 'Erro!',
-                'msg' => 'Não foi possível importar os registros.',
+                'msg' => "Não foi possível importar os registros. <br/>{$e->getMessage()}",
                 'type' => 'error',
                 'reload'=> true,
             ];

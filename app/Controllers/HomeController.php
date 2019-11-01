@@ -17,8 +17,10 @@ class HomeController extends Controller
 
     public function index()
     {
+        $page = $_GET['page'];
         $cartorio = new Cartorios;
-        $cartorios = $cartorio->all();
+        //$cartorios = $cartorio->all();
+        $cartorios = $cartorio->paginate(10, $page);
 
         return $this->view('inicio', ['cartorios' => $cartorios]);
     }

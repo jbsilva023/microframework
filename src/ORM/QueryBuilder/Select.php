@@ -11,6 +11,7 @@ class Select implements QueryBuilderInterface
 {
     use Where;
     use Join;
+    use Pagination;
 
     private $query;
     private $values = [];
