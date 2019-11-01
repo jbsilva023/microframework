@@ -124,12 +124,23 @@ abstract class Model
         return $this;
     }
 
-    /*public function paginate(array $pagination = [])
+    public function paginate(int $num_registers = 10, $current_page = 1, array $orderBy = [])
     {
         $collection = [];
         $conditions = [];
         $junctions = [];
+        $pagination = [$num_registers, $current_page, $orderBy];
         $model = null;
+
+        $total = $this->driver
+            ->setQueryBuilder(new Select($this->getTable(), $conditions))
+            ->exec()
+            ->count();
+
+        $firstItem = (($current_page - 1) * $num_registers) + 1;
+        $lastItem = ($firstItem + $num_registers) -1;
+
+        //$collection = array_merge($collection, ['firstItem' => $firstItem, 'lastItem' => $lastItem, 'total' => $total]);
 
         $data = $this->driver
             ->setQueryBuilder(new Select($this->getTable(), $conditions, $junctions, $model, $pagination))
@@ -144,7 +155,7 @@ abstract class Model
         }
 
         return $collection;
-    }*/
+    }
 
     /**
      * @return mixed

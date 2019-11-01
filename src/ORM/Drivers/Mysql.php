@@ -54,4 +54,9 @@ class Mysql implements DriverInterface
     {
         return $this->stmt->fetchall(\PDO::FETCH_ASSOC);
     }
+
+    public function count()
+    {
+        return $this->stmt->rowCount();
+    }
 }
