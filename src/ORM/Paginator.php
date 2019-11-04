@@ -137,7 +137,8 @@ class Paginator
      */
     public function getPageUrl($pageNum)
     {
-        return str_replace(self::NUM_PLACEHOLDER, $pageNum, $this->urlPattern);
+        //return str_replace(self::NUM_PLACEHOLDER, $pageNum, $this->urlPattern);
+        return $this->urlPattern . $pageNum;
     }
 
     public function getNextPage()
@@ -239,7 +240,7 @@ class Paginator
     {
         return [
             'num' => $pageNum,
-            'url' => $this->getPageUrl($pageNum) . $pageNum,
+            'url' => $this->getPageUrl($pageNum),
             'isCurrent' => $isCurrent,
         ];
     }
@@ -266,13 +267,13 @@ class Paginator
         if ($this->numPages <= 1) {
             return '';
         }
-        $html = '<nav aria-label="Page navigation example bd-1">
+        $html = '<nav aria-label="Page navigation example">
                     <ul class="pagination">';
         if ($this->getPrevUrl()) {
             $html .= '<li class="page-item"><a class="page-link" href="'
                 . htmlspecialchars($this->getPrevUrl()) . '" aria-label="Previous">&laquo; ' . $this->previousText . '</a></li>';
         }
-//        var_dump($this->getPages()); die;
+
         foreach ($this->getPages() as $page) {
             if (!is_null($page['url'])) {
                 $html .= '<li class="page-item' . ($page['isCurrent'] ? ' active' : '')
@@ -283,11 +284,13 @@ class Paginator
                             ' . htmlspecialchars($page['num']) . '</a></li>';
             }
         }
+
         if ($this->getNextUrl()) {
             $html .= '<li class="page-item"><a href="' . htmlspecialchars($this->getNextUrl()) . '" class="page-link" 
             aria-label="Next">' . $this->nextText . ' &raquo;</a></li>';
         }
-        $html .= '</ul>';
+
+        $html .= '</ul></nav>';
         return $html;
     }
 

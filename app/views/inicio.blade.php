@@ -21,19 +21,19 @@
         <table class="table table-responsive-lg table-hover mt-10">
             <thead>
             <tr>
-                <th>Nome</th>
-                <th>Razão</th>
-                <th>Documeto</th>
-                <th>telefone</th>
-                <th>E-mail</th>
-                <th>Endereco</th>
-                <th>Ações</th>
+                {{--<th width="20%">Nome</th>--}}
+                <th width="23%">Razão</th>
+                <th width="10%">Documeto</th>
+                <th width="15%">telefone</th>
+                <th width="20%">E-mail</th>
+                <th width="20%">Endereco</th>
+                <th width="12%">Ações</th>
             </tr>
             </thead>
             <tbody>
             @forelse($cartorios as $cartorio)
                 <tr>
-                    <td>{{ $cartorio->nome }}</td>
+                    {{--<td>{{ $cartorio->nome }}</td>--}}
                     <td>{{ $cartorio->razao }}</td>
                     <td>{{ $cartorio->documento }}</td>
                     <td>{{ $cartorio->telefone }}</td>
@@ -59,10 +59,13 @@
             </tbody>
         </table>
         <div class="row">
-            <span>
-                {{ $paginator->getCurrentPageFirstItem() }} até {{ $paginator->getCurrentPageLastItem() }} de
-                {{ $paginator->getTotalItems() }}
-            </span>
+            <div class="col">
+                <span>
+                    Exibindo de <b>{{ $paginator->getCurrentPageFirstItem() }}</b> até
+                    <b>{{ $paginator->getCurrentPageLastItem() }}</b> de
+                    <b>{{ $paginator->getTotalItems() }}</b> registros.
+                </span>
+            </div>
         </div>
         <div class="row">
             <div class="col">
