@@ -44,10 +44,10 @@
                         , {{ $cartorio->endereco()->cep }}
                     </td>
                     <td>
-                        <a href="#" class="btn btn-primary" data-iduser="{{ $cartorio->id }}"
+                        <a href="javascript:void(0)" class="btn btn-primary" data-iduser="{{ $cartorio->id }}"
                            data-target="#update-cartorio" data-toggle="modal"><i
                                     class="fas fa-edit"></i></a>
-                        <a href="#" class="btn btn-danger delete-cartorio" data-iduser="{{ $cartorio->id }}"><i
+                        <a href="javascript:void(0)" class="btn btn-danger delete-cartorio" data-iduser="{{ $cartorio->id }}"><i
                                     class="fas fa-trash"></i></a>
                     </td>
                 </tr>
@@ -68,8 +68,28 @@
             </div>
         </div>
         <div class="row">
-            <div class="col">
+            <div class="col text-center">
                 {!! $paginator !!}
+            </div>
+        </div>
+    </div>
+    <div id="update-cartorio" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="update-cartorio"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success">Save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>

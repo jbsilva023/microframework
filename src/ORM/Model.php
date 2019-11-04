@@ -137,11 +137,6 @@ abstract class Model
             ->exec()
             ->count();
 
-        //$firstItem = (($current_page - 1) * $num_registers) + 1;
-        //$lastItem = ($firstItem + $num_registers) -1;
-
-        //$collection = array_merge($collection, ['firstItem' => $firstItem, 'lastItem' => $lastItem, 'total' => $total]);
-
         $collection['paginator'] = new Paginator($total, $num_registers, $current_page);
 
         $data = $this->driver
