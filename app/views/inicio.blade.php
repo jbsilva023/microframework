@@ -58,5 +58,16 @@
             @endforelse
             </tbody>
         </table>
+        <div class="row">
+            <span>
+                {{ $paginator->getCurrentPageFirstItem() }} até {{ $paginator->getCurrentPageLastItem() }} de
+                {{ $paginator->getTotalItems() }}
+            </span>
+        </div>
+        <div class="row">
+            <div class="col">
+                {!! $paginator !!}
+            </div>
+        </div>
     </div>
 @stop
