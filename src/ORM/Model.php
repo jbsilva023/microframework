@@ -71,6 +71,21 @@ abstract class Model
         $this->driver = $driver;
     }
 
+    public function beginTransaction()
+    {
+        $this->driver->beginTransaction();
+    }
+
+    public function commit()
+    {
+        $this->driver->commit();
+    }
+
+    public function rollBack()
+    {
+        $this->driver->rollBack();
+    }
+
     /**
      * @return Model
      */
@@ -136,11 +151,6 @@ abstract class Model
             ->setQueryBuilder(new Select($this->getTable(), $conditions))
             ->exec()
             ->count();
-
-        //$firstItem = (($current_page - 1) * $num_registers) + 1;
-        //$lastItem = ($firstItem + $num_registers) -1;
-
-        //$collection = array_merge($collection, ['firstItem' => $firstItem, 'lastItem' => $lastItem, 'total' => $total]);
 
         $collection['paginator'] = new Paginator($total, $num_registers, $current_page);
 
