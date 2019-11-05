@@ -29,6 +29,7 @@
             $('.file-upload').file_upload();
         });
     </script>
+    <script type="text/javascript" src="/app/public/js/app/cartorio.js"></script>
 </head>
 <body>
 <div class="container">

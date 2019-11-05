@@ -35,19 +35,20 @@
                 <tr>
                     {{--<td>{{ $cartorio->nome }}</td>--}}
                     <td>{{ $cartorio->razao }}</td>
-                    <td>{{ $cartorio->documento }}</td>
+                    <td>{{ \App\Helpers\Helper::mask('CNPJ', $cartorio->documento) }}</td>
                     <td>{{ $cartorio->telefone }}</td>
                     <td>{{ $cartorio->email }}</td>
                     <td>
                         {{ $cartorio->endereco()->nome }}, {{ $cartorio->endereco()->bairro }},
                         {{ $cartorio->endereco()->cidade }} - {{ $cartorio->endereco()->uf }}
-                        , {{ $cartorio->endereco()->cep }}
+                        , {{ \App\Helpers\Helper::mask('CEP', $cartorio->endereco()->cep) }}
                     </td>
                     <td>
-                        <a href="javascript:void(0)" class="btn btn-primary" data-iduser="{{ $cartorio->id }}"
+                        <a href="javascript:void(0)" class="btn btn-primary" data-idcarorio="{{ $cartorio->id }}"
+                           data-nome="{{ $cartorio->nome }}"
                            data-target="#update-cartorio" data-toggle="modal"><i
                                     class="fas fa-edit"></i></a>
-                        <a href="javascript:void(0)" class="btn btn-danger delete-cartorio" data-iduser="{{ $cartorio->id }}"><i
+                        <a href="javascript:void(0)" class="btn btn-danger delete-cartorio" data-idcarorio="{{ $cartorio->id }}"><i
                                     class="fas fa-trash"></i></a>
                     </td>
                 </tr>
@@ -78,7 +79,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
+                    <h5 class="modal-title"></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

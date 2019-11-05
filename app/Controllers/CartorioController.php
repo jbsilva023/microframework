@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Models\Cartorios;
 use App\Models\Enderecos;
-use App\Models\Users;
 
 class CartorioController extends Controller
 {
@@ -21,7 +20,7 @@ class CartorioController extends Controller
         $cartorio = new Cartorios;
         $cartorios = $cartorio->paginate(10, $page);
 
-        return $this->view('inicio', ['cartorios' => $cartorios['data'], 'paginator' => $cartorios['paginator']]);
+        return $this->view('app.inicio', ['cartorios' => $cartorios['data'], 'paginator' => $cartorios['paginator']]);
     }
 
     public function show()
@@ -30,12 +29,12 @@ class CartorioController extends Controller
         $cartorio = new Cartorios;
         $cartorio = $cartorio->find($id);
 
-        return $this->view('form-cartorio', ['cartorio' => $cartorio]);
+        return $this->view('app.form-cartorio', ['cartorio' => $cartorio]);
     }
 
     public function create()
     {
-        return $this->view('form-cartorio');
+        return $this->view('app.form-cartorio');
     }
 
     public function store()
