@@ -3,7 +3,6 @@
 
 namespace JbSilva\ORM\Filters;
 
-
 trait Pagination
 {
     public function makePagination(array $pagination = []): string
@@ -27,5 +26,4 @@ trait Pagination
 
         return $sql;
     }
-
 }

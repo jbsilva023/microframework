@@ -3,7 +3,6 @@
 
 namespace JbSilva\ORM;
 
-
 class Paginator
 {
     const NUM_PLACEHOLDER = '(:num)';
@@ -21,7 +20,8 @@ class Paginator
      * @param int $totalItems The total number of items.
      * @param int $itemsPerPage The number of items per page.
      * @param int $currentPage The current page number.
-     * @param string $urlPattern A URL for each page, with (:num) as a placeholder for the page number. Ex. '/foo/page/(:num)'
+     * @param string $urlPattern A URL for each page, with (:num) as a placeholder for the page number.
+     * Ex. '/foo/page/(:num)'
      */
     public function __construct($totalItems, $itemsPerPage, $currentPage, $urlPattern = '?page=')
     {
@@ -210,9 +210,13 @@ class Paginator
             } else {
                 $slidingStart = $this->currentPage - $numAdjacents;
             }
-            if ($slidingStart < 2) $slidingStart = 2;
+            if ($slidingStart < 2) {
+                $slidingStart = 2;
+            }
             $slidingEnd = $slidingStart + $this->maxPagesToShow - 3;
-            if ($slidingEnd >= $this->numPages) $slidingEnd = $this->numPages - 1;
+            if ($slidingEnd >= $this->numPages) {
+                $slidingEnd = $this->numPages - 1;
+            }
             // Build the list of pages.
             $pages[] = $this->createPage(1, $this->currentPage == 1);
             if ($slidingStart > 2) {
@@ -271,14 +275,15 @@ class Paginator
                     <ul class="pagination justify-content-center">';
         if ($this->getPrevUrl()) {
             $html .= '<li class="page-item"><a class="page-link" href="'
-                . htmlspecialchars($this->getPrevUrl()) . '" aria-label="Previous">&laquo; ' . $this->previousText . '</a></li>';
+                . htmlspecialchars($this->getPrevUrl()) . '" aria-label="Previous">&laquo; '
+                . $this->previousText . '</a></li>';
         }
 
         foreach ($this->getPages() as $page) {
             if (!is_null($page['url'])) {
                 $html .= '<li class="page-item' . ($page['isCurrent'] ? ' active' : '')
-                    . '"><a href="' . htmlspecialchars($page['url']) . '" class="page-link">' . htmlspecialchars($page['num'])
-                    . '</a></li>';
+                    . '"><a href="' . htmlspecialchars($page['url']) . '" class="page-link">'
+                    . htmlspecialchars($page['num']) . '</a></li>';
             } else {
                 $html .= '<li class="page-item disabled"><a href="javascript:void(1);" class="page-link">
                             ' . htmlspecialchars($page['num']) . '</a></li>';

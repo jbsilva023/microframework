@@ -34,7 +34,7 @@ class Select implements QueryBuilderInterface
             $sql .= $this->makeWhere($conditions);
         }
 
-        if  ($paginations) {
+        if ($paginations) {
             $sql .= $this->makePagination($paginations);
         }
 

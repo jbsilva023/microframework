@@ -71,6 +71,21 @@ abstract class Model
         $this->driver = $driver;
     }
 
+    public function beginTransaction()
+    {
+        $this->driver->beginTransaction();
+    }
+
+    public function commit()
+    {
+        $this->driver->commit();
+    }
+
+    public function rollBack()
+    {
+        $this->driver->rollBack();
+    }
+
     /**
      * @return Model
      */
