@@ -20,16 +20,18 @@
     </script>
     <script src="https://kit.fontawesome.com/be56a064b0.js" crossorigin="anonymous"></script>
     <script src="/vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/app/public/js/jquery.mask.min.js"></script>
+    <script src="/app/public/js/jquery.funcoes.js"></script>
 
     <script src="/app/public/js/sweetalert2.all.min.js"></script>
-    <script src="/app/public/js/file-upload.js"></script>
-    <script src="/app/public/js/app/import-xml.js"></script>
+    <script src="/app/public/js/jquery.funcoes.file-upload.js"></script>
+    <script src="/app/public/js/app/jquery.funcoes.import-xml.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('.file-upload').file_upload();
         });
     </script>
-    <script type="text/javascript" src="/app/public/js/app/cartorio.js"></script>
+    <script type="text/javascript" src="/app/public/js/app/jquery.funcoes.cartorio.js"></script>
 </head>
 <body>
 <div class="container">

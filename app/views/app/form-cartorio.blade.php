@@ -19,13 +19,13 @@
         </div>
         <div class="col-md-6">
             <label for="documento">Documento</label>
-            <input type="text" name="documento" id="documento" class="form-control"
-                   value="{{ \App\Helpers\Helper::mask('CNPJ', $cartorio->documento) }}" readonly>
+            <input type="text" name="documento" id="documento" class="cnpj form-control"
+                   value="{{ $cartorio->documento }}" readonly>
         </div>
         <div class="col-md-6">
             <label for="telefone">Telefone</label>
-            <input type="text" name="telefone" id="telefone" class="form-control"
-                   value="{{ \App\Helpers\Helper::mask('TELEFONE', $cartorio->telefone) }}">
+            <input type="text" name="telefone" id="telefone" class="phone form-control"
+                   value="{{ $cartorio->telefone }}">
         </div>
         <div class="col-md-6">
             <label for="email">E-mail</label>
@@ -54,8 +54,8 @@
         </div>
         <div class="col-md-6">
             <label for="cep">CEP</label>
-            <input type="text" name="cep" id="cep" class="form-control"
-                   value="{{ \App\Helpers\Helper::mask('CEP', $cartorio->endereco()->cep) }}">
+            <input type="text" name="cep" id="cep" class="cep form-control"
+                   value="{{ $cartorio->endereco()->cep }}">
         </div>
     </div>
 </form>

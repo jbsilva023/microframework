@@ -23,9 +23,9 @@
             <tr>
                 {{--<th width="20%">Nome</th>--}}
                 <th width="23%">Razão</th>
-                <th width="10%">Documeto</th>
-                <th width="15%">telefone</th>
-                <th width="20%">E-mail</th>
+                <th width="16%">Documeto</th>
+                <th width="14%">telefone</th>
+                <th width="15%">E-mail</th>
                 <th width="20%">Endereco</th>
                 <th width="12%">Ações</th>
             </tr>
@@ -35,20 +35,20 @@
                 <tr>
                     {{--<td>{{ $cartorio->nome }}</td>--}}
                     <td>{{ $cartorio->razao }}</td>
-                    <td>{{ \App\Helpers\Helper::mask('CNPJ', $cartorio->documento) }}</td>
-                    <td>{{ $cartorio->telefone }}</td>
+                    <td><span class="cnpj">{{ $cartorio->documento }}</span></td>
+                    <td><span class="phone">{{ $cartorio->telefone }}</span></td>
                     <td>{{ $cartorio->email }}</td>
                     <td>
                         {{ $cartorio->endereco()->nome }}, {{ $cartorio->endereco()->bairro }},
                         {{ $cartorio->endereco()->cidade }} - {{ $cartorio->endereco()->uf }}
-                        , {{ \App\Helpers\Helper::mask('CEP', $cartorio->endereco()->cep) }}
+                        , <span class="cep">{{ $cartorio->endereco()->cep }}</span>
                     </td>
                     <td>
-                        <a href="javascript:void(0)" class="btn btn-primary" data-idcarorio="{{ $cartorio->id }}"
+                        <a href="javascript:void(0)" class="btn btn-primary" data-idcartorio="{{ $cartorio->id }}"
                            data-nome="{{ $cartorio->nome }}"
                            data-target="#update-cartorio" data-toggle="modal"><i
                                     class="fas fa-edit"></i></a>
-                        <a href="javascript:void(0)" class="btn btn-danger delete-cartorio" data-idcarorio="{{ $cartorio->id }}"><i
+                        <a href="javascript:void(0)" class="btn btn-danger delete-cartorio" data-idcartorio="{{ $cartorio->id }}"><i
                                     class="fas fa-trash"></i></a>
                     </td>
                 </tr>
