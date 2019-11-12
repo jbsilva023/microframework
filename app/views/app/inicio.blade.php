@@ -61,7 +61,7 @@
         </table>
         <div class="row">
             <div class="col">
-                <span>
+                <span class="paginate-info">
                     Exibindo de <b>{{ $paginator->getCurrentPageFirstItem() }}</b> até
                     <b>{{ $paginator->getCurrentPageLastItem() }}</b> de
                     <b>{{ $paginator->getTotalItems() }}</b> registros.
@@ -88,8 +88,8 @@
                     <div class="form"></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success save">Save</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success save">Salvar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                 </div>
             </div>
         </div>

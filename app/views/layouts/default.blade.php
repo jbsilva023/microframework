@@ -47,14 +47,14 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Importar <span class="sr-only">(Página atual)</span></a>
+                    <a class="nav-link" href="/inicio">Importar <span class="sr-only">(Página atual)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Destaques</a>
+                    <a class="nav-link" href="/cartorio/novo">Cadastro</a>
                 </li>
-                <li class="nav-item">
+                {{--<li class="nav-item">
                     <a class="nav-link" href="#">Preços</a>
-                </li>
+                </li>--}}
             </ul>
         </div>
     </nav>

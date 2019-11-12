@@ -8,11 +8,11 @@
         </div>
         <div class="col-md-12">
             <label for="razao">Razão social</label>
-            <input type="text" name="razao" id="razao" class="form-control"value="{{ $cartorio->razao }}">
+            <input type="text" name="razao" id="razao" class="form-control" value="{{ $cartorio->razao }}">
         </div>
         <div class="col-md-6">
             <label for="tabeliao">Tabelião</label>
-            <input type="text" name="tabeliao" id="tabeliao" class="form-control"value="{{ $cartorio->tabeliao }}">
+            <input type="text" name="tabeliao" id="tabeliao" class="form-control" value="{{ $cartorio->tabeliao }}">
         </div>
         <div class="col-md-6">
             <label for="email">E-mail</label>

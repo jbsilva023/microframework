@@ -30,16 +30,17 @@ class CartorioController extends Controller
         $cartorio = new Cartorios;
         $cartorio = $cartorio->find($id);
 
-        return $this->view('app.form-cartorio', ['cartorio' => $cartorio]);
+        return $this->view('app.form-update-cartorio', ['cartorio' => $cartorio]);
     }
 
     public function create()
     {
-        return $this->view('app.form-cartorio');
+        return $this->view('app.form-novo-cartorio');
     }
 
     public function store()
     {
+        var_dump($_POST); die;
         $cartorio = new Cartorios;
         $cartorio->beginTransaction();
 
@@ -114,7 +115,7 @@ class CartorioController extends Controller
                     'title' => 'Sucesso!',
                     'msg' => 'Registro atualizado com sucesso.',
                     'type' => 'success',
-                    'reload' => true,
+                    'reload' => true
                 ];
 
             } catch (\Exception $e) {
@@ -124,7 +125,7 @@ class CartorioController extends Controller
                     'title' => 'Erro!',
                     'msg' => "Não foi possível atualizar o registro. <br/>Erro: {$e->getMessage()}",
                     'type' => 'error',
-                    'reload' => true,
+                    'reload' => true
                 ];
             }
         }
@@ -134,7 +135,7 @@ class CartorioController extends Controller
             'title' => 'Erro!',
             'msg' => "Não foi possível localizar o registro.",
             'type' => 'error',
-            'reload' => true,
+            'reload' => true
         ];
     }
 
@@ -150,7 +151,7 @@ class CartorioController extends Controller
                 'title' => 'Sucesso!',
                 'msg' => 'Registro removido com sucesso.',
                 'type' => 'success',
-                'reload' => true,
+                'reload' => true
             ];
         }
 
@@ -158,7 +159,7 @@ class CartorioController extends Controller
             'title' => 'Erro!',
             'msg' => "Não foi possível localizar o registro.",
             'type' => 'error',
-            'reload' => true,
+            'reload' => true
         ];
     }
 }

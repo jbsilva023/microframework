@@ -31,6 +31,53 @@ $(function ($) {
         $(this).find('div.modal-content .form').html('');
     });
 
+    /*$('select[name=tipo_documento]').on('change', function () {
+        let form = $(this).closest('form');
+
+        switch ($(this).val()) {
+            case '1':
+                form.find('input[name=documento]').removeClass('cnpj').addClass('cpf')
+                    .attr('disabled', false).val('');
+                break;
+            case '2':
+                form.find('input[name=documento]').removeClass('cpf').addClass('cnpj')
+                    .attr('disabled', false).val('');
+                break;
+            default:
+                form.find('input[name=documento]').removeClass('cpf').removeClass('cnpj')
+                    .attr('disabled', true).val('');
+                break;
+        }
+    });*/
+
+    $('form[name=cartorio]').on('submit', function (event) {
+        event.preventDefault();
+
+        var form = $(this);
+
+        $.ajax({
+            type: "POST",
+            url: "/cartorio/inserir",
+            data: form.serialize(),
+            beforeSend: function () {
+                $('div#update-cartorio').find('.preload').fadeIn('slow');
+            },
+            success: function (response) {
+                Swal.fire(response.title, response.msg, response.type).then(function () {
+                    if (response.reload) {
+                        window.location.reload();
+                    }
+                });
+            },
+            error: function () {
+
+            },
+            complete: function () {
+                $('.preload').fadeOut('slow');
+            }
+        });
+    });
+
     $('div#update-cartorio').on('click', 'button.save', function (event) {
         var form = $('form[name=cartorio]');
 
