@@ -31,24 +31,23 @@ $(function ($) {
         $(this).find('div.modal-content .form').html('');
     });
 
-    /*$('select[name=tipo_documento]').on('change', function () {
+    $('select[name=tipo_documento]').on('change', function () {
         let form = $(this).closest('form');
 
         switch ($(this).val()) {
             case '1':
-                form.find('input[name=documento]').removeClass('cnpj').addClass('cpf')
-                    .attr('disabled', false).val('');
+                form.find('input[name=documento]').attr('disabled', false).val('');
+                form.find('input[name=documento]').mask('000.000.000-00', {reverse: true});
                 break;
             case '2':
-                form.find('input[name=documento]').removeClass('cpf').addClass('cnpj')
-                    .attr('disabled', false).val('');
+                form.find('input[name=documento]').attr('disabled', false).val('');
+                form.find('input[name=documento]').mask('00.000.000/0000-00', {reverse: true});
                 break;
             default:
-                form.find('input[name=documento]').removeClass('cpf').removeClass('cnpj')
-                    .attr('disabled', true).val('');
+                form.find('input[name=documento]').attr('disabled', true).val('');
                 break;
         }
-    });*/
+    });
 
     $('form[name=cartorio]').on('submit', function (event) {
         event.preventDefault();

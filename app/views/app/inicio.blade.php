@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col text-right">
                 <form name="importar-registros" method="post" action="/arquivo/importar"
-                      enctype=class="form-horizontal">
+                      class="form-horizontal">
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-12">
                             <label class="file-upload btn btn-primary mt-2">
