@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Helpers\Helper;
 use App\Models\Cartorios;
 use App\Models\Enderecos;
 
@@ -46,15 +47,15 @@ class CartorioController extends Controller
             $cartorio->nome = $_POST['nome'];
             $cartorio->tabeliao = $_POST['tabeliao'];
             $cartorio->email = $_POST['email'];
-            $cartorio->documento = $_POST['documento'];
+            $cartorio->documento = Helper::unmask($_POST['documento']);
             $cartorio->tipo_documento = $_POST['tipo_documento'];
-            $cartorio->telefone = $_POST['telefone'];
+            $cartorio->telefone = Helper::unmask($_POST['telefone']);
             $cartorio->razao = $_POST['razao'];
             $cartorio->save();
 
             $endereco = new Enderecos;
             $endereco->nome = $_POST['endereco'];
-            $endereco->cep = $_POST['cep'];
+            $endereco->cep = Helper::unmask($_POST['cep']);
             $endereco->uf = $_POST['uf'];
             $endereco->bairro = $_POST['bairro'];
             $endereco->cidade = $_POST['cidade'];
@@ -93,19 +94,18 @@ class CartorioController extends Controller
                 $cartorio->nome = $_POST['nome'];
                 $cartorio->tabeliao = $_POST['tabeliao'];
                 $cartorio->email = $_POST['email'];
-                $cartorio->documento = $_POST['documento'];
+                $cartorio->documento = Helper::unmask($_POST['documento']);
                 $cartorio->tipo_documento = $_POST['tipo_documento'];
-                $cartorio->telefone = $_POST['telefone'];
+                $cartorio->telefone = Helper::unmask($_POST['telefone']);
                 $cartorio->razao = $_POST['razao'];
                 $cartorio->save();
 
-                $endereco = new Enderecos;
+                $endereco = $cartorio->endereco();
                 $endereco->nome = $_POST['endereco'];
-                $endereco->cep = $_POST['cep'];
+                $endereco->cep = Helper::unmask($_POST['cep']);
                 $endereco->uf = $_POST['uf'];
                 $endereco->bairro = $_POST['bairro'];
                 $endereco->cidade = $_POST['cidade'];
-                $endereco->cartorio_id = $cartorio->id;
                 $endereco->save();
 
                 $cartorio->commit();

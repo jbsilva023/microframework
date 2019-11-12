@@ -31,6 +31,32 @@ $(function ($) {
         $(this).find('div.modal-content .form').html('');
     });
 
+    $('div#update-cartorio').on('click', 'button.save', function (event) {
+        var form = $('form[name=cartorio]');
+
+        $.ajax({
+            type: "POST",
+            url: "/cartorio/update",
+            data: form.serialize(),
+            beforeSend: function () {
+                $('div#update-cartorio').find('.preload').fadeIn('slow');
+            },
+            success: function (response) {
+                Swal.fire(response.title, response.msg, response.type).then(function () {
+                    if (response.reload) {
+                        window.location.reload();
+                    }
+                });
+            },
+            error: function () {
+                
+            },
+            complete: function () {
+                $('.preload').fadeOut('slow');
+            }
+        });
+    });
+
     $('.delete-cartorio').on('click', function (event) {
         event.preventDefault();
 
