@@ -32,6 +32,8 @@ $(window).on('load', function () {
                     $('.preload').fadeOut('slow');
                 }
             });
+        } else {
+            Swal.fire("Atenção", "Reaize o upload de um arquivo XML", "info");
         }
     });
 });

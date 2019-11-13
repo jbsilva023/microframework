@@ -19,7 +19,7 @@ class CartorioController extends Controller
     {
         $page = $_GET['page'] ?? 1;
         $cartorio = new Cartorios;
-        $cartorios = $cartorio->paginate(10, $page);
+        $cartorios = $cartorio->paginate(10, $page, ['id', 'DESC']);
 
         return $this->view('app.inicio', ['cartorios' => $cartorios['data'], 'paginator' => $cartorios['paginator']]);
     }
@@ -40,7 +40,6 @@ class CartorioController extends Controller
 
     public function store()
     {
-        var_dump($_POST); die;
         $cartorio = new Cartorios;
         $cartorio->beginTransaction();
 

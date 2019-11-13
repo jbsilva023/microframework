@@ -64,7 +64,7 @@ $(function ($) {
             success: function (response) {
                 Swal.fire(response.title, response.msg, response.type).then(function () {
                     if (response.reload) {
-                        window.location.reload();
+                        window.location.href = '/';
                     }
                 });
             },
@@ -95,7 +95,7 @@ $(function ($) {
                 });
             },
             error: function () {
-                
+
             },
             complete: function () {
                 $('.preload').fadeOut('slow');
@@ -121,7 +121,7 @@ $(function ($) {
                 $.ajax({
                     type: "POST",
                     url: "/cartorio/delete",
-                    data: {'id':id},
+                    data: {'id': id},
                     beforeSend: function () {
                         $('.preload').fadeIn('slow');
                     },
