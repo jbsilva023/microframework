@@ -33,7 +33,7 @@ $(window).on('load', function () {
                 }
             });
         } else {
-            Swal.fire("Atenção", "Reaize o upload de um arquivo XML", "info");
+            Swal.fire("Atenção", "Realize o upload de um arquivo XML", "info");
         }
     });
 });

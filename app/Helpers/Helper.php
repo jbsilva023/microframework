@@ -66,4 +66,10 @@ class Helper
         ];
         return preg_replace(array_keys($utf8), array_values($utf8), $text);
     }
+
+    static function replaceUrl($value)
+    {
+        $url = explode('?', $value);
+        return $url[0];
+    }
 }

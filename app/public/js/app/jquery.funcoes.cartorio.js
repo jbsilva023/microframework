@@ -110,12 +110,13 @@ $(function ($) {
 
         Swal.fire({
             title: 'Você tem certeza?',
-            text: "Você deseja excluir o registro!",
+            text: "Você deseja excluir o registro?",
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Sim'
+            cancelButtonText: 'Não',
+            confirmButtonText: 'Sim',
         }).then((result) => {
             if (result.value) {
                 $.ajax({

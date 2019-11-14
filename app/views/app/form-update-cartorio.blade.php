@@ -46,7 +46,7 @@
             <select name="uf" id="uf" class="form-control">
                 <option value="">Selecione...</option>
                 @foreach($ufs as $uf)
-                    <option value="{{ $uf->name }}"
+                    <option value="{{ $uf['name'] }}"
                             {{$cartorio->endereco()->uf === $uf['name'] ? 'selected':''}}>
                         {{ $uf['description'] }}
                     </option>

@@ -55,7 +55,6 @@
                                     <label for="uf">UF</label>
                                     <select name="uf" id="uf" class="form-control">
                                         <option value="">Selecione...</option>
-                                        {{var_dump($ufs)}}
                                         @foreach($ufs as $uf)
                                             <option value="{{ $uf['name'] }}">{{ $uf['description'] }}</option>
                                         @endforeach

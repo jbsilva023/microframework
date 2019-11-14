@@ -46,7 +46,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item{{$_SERVER['REQUEST_URI'] ==='/inicio' ? ' active' : ''}}">
+                <li class="nav-item{{App\Helpers\Helper::replaceUrl($_SERVER['REQUEST_URI']) ==='/inicio' ? ' active' : ''}}">
                     <a class="nav-link" href="/inicio">Importar <span class="sr-only">(Página atual)</span></a>
                 </li>
                 <li class="nav-item{{$_SERVER['REQUEST_URI'] ==='/cartorio/novo'? ' active' : ''}}">
