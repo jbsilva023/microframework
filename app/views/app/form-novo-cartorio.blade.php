@@ -55,34 +55,10 @@
                                     <label for="uf">UF</label>
                                     <select name="uf" id="uf" class="form-control">
                                         <option value="">Selecione...</option>
-                                        <option value="AC">Acre</option>
-                                        <option value="AL">Alagoas</option>
-                                        <option value="AP">Amapá</option>
-                                        <option value="AM">Amazonas</option>
-                                        <option value="BA">Bahia</option>
-                                        <option value="CE">Ceará</option>
-                                        <option value="DF">Distrito Federal</option>
-                                        <option value="ES">Espírito Santo</option>
-                                        <option value="GO">Goiás</option>
-                                        <option value="MA">Maranhão</option>
-                                        <option value="MT">Mato Grosso</option>
-                                        <option value="MS">Mato Grosso do Sul</option>
-                                        <option value="MG">Minas Gerais</option>
-                                        <option value="PA">Pará</option>
-                                        <option value="PB">Paraíba</option>
-                                        <option value="PR">Paraná</option>
-                                        <option value="PE">Pernambuco</option>
-                                        <option value="PI">Piauí</option>
-                                        <option value="RJ">Rio de Janeiro</option>
-                                        <option value="RN">Rio Grande do Norte</option>
-                                        <option value="RS">Rio Grande do Sul</option>
-                                        <option value="RO">Rondônia</option>
-                                        <option value="RR">Roraima</option>
-                                        <option value="SC">Santa Catarina</option>
-                                        <option value="SP">São Paulo</option>
-                                        <option value="SE">Sergipe</option>
-                                        <option value="TO">Tocantins</option>
-                                        <option value="EX">Estrangeiro</option>
+                                        {{var_dump($ufs)}}
+                                        @foreach($ufs as $uf)
+                                            <option value="{{ $uf['name'] }}">{{ $uf['description'] }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-6">
@@ -106,7 +82,7 @@
                 </div>
                 <div class="card-footer">
                     <div class="col">
-                        <div class="form-group">
+                        <div class="form-group float-right">
                             <div class="col-sm-offset-2 col-sm-12">
                                 <button type="submit" class="btn btn-success">Salvar</button>
                                 <button type="reset" class="btn btn-primary">Limpar</button>

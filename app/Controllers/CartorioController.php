@@ -29,13 +29,15 @@ class CartorioController extends Controller
         $id = $_POST['id'];
         $cartorio = new Cartorios;
         $cartorio = $cartorio->find($id);
+        $ufs = $this->getUfs();
 
-        return $this->view('app.form-update-cartorio', ['cartorio' => $cartorio]);
+        return $this->view('app.form-update-cartorio', ['cartorio' => $cartorio, 'ufs' => $ufs]);
     }
 
     public function create()
     {
-        return $this->view('app.form-novo-cartorio');
+        $ufs = $this->getUfs();
+        return $this->view('app.form-novo-cartorio', ['ufs' => $ufs]);
     }
 
     public function store()
@@ -159,6 +161,40 @@ class CartorioController extends Controller
             'msg' => "Não foi possível localizar o registro.",
             'type' => 'error',
             'reload' => true
+        ];
+    }
+
+    protected function getUfs(): array
+    {
+        return [
+            ["name" =>"AC", "description" => "Acre"],
+            ["name" => "AL", "description" => "Alagoas"],
+            ["name" => "AP", "description" => "Amapá"],
+            ["name" => "AM", "description" => 'Amazonas'],
+            ["name" => "BA", "description" => "Bahia"],
+            ["name" =>"CE", "description" => "Ceará"],
+            ["name" => "DF", "description" => "Distrito Federal"],
+            ["name" => "ES", "description" => "Espírito Santo"],
+            ["name" => "GO", "description" => "Goiás"],
+            ["name" => "MA", "description" => "Maranhão"],
+            ["name" => "MT", "description" => "Mato Grosso"],
+            ["name" => "MS", "description" => "Mato Grosso do Sul"],
+            ["name" => "MG", "description" => "Minas Gerais"],
+            ["name" => "PA", "description" => "Pará"],
+            ["name" => "PB", "description" => "Paraíba"],
+            ["name" =>"PR", "description" => "Paraná"],
+            ["name" => "PE", "description" => "Pernambuco"],
+            ["name" => "PI", "description" => "Piauí"],
+            ["name" => "RJ", "description" => "Rio de Janeiro"],
+            ["name" => "RN", "description" => "Rio Grande do Norte"],
+            ["name" =>"RS", "description" => "Rio Grande do Sul"],
+            ["name" => "RO", "description" => "Rondônia"],
+            ["name" => "RR", "description" => "Roraima"],
+            ["name" => "SC", "description" => "Santa Catarina"],
+            ["name" => "SP", "description" => "São Paulo"],
+            ["name" =>"SE", "description" => "Sergipe"],
+            ["name" => "TO", "description" => "Tocantins"],
+            ["name" => "EX", "description" => "Estrangeiro"]
         ];
     }
 }

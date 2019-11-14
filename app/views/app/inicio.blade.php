@@ -18,16 +18,16 @@
             </div>
         </div>
         <div class="preload"></div>
-        <table class="table table-responsive-lg table-hover mt-10">
-            <thead>
+        <table class="table table-responsive-lg table-hover mt-10 table-sm">
+            <thead class="table-dark">
             <tr>
                 {{--<th width="20%">Nome</th>--}}
-                <th width="23%">Razão</th>
-                <th width="16%">Documeto</th>
-                <th width="14%">telefone</th>
+                <th width="25%">Razão</th>
+                <th width="15%">Documeto</th>
+                <th width="10%">telefone</th>
                 <th width="15%">E-mail</th>
-                <th width="20%">Endereco</th>
-                <th width="12%">Ações</th>
+                <th width="25%">Endereco</th>
+                <th width="10%">Ações</th>
             </tr>
             </thead>
             <tbody>

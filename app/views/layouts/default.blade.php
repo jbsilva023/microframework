@@ -35,8 +35,8 @@
 </head>
 <body>
 <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href="#">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info">
+        <a class="navbar-brand" href="/">
             <img src="https://www.anoreg.org.br/site/wp-content/images/logo-anoreg-300.png" width="30" height="30"
                  alt="">
         </a>
@@ -46,10 +46,10 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item active">
+                <li class="nav-item{{$_SERVER['REQUEST_URI'] ==='/inicio' ? ' active' : ''}}">
                     <a class="nav-link" href="/inicio">Importar <span class="sr-only">(Página atual)</span></a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item{{$_SERVER['REQUEST_URI'] ==='/cartorio/novo'? ' active' : ''}}">
                     <a class="nav-link" href="/cartorio/novo">Cadastro</a>
                 </li>
                 {{--<li class="nav-item">
