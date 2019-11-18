@@ -34,7 +34,7 @@ class Paginator
 
     protected function updateNumPages()
     {
-        $this->numPages = ($this->itemsPerPage == 0 ? 0 : (int)ceil($this->totalItems / $this->itemsPerPage));
+        $this->numPages = ($this->itemsPerPage === 0 ? 0 : (int)ceil($this->totalItems / $this->itemsPerPage));
     }
 
     /**
@@ -238,7 +238,7 @@ class Paginator
      *
      * @param int $pageNum
      * @param bool $isCurrent
-     * @return Array
+     * @return array
      */
     protected function createPage($pageNum, $isCurrent = false)
     {

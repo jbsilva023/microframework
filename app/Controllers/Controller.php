@@ -10,7 +10,7 @@ class Controller
     {
     }
 
-    protected function view($view, $data)
+    protected function view($view, $data = [])
     {
         $blade = new Blade('app/views', 'app/cache');
         return $blade->render($view, $data);

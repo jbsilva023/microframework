@@ -17,7 +17,7 @@ class XMLController extends Controller
     }
 
     /**
-     * @return false|string
+     * @return array
      */
     public function importar()
     {
@@ -48,18 +48,18 @@ class XMLController extends Controller
 
             return [
                 'title' => 'Sucesso!',
-                'msg' => 'Registros importados com sucesso.',
+                'msg' => 'Registro importados com sucesso.',
                 'type' => 'success',
-                'reload'=> true,
+                'reload' => true
             ];
+
         } catch (\Exception $e) {
             return [
                 'title' => 'Erro!',
                 'msg' => "Não foi possível importar os registros. <br/>{$e->getMessage()}",
                 'type' => 'error',
-                'reload'=> true,
+                'reload'=> true
             ];
         }
-
     }
 }

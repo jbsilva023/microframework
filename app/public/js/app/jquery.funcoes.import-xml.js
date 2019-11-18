@@ -32,28 +32,8 @@ $(window).on('load', function () {
                     $('.preload').fadeOut('slow');
                 }
             });
+        } else {
+            Swal.fire("Atenção", "Realize o upload de um arquivo XML", "info");
         }
-    });
-
-    $('.delete-cartorio').on('click', function (e) {
-        e.preventDefault();
-
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "Você deseja excluir o registro!",
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Sim'
-        }).then((result) => {
-            if (result.value) {
-                Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
-                    'success'
-                )
-            }
-        })
     });
 });

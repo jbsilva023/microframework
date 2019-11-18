@@ -16,8 +16,13 @@ class Select implements QueryBuilderInterface
     private $query;
     private $values = [];
 
-    public function __construct(string $table, array $conditions = [], array $junctions = [], $model = null, $paginations = [])
-    {
+    public function __construct(
+        string $table,
+        array $conditions = [],
+        array $junctions = [],
+        $model = null,
+        array $paginations = []
+    ) {
         $this->query = $this->makeSql($table, $conditions, $junctions, $model, $paginations);
     }
 

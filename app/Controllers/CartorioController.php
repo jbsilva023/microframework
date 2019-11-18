@@ -2,9 +2,9 @@
 
 namespace App\Controllers;
 
+use App\Helpers\Helper;
 use App\Models\Cartorios;
 use App\Models\Enderecos;
-use App\Models\Users;
 
 class CartorioController extends Controller
 {
@@ -19,9 +19,9 @@ class CartorioController extends Controller
     {
         $page = $_GET['page'] ?? 1;
         $cartorio = new Cartorios;
-        $cartorios = $cartorio->paginate(10, $page);
+        $cartorios = $cartorio->paginate(10, $page, ['id', 'DESC']);
 
-        return $this->view('inicio', ['cartorios' => $cartorios['data'], 'paginator' => $cartorios['paginator']]);
+        return $this->view('app.inicio', ['cartorios' => $cartorios['data'], 'paginator' => $cartorios['paginator']]);
     }
 
     public function show()
@@ -29,13 +29,15 @@ class CartorioController extends Controller
         $id = $_POST['id'];
         $cartorio = new Cartorios;
         $cartorio = $cartorio->find($id);
+        $ufs = $this->getUfs();
 
-        return $this->view('form-cartorio', ['cartorio' => $cartorio]);
+        return $this->view('app.form-update-cartorio', ['cartorio' => $cartorio, 'ufs' => $ufs]);
     }
 
     public function create()
     {
-        return $this->view('form-cartorio');
+        $ufs = $this->getUfs();
+        return $this->view('app.form-novo-cartorio', ['ufs' => $ufs]);
     }
 
     public function store()
@@ -47,15 +49,15 @@ class CartorioController extends Controller
             $cartorio->nome = $_POST['nome'];
             $cartorio->tabeliao = $_POST['tabeliao'];
             $cartorio->email = $_POST['email'];
-            $cartorio->documento = $_POST['documento'];
+            $cartorio->documento = Helper::unmask($_POST['documento']);
             $cartorio->tipo_documento = $_POST['tipo_documento'];
-            $cartorio->telefone = $_POST['telefone'];
+            $cartorio->telefone = Helper::unmask($_POST['telefone']);
             $cartorio->razao = $_POST['razao'];
             $cartorio->save();
 
             $endereco = new Enderecos;
             $endereco->nome = $_POST['endereco'];
-            $endereco->cep = $_POST['cep'];
+            $endereco->cep = Helper::unmask($_POST['cep']);
             $endereco->uf = $_POST['uf'];
             $endereco->bairro = $_POST['bairro'];
             $endereco->cidade = $_POST['cidade'];
@@ -94,19 +96,18 @@ class CartorioController extends Controller
                 $cartorio->nome = $_POST['nome'];
                 $cartorio->tabeliao = $_POST['tabeliao'];
                 $cartorio->email = $_POST['email'];
-                $cartorio->documento = $_POST['documento'];
+                $cartorio->documento = Helper::unmask($_POST['documento']);
                 $cartorio->tipo_documento = $_POST['tipo_documento'];
-                $cartorio->telefone = $_POST['telefone'];
+                $cartorio->telefone = Helper::unmask($_POST['telefone']);
                 $cartorio->razao = $_POST['razao'];
                 $cartorio->save();
 
-                $endereco = new Enderecos;
+                $endereco = $cartorio->endereco();
                 $endereco->nome = $_POST['endereco'];
-                $endereco->cep = $_POST['cep'];
+                $endereco->cep = Helper::unmask($_POST['cep']);
                 $endereco->uf = $_POST['uf'];
                 $endereco->bairro = $_POST['bairro'];
                 $endereco->cidade = $_POST['cidade'];
-                $endereco->cartorio_id = $cartorio->id;
                 $endereco->save();
 
                 $cartorio->commit();
@@ -115,7 +116,7 @@ class CartorioController extends Controller
                     'title' => 'Sucesso!',
                     'msg' => 'Registro atualizado com sucesso.',
                     'type' => 'success',
-                    'reload' => true,
+                    'reload' => true
                 ];
 
             } catch (\Exception $e) {
@@ -125,7 +126,7 @@ class CartorioController extends Controller
                     'title' => 'Erro!',
                     'msg' => "Não foi possível atualizar o registro. <br/>Erro: {$e->getMessage()}",
                     'type' => 'error',
-                    'reload' => true,
+                    'reload' => true
                 ];
             }
         }
@@ -135,7 +136,7 @@ class CartorioController extends Controller
             'title' => 'Erro!',
             'msg' => "Não foi possível localizar o registro.",
             'type' => 'error',
-            'reload' => true,
+            'reload' => true
         ];
     }
 
@@ -151,7 +152,7 @@ class CartorioController extends Controller
                 'title' => 'Sucesso!',
                 'msg' => 'Registro removido com sucesso.',
                 'type' => 'success',
-                'reload' => true,
+                'reload' => true
             ];
         }
 
@@ -159,7 +160,41 @@ class CartorioController extends Controller
             'title' => 'Erro!',
             'msg' => "Não foi possível localizar o registro.",
             'type' => 'error',
-            'reload' => true,
+            'reload' => true
+        ];
+    }
+
+    protected function getUfs(): array
+    {
+        return [
+            ["name" =>"AC", "description" => "Acre"],
+            ["name" => "AL", "description" => "Alagoas"],
+            ["name" => "AP", "description" => "Amapá"],
+            ["name" => "AM", "description" => 'Amazonas'],
+            ["name" => "BA", "description" => "Bahia"],
+            ["name" =>"CE", "description" => "Ceará"],
+            ["name" => "DF", "description" => "Distrito Federal"],
+            ["name" => "ES", "description" => "Espírito Santo"],
+            ["name" => "GO", "description" => "Goiás"],
+            ["name" => "MA", "description" => "Maranhão"],
+            ["name" => "MT", "description" => "Mato Grosso"],
+            ["name" => "MS", "description" => "Mato Grosso do Sul"],
+            ["name" => "MG", "description" => "Minas Gerais"],
+            ["name" => "PA", "description" => "Pará"],
+            ["name" => "PB", "description" => "Paraíba"],
+            ["name" =>"PR", "description" => "Paraná"],
+            ["name" => "PE", "description" => "Pernambuco"],
+            ["name" => "PI", "description" => "Piauí"],
+            ["name" => "RJ", "description" => "Rio de Janeiro"],
+            ["name" => "RN", "description" => "Rio Grande do Norte"],
+            ["name" =>"RS", "description" => "Rio Grande do Sul"],
+            ["name" => "RO", "description" => "Rondônia"],
+            ["name" => "RR", "description" => "Roraima"],
+            ["name" => "SC", "description" => "Santa Catarina"],
+            ["name" => "SP", "description" => "São Paulo"],
+            ["name" =>"SE", "description" => "Sergipe"],
+            ["name" => "TO", "description" => "Tocantins"],
+            ["name" => "EX", "description" => "Estrangeiro"]
         ];
     }
 }

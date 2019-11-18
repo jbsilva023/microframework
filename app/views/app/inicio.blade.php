@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col text-right">
                 <form name="importar-registros" method="post" action="/arquivo/importar"
-                      enctype=class="form-horizontal">
+                      class="form-horizontal">
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-12">
                             <label class="file-upload btn btn-primary mt-2">
@@ -18,16 +18,16 @@
             </div>
         </div>
         <div class="preload"></div>
-        <table class="table table-responsive-lg table-hover mt-10">
-            <thead>
+        <table class="table table-responsive-lg table-hover mt-10 table-sm">
+            <thead class="table-dark">
             <tr>
                 {{--<th width="20%">Nome</th>--}}
-                <th width="23%">Razão</th>
-                <th width="10%">Documeto</th>
-                <th width="15%">telefone</th>
-                <th width="20%">E-mail</th>
-                <th width="20%">Endereco</th>
-                <th width="12%">Ações</th>
+                <th width="25%">Razão</th>
+                <th width="15%">Documeto</th>
+                <th width="10%">telefone</th>
+                <th width="15%">E-mail</th>
+                <th width="25%">Endereco</th>
+                <th width="10%">Ações</th>
             </tr>
             </thead>
             <tbody>
@@ -35,19 +35,20 @@
                 <tr>
                     {{--<td>{{ $cartorio->nome }}</td>--}}
                     <td>{{ $cartorio->razao }}</td>
-                    <td>{{ $cartorio->documento }}</td>
-                    <td>{{ $cartorio->telefone }}</td>
+                    <td><span class="cpf_cnpj">{{ $cartorio->documento }}</span></td>
+                    <td><span class="phone">{{ $cartorio->telefone }}</span></td>
                     <td>{{ $cartorio->email }}</td>
                     <td>
                         {{ $cartorio->endereco()->nome }}, {{ $cartorio->endereco()->bairro }},
                         {{ $cartorio->endereco()->cidade }} - {{ $cartorio->endereco()->uf }}
-                        , {{ $cartorio->endereco()->cep }}
+                        , <span class="cep">{{ $cartorio->endereco()->cep }}</span>
                     </td>
                     <td>
-                        <a href="javascript:void(0)" class="btn btn-primary" data-iduser="{{ $cartorio->id }}"
+                        <a href="javascript:void(0)" class="btn btn-primary" data-idcartorio="{{ $cartorio->id }}"
+                           data-nome="{{ $cartorio->nome }}"
                            data-target="#update-cartorio" data-toggle="modal"><i
                                     class="fas fa-edit"></i></a>
-                        <a href="javascript:void(0)" class="btn btn-danger delete-cartorio" data-iduser="{{ $cartorio->id }}"><i
+                        <a href="javascript:void(0)" class="btn btn-danger delete-cartorio" data-idcartorio="{{ $cartorio->id }}"><i
                                     class="fas fa-trash"></i></a>
                     </td>
                 </tr>
@@ -60,7 +61,7 @@
         </table>
         <div class="row">
             <div class="col">
-                <span>
+                <span class="paginate-info">
                     Exibindo de <b>{{ $paginator->getCurrentPageFirstItem() }}</b> até
                     <b>{{ $paginator->getCurrentPageLastItem() }}</b> de
                     <b>{{ $paginator->getTotalItems() }}</b> registros.
@@ -78,7 +79,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
+                    <h5 class="modal-title"></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -87,8 +88,8 @@
                     <div class="form"></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success">Save</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success save">Salvar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                 </div>
             </div>
         </div>
