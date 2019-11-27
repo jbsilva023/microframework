@@ -51,22 +51,22 @@ $(function ($) {
 
     $('form[name=cartorio]').on('submit', function (event) {
         event.preventDefault();
-        var erro = [];
+        var erros = [];
         var form = $(this);
 
         form.find('input.required, select.required').each(function () {
-            if ($(this).val() == '') {
-                erro.push('O campo <b>' + $(this).closest('label').text() + '</b> é obrigatório');
+            $(this).removeClass('border-red');
+
+            if ($(this).val() === '') {
+                $(this).addClass('border-red');
+                erros.push('O campo <b>' + $(this).parent().find('label').text().replace('*', '')
+                    + '</b> é obrigatório.');
             }
         });
+        form.find('div.erros div.message').hide('slow');
 
-        if (erro.length > 0) {
-            form.find('div.erro div.message').html(erro.join('<br>'))
-                .show("slow");
-        } else {
-            form.find('div.erro div.message').slideUp('slow');
-
-            $.ajax({
+        if (!erros.length > 0) {
+            /*$.ajax({
                 type: "POST",
                 url: "/cartorio/inserir",
                 data: form.serialize(),
@@ -86,7 +86,9 @@ $(function ($) {
                 complete: function () {
                     $('.preload').fadeOut('slow');
                 }
-            });
+            });*/
+        } else {
+            form.find('div.erros div.message').html(erros.join('<br>')).show("slow");
         }
     });
 
