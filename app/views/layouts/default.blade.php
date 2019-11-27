@@ -9,8 +9,8 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="/vendor/twbs/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="/app/public/css/file-upload.css"/>
     <link rel="stylesheet" type="text/css" href="/app/public/css/app.css"/>
+    @yield('css')
 
     <!-- JavaScript (Opcional) -->
     <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
@@ -24,13 +24,6 @@
     <script src="/app/public/js/jquery.funcoes.js"></script>
 
     <script src="/app/public/js/sweetalert2.all.min.js"></script>
-    <script src="/app/public/js/jquery.funcoes.file-upload.js"></script>
-    <script src="/app/public/js/app/jquery.funcoes.import-xml.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('.file-upload').file_upload();
-        });
-    </script>
     @yield('scripts')
 </head>
 <body>
@@ -52,8 +45,8 @@
                 <li class="nav-item{{$_SERVER['REQUEST_URI'] ==='/cartorio/novo'? ' active' : ''}}">
                     <a class="nav-link" href="/cartorio/novo">Cadastro</a>
                 </li>
-                <li class="nav-item{{App\Helpers\Helper::replaceUrl($_SERVER['REQUEST_URI']) ==='/enviar-email' ? ' active' : ''}}">
-                    <a class="nav-link" href="/enviar-email">Enviar emails</a>
+                <li class="nav-item{{App\Helpers\Helper::replaceUrl($_SERVER['REQUEST_URI']) ==='/novo-email' ? ' active' : ''}}">
+                    <a class="nav-link" href="/novo-email">Enviar e-mail</a>
                 </li>
             </ul>
         </div>

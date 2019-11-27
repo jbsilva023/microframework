@@ -1,4 +1,4 @@
-$(window).on('load', function () {
+$(function ($) {
     $('.preload').fadeOut('slow');
 
     $('form[name=importar-registros]').on('submit', function (e) {

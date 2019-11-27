@@ -6,20 +6,38 @@
 @section('content')
     <div class="container">
             <div class="card mt-4">
-                <div class="card-header">
-                    <h5 class="card-title">Enviar Email Cartórios</h5>
-                </div>
+                {{--<div class="card-header">
+                    <h5 class="card-title">Enviar e-mail para cartórios</h5>
+                </div>--}}
+                <div class="preload"></div>
                 <div class="card-body">
+                    <h5 class="card-title">Enviar e-mail para cartórios</h5>
                     <form>
-                        <textarea name="editor1" id="editor1" rows="10" cols="80"></textarea>
-                        <script>
-                            // Replace the <textarea id="editor1"> with a CKEditor
-                            // instance, using default configuration.
-                            CKEDITOR.replace( 'editor1' );
-                        </script>
+                        <div class="col-md-6 col-sm-12">
+                            <label for="subjetc">Assunto: <span class="text-danger">*</span></label>
+                            <input type="text" name="subject" id="subjetc" class="form-control required mb-2" value="">
+                        </div>
+
+                        <div class="col-md-12 col-sm-12">
+                            <label for="editor1">Mensagem: <span class="text-danger">*</span></label>
+                            <textarea name="editor1" id="editor1" rows="10" cols="80"></textarea>
+                            <script>
+                                // Replace the <textarea id="editor1"> with a CKEditor
+                                // instance, using default configuration.
+                                CKEDITOR.replace('editor1');
+                            </script>
+                        </div>
+                        <div class="col mt-4">
+                            <div class="form-group float-right">
+                                <div class="col-sm-offset-2 col-sm-12">
+                                    <button type="submit" class="btn btn-success">Enviar</button>
+                                    <button type="reset" class="btn btn-primary">Limpar</button>
+                                </div>
+                            </div>
+                        </div>
                     </form>
                 </div>
-                <div class="card-footer">
+                {{--<div class="card-footer">
                     <div class="col">
                         <div class="form-group float-right">
                             <div class="col-sm-offset-2 col-sm-12">
@@ -28,7 +46,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>--}}
             </div>
         </form>
     </div>

@@ -164,9 +164,19 @@ class CartorioController extends Controller
         ];
     }
 
-    public function enviarEmail()
+    public function newEmail()
     {
         return $this->view('app.form-novo-email');
+    }
+
+    public function sendEmail()
+    {
+        $cartorios = new Cartorios;
+        $cartorios = $cartorios->all(['status', 1]);
+
+        foreach ($cartorios as $cartorio) {
+            $email = $cartorio->email;
+        }
     }
 
     protected function getUfs(): array

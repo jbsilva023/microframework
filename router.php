@@ -10,6 +10,7 @@ $app->post('/cartorio/detalhe', 'CartorioController@show');
 $app->post('/cartorio/update', 'CartorioController@update');
 $app->post('/cartorio/delete', 'CartorioController@delete');
 
-$app->get('/enviar-email', 'CartorioController@enviarEmail');
+$app->get('/novo-email', 'CartorioController@newEmail');
+$app->post('/enviar-email', 'CartorioController@sendEmail');
 
 $app->post('/arquivo/importar', 'XMLController@importar');

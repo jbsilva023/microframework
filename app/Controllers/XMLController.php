@@ -22,6 +22,9 @@ class XMLController extends Controller
     public function importar()
     {
         try {
+
+            //$allowedType = ['application/vnd.ms-excel','text/xls','text/xlsx','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
+
             $xml = simplexml_load_file($_FILES["arquivo"]['tmp_name']);
 
             foreach ($xml as $item) {
