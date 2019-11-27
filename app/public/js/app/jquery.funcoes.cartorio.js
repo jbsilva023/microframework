@@ -31,6 +31,32 @@ $(function ($) {
         $(this).find('div.modal-content .form').html('');
     });
 
+    $('div#create-cartorio').on('shown.bs.modal', function (event) {
+        $(this).find('.modal-header h5.modal-title').html('Cadastrar cartório');
+
+        $.ajax({
+            type: "GET",
+            url: "/cartorio/novo",
+            beforeSend: function () {
+                $('div#create-cartorio').find('.preload').fadeIn('slow');
+            },
+            success: function (response) {
+                $('div#create-cartorio').find('div.modal-content .form').html(response);
+            },
+            error: function () {
+
+            },
+            complete: function () {
+                $('div#create-cartorio').find('.preload').fadeOut('slow');
+            },
+        });
+    });
+
+    $('div#create-cartorio').on('hidden.bs.modal', function (event) {
+        $(this).find('.modal-header h5.modal-title').html('');
+        $(this).find('div.modal-content .form').html('');
+    });
+
     $('select[name=tipo_documento]').on('change', function () {
         let form = $(this).closest('form');
 
@@ -49,10 +75,9 @@ $(function ($) {
         }
     });
 
-    $('form[name=cartorio]').on('submit', function (event) {
-        event.preventDefault();
+    $('div#create-cartorio').on('click', 'button.save', function (event) {
+        var form = $('form[name=cartorio]');
         var erros = [];
-        var form = $(this);
 
         form.find('input.required, select.required').each(function () {
             $(this).removeClass('border-red');
@@ -62,10 +87,11 @@ $(function ($) {
                 erros.push('O campo <b>' + $(this).parent().find('label').text().replace(/[^a-zA-Z]/g, '') + '</b> é obrigatório.');
             }
         });
+
         form.find('div.erros div.message').hide('slow');
 
         if (!erros.length > 0) {
-            /*$.ajax({
+            $.ajax({
                 type: "POST",
                 url: "/cartorio/inserir",
                 data: form.serialize(),
@@ -85,7 +111,7 @@ $(function ($) {
                 complete: function () {
                     $('.preload').fadeOut('slow');
                 }
-            });*/
+            });
         } else {
             form.find('div.erros div.message').html(erros.join('<br>')).show("slow");
         }
@@ -175,7 +201,7 @@ $(function ($) {
         });
     });
 
-    $('form[name=cartorio]').on('reset', function (event) {
+    /*$('form[name=cartorio]').on('reset', function (event) {
         var form = $(this);
 
         form.find('input.required, select.required').each(function () {
@@ -183,5 +209,5 @@ $(function ($) {
         });
 
         form.find('div.erros div.message').hide('slow');
-    });
+    });*/
 });

@@ -14,6 +14,23 @@ $(window).on('load', function () {
     $('.cpf_cnpj').mask(CPFCNPJMask, spOptions);
     $('.money').mask('000.000.000.000.000,00', {reverse: true});
     $('.money2').mask("#.##0,00", {reverse: true});
+
+    /* Evento que controle o submenu lateral, será exibido no momento do click
+     * no dropdown-item dropdown-toggle
+     */
+    $('.dropdown-menu a.dropdown-toggle').on('click', function(e) {
+        if (!$(this).next().hasClass('show')) {
+            $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
+        }
+        var $subMenu = $(this).next(".dropdown-menu");
+        $subMenu.toggleClass('show');
+
+        $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
+            $('.dropdown-submenu .show').removeClass("show");
+        });
+
+        return false;
+    });
 });
 
 var CPFCNPJMask = function (val) {

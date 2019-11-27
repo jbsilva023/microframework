@@ -13,4 +13,9 @@ $app->post('/cartorio/delete', 'CartorioController@delete');
 $app->get('/novo-email', 'CartorioController@newEmail');
 $app->post('/enviar-email', 'CartorioController@sendEmail');
 
-$app->post('/arquivo/importar', 'XMLController@importar');
+$app->get('/arquivos/upload/xml', 'XMLController@index');
+$app->post('/arquivos/importar/xml', 'XMLController@importar');
+
+$app->get('/arquivos/upload/excel', 'XLSController@index');
+$app->post('/arquivos/importar/excel', 'XLSController@importar');
+$app->get('/arquivos/exportar/excel', 'XLSController@index');

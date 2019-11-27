@@ -40,11 +40,45 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item{{App\Helpers\Helper::replaceUrl($_SERVER['REQUEST_URI']) ==='/inicio' ? ' active' : ''}}">
-                    <a class="nav-link" href="/inicio">Importar <span class="sr-only">(Página atual)</span></a>
+                    <a class="nav-link" href="/inicio">Início <span class="sr-only">(Página atual)</span></a>
                 </li>
-                <li class="nav-item{{$_SERVER['REQUEST_URI'] ==='/cartorio/novo'? ' active' : ''}}">
+                {{--<li class="nav-item{{$_SERVER['REQUEST_URI'] ==='/cartorio/novo'? ' active' : ''}}">
                     <a class="nav-link" href="/cartorio/novo">Cadastro</a>
+                </li>--}}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink"
+                       href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Arquivos</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li class="dropdown-submenu">
+                            <a class="dropdown-item dropdown-toggle" href="javascript:void(0)">XML</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/arquivos/upload/xml">Importar</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a class="dropdown-item dropdown-toggle" href="javascript:void(0)">Excel</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/arquivos/upload/excel">Importar</a></li>
+                                <li><a class="dropdown-item" href="/arquivos/exportar/excel">Exportar</a></li>
+                            </ul>
+                        </li>
+
+                        {{--<li class="dropdown-submenu">
+                            <a class="dropdown-item" href="/importar-xml">XML</a>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a class="dropdown-item" href="/iportar-excel">Excel</a>
+                        </li>--}}
+                    </ul>
                 </li>
+                {{--<li class="nav-item{{App\Helpers\Helper::replaceUrl($_SERVER['REQUEST_URI']) ==='/importar-arquivo' ? ' active' : ''}}">
+                    <a class="nav-link dropdown-toggle" href="javascript:void(0)"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Importar arquivo</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">XML</a>
+                        <a class="dropdown-item" href="#">Excel</a>
+                    </div>
+                </li>--}}
                 <li class="nav-item{{App\Helpers\Helper::replaceUrl($_SERVER['REQUEST_URI']) ==='/novo-email' ? ' active' : ''}}">
                     <a class="nav-link" href="/novo-email">Enviar e-mail</a>
                 </li>

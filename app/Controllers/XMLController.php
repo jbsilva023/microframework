@@ -16,6 +16,11 @@ class XMLController extends Controller
         $this->params = $params;
     }
 
+
+    public function index()
+    {
+        return $this->view('app.form-upload-xml');
+    }
     /**
      * @return array
      */

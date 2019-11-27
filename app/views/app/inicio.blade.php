@@ -1,16 +1,15 @@
 @extends('layouts.default')
 
-@section('css')
-    <link rel="stylesheet" type="text/css" href="/app/public/css/file-upload.css"/>
-@stop
-
 @section('content')
     <div class="container">
         <div class="card mt-4">
             <div class="card-body">
+                <h4 class="card-title">Listagem de cartórios</h4>
                 <div class="row">
                     <div class="col text-right">
-                        <form name="importar-registros" method="post" action="/arquivo/importar"
+                        <button class="btn btn-success" data-target="#create-cartorio" data-toggle="modal">
+                            <i class="fas fa-plus"></i> Novo</button>
+                        {{--<form name="importar-registros" method="post" action="/arquivo/importar"
                               class="form-horizontal">
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-12">
@@ -20,11 +19,11 @@
                                     <input type="submit" class="btn btn-success" vlaue="enviar">
                                 </div>
                             </div>
-                        </form>
+                        </form>--}}
                     </div>
                 </div>
                 <div class="preload"></div>
-                <table class="table table-responsive-lg table-hover mt-10 table-sm">
+                <table class="table table-responsive-lg table-hover mt-2 table-sm">
                     <thead class="table-dark">
                     <tr>
                         {{--<th width="20%">Nome</th>--}}
@@ -83,7 +82,27 @@
         </div>
     </div>
 
-    <div id="update-cartorio" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="update-cartorio"
+    <div id="create-cartorio" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="cartorio"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success save">Salvar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="update-cartorio" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="cartorio"
          aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -106,12 +125,5 @@
 @stop
 
 @section('scripts')
-    <script src="/app/public/js/jquery.funcoes.file-upload.js"></script>
-    <script src="/app/public/js/app/jquery.funcoes.import-xml.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('.file-upload').file_upload();
-        });
-    </script>
     <script type="text/javascript" src="/app/public/js/app/jquery.funcoes.cartorio.js"></script>
 @stop
