@@ -19,6 +19,11 @@ class XLSController extends Controller
         $this->params = $params;
     }
 
+    public function index()
+    {
+        return $this->view('app.form-upload-excel');
+    }
+
     /**
      * @return array
      */
@@ -31,11 +36,26 @@ class XLSController extends Controller
             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
         ];
 
-        if (in_array($_FILES["file"]["type"], $allowedType)) {
+        $columns = [
+            'nome',
+            'razao',
+            'documento',
+            'cep',
+            'endereco',
+            'bairro',
+            'cidade',
+            'uf',
+            'telefone',
+            'email',
+            'tabeliao',
+            'status'
+        ];
+
+        if (in_array($_FILES["arquivo"]["type"], $allowedType)) {
             $reader = PHPExcel_IOFactory::createReader('Excel2007');
             $reader->setReadDataOnly(true);
 
-            $phpExcel = $reader->load($_FILES['file']['temp_name']);
+            $phpExcel = $reader->load($_FILES['arquivo']['tmp_name']);
             $worksheet = $phpExcel->getActiveSheet();
 
             $highestRow = $worksheet->getHighestRow();
@@ -44,47 +64,45 @@ class XLSController extends Controller
 
             $rows = [];
 
-            for ($row = 1; $row <= $highestRow; $row++) {
+            for ($row = 1; $row <= $highestRow; ++$row) {
                 for ($col = 0; $col < $highestColumnIndex; $col++) {
-                    $rows[$col] = $worksheet->getCellByColumnAndRow($col, $row)->getValue();
+                    $rows[0][$columns[$col]] = $worksheet->getCellByColumnAndRow($col, $row)->getValue();
                 }
             }
 
-            echo "<pre>";
-            var_dump($rows);
-            die;
-//            $Reader = new SpreadsheetReader($targetPath);
+            try {
+                foreach ($rows as $row) {
+                    $cartorio = new Cartorios;
+                    $cartorio->nome = $row['nome'];
+                    $cartorio->razao = $row['razao'];
+                    $cartorio->tipo_documento = $row['tipo_documento'];
+                    $cartorio->documento = $row['documento'];
+                    $cartorio->tabeliao = $row['tabeliao'];
+                    $cartorio->status = $row['status'];
+                    $cartorio = $cartorio->save();
 
-//            $sheetCount = count($Reader->sheets());
-
-            /*for ($i = 0; $i < $sheetCount; $i++) {
-                $Reader->ChangeSheet($i);
-
-                foreach ($Reader as $Row) {
-                    $name = "";
-                    if (isset($Row[0])) {
-                        $name = mysqli_real_escape_string($conn, $Row[0]);
-                    }
-
-                    $description = "";
-                    if (isset($Row[1])) {
-                        $description = mysqli_real_escape_string($conn, $Row[1]);
-                    }
-
-                    if (!empty($name) || !empty($description)) {
-                        $query = "insert into tbl_info(name,description) values('" . $name . "','" . $description . "')";
-                        $result = mysqli_query($conn, $query);
-
-                        if (!empty($result)) {
-                            $type = "success";
-                            $message = "Excel Data Imported into the Database";
-                        } else {
-                            $type = "error";
-                            $message = "Problem in Importing Excel Data";
-                        }
+                    if ($cartorio->id) {
+                        $endereco = new Enderecos;
+                        $endereco->cep = $row['cep'];
+                        $endereco->nome = $row['endereco'];
+                        $endereco->bairro = $row['bairro'];
+                        $endereco->cidade = $row['cidade'];
+                        $endereco->uf = $row['uf'];
+                        $endereco->cartorio_id = $cartorio['id'];
+                        $endereco->save();
                     }
                 }
-            }*/
+
+                return [
+                    'title' => 'Sucesso!',
+                    'msg' => 'Registro importados com sucesso.',
+                    'type' => 'success',
+                    'reload' => true
+                ];
+
+            } catch (\Exception $e) {
+
+            }
         }
 
         return [

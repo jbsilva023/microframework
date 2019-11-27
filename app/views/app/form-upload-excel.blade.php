@@ -10,7 +10,7 @@
             <div class="preload"></div>
             <div class="card-body">
                 <h5 class="card-title">Upload arquivo Excel</h5>
-                <form name="importar-registros" method="post" action="/arquivos/importar/xml" class="form-horizontal">
+                <form name="importar-registros" method="post" action="/arquivos/importar/excel" class="form-horizontal">
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-12">
                             <label class="file-upload btn btn-primary mt-2">

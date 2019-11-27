@@ -80,7 +80,7 @@ class CartorioController extends Controller
                 'title' => 'Erro!',
                 'msg' => "Não foi possível cadastrar o registro. <br/>Erro: {$e->getMessage()}",
                 'type' => 'error',
-                'reload' => true,
+                'reload' => false,
             ];
         }
     }

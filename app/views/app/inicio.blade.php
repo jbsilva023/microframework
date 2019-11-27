@@ -9,17 +9,6 @@
                     <div class="col text-right">
                         <button class="btn btn-success" data-target="#create-cartorio" data-toggle="modal">
                             <i class="fas fa-plus"></i> Novo</button>
-                        {{--<form name="importar-registros" method="post" action="/arquivo/importar"
-                              class="form-horizontal">
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-12">
-                                    <label class="file-upload btn btn-primary mt-2">
-                                        Upload XML <input type="file" name="arquivo" id="arquivo"/>
-                                    </label>
-                                    <input type="submit" class="btn btn-success" vlaue="enviar">
-                                </div>
-                            </div>
-                        </form>--}}
                     </div>
                 </div>
                 <div class="preload"></div>

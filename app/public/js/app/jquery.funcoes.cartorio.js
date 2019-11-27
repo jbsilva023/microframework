@@ -101,7 +101,7 @@ $(function ($) {
                 success: function (response) {
                     Swal.fire(response.title, response.msg, response.type).then(function () {
                         if (response.reload) {
-                            window.location.href = '/';
+                            location.reload();
                         }
                     });
                 },

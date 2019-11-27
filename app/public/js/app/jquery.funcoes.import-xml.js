@@ -9,7 +9,7 @@ $(function ($) {
         if ($(this).find('input[name=arquivo]:file').val()) {
             $.ajax({
                 type: "POST",
-                url: "/arquivo/importar",
+                url: "/arquivos/importar/excel",
                 data: data,
                 enctype: 'multipart/form-data',
                 processData: false,
