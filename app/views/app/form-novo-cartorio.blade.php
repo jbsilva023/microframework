@@ -1,5 +1,9 @@
 @extends('layouts.default')
 
+@section('scripts')
+    <script type="text/javascript" src="/app/public/js/app/jquery.funcoes.cartorio.js"></script>
+@stop
+
 @section('content')
     <div class="container">
         <form name="cartorio" class="form-horizontal mt-3">
@@ -11,18 +15,21 @@
                     <div class="row">
                         <div class="col">
                             <div class="preload"></div>
+                            <div class="erro">
+                                <div class="message alert alert-danger" style="display: none"></div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <label for="nome">Nome</label>
-                                    <input type="text" name="nome" id="nome" class="form-control" value="">
+                                    <input type="text" name="nome" id="nome" class="form-control required" value="">
                                 </div>
                                 <div class="col-md-12">
                                     <label for="razao">Razão social</label>
-                                    <input type="text" name="razao" id="razao" class="form-control" value="">
+                                    <input type="text" name="razao" id="razao" class="form-control required" value="">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="tabeliao">Tabelião</label>
-                                    <input type="text" name="tabeliao" id="tabeliao" class="form-control" value="">
+                                    <input type="text" name="tabeliao" id="tabeliao" class="form-control required" value="">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="email">E-mail</label>
@@ -30,7 +37,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="tipo_documento">Tipo documento</label>
-                                    <select name="tipo_documento" id="tipo_documento" class="form-control">
+                                    <select name="tipo_documento" id="tipo_documento" class="form-control required">
                                         <option value="">Selecione...</option>
                                         <option value="1">CPF</option>
                                         <option value="2">CNPJ</option>
@@ -38,7 +45,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="documento">Documento</label>
-                                    <input type="text" name="documento" id="documento" class="form-control"
+                                    <input type="text" name="documento" id="documento" class="form-control required"
                                            value="" disabled>
                                 </div>
                                 <div class="col-md-6">

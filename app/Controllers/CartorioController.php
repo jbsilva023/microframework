@@ -164,6 +164,11 @@ class CartorioController extends Controller
         ];
     }
 
+    public function enviarEmail()
+    {
+        return $this->view('app.form-novo-email');
+    }
+
     protected function getUfs(): array
     {
         return [

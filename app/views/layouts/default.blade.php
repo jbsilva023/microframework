@@ -31,7 +31,7 @@
             $('.file-upload').file_upload();
         });
     </script>
-    <script type="text/javascript" src="/app/public/js/app/jquery.funcoes.cartorio.js"></script>
+    @yield('scripts')
 </head>
 <body>
 <div class="container">
@@ -52,9 +52,9 @@
                 <li class="nav-item{{$_SERVER['REQUEST_URI'] ==='/cartorio/novo'? ' active' : ''}}">
                     <a class="nav-link" href="/cartorio/novo">Cadastro</a>
                 </li>
-                {{--<li class="nav-item">
-                    <a class="nav-link" href="#">Preços</a>
-                </li>--}}
+                <li class="nav-item{{App\Helpers\Helper::replaceUrl($_SERVER['REQUEST_URI']) ==='/enviar-email' ? ' active' : ''}}">
+                    <a class="nav-link" href="/enviar-email">Enviar emails</a>
+                </li>
             </ul>
         </div>
     </nav>

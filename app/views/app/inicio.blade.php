@@ -1,5 +1,9 @@
 @extends('layouts.default')
 
+@section('scripts')
+    <script type="text/javascript" src="/app/public/js/app/jquery.funcoes.cartorio.js"></script>
+@stop
+
 @section('content')
     <div class="container">
         <div class="row">

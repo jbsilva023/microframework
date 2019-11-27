@@ -51,30 +51,43 @@ $(function ($) {
 
     $('form[name=cartorio]').on('submit', function (event) {
         event.preventDefault();
-
+        var erro = [];
         var form = $(this);
 
-        $.ajax({
-            type: "POST",
-            url: "/cartorio/inserir",
-            data: form.serialize(),
-            beforeSend: function () {
-                $('div#update-cartorio').find('.preload').fadeIn('slow');
-            },
-            success: function (response) {
-                Swal.fire(response.title, response.msg, response.type).then(function () {
-                    if (response.reload) {
-                        window.location.href = '/';
-                    }
-                });
-            },
-            error: function () {
-
-            },
-            complete: function () {
-                $('.preload').fadeOut('slow');
+        form.find('input.required, select.required').each(function () {
+            if ($(this).val() == '') {
+                erro.push('O campo <b>' + $(this).closest('label').text() + '</b> é obrigatório');
             }
         });
+
+        if (erro.length > 0) {
+            form.find('div.erro div.message').html(erro.join('<br>'))
+                .show("slow");
+        } else {
+            form.find('div.erro div.message').slideUp('slow');
+
+            $.ajax({
+                type: "POST",
+                url: "/cartorio/inserir",
+                data: form.serialize(),
+                beforeSend: function () {
+                    $('div#update-cartorio').find('.preload').fadeIn('slow');
+                },
+                success: function (response) {
+                    Swal.fire(response.title, response.msg, response.type).then(function () {
+                        if (response.reload) {
+                            window.location.href = '/';
+                        }
+                    });
+                },
+                error: function () {
+
+                },
+                complete: function () {
+                    $('.preload').fadeOut('slow');
+                }
+            });
+        }
     });
 
     $('div#update-cartorio').on('click', 'button.save', function (event) {
