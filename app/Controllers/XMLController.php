@@ -40,11 +40,7 @@ class XMLController extends Controller
                         str_pad($item->documento, 14, '0', STR_PAD_RIGHT) :
                         $item->documento;
 
-                    $cartorio = $cartorio->findForColumn(['documento', $documento]);
-
-                    if (!$cartorio) {
-                        $cartorio = new Cartorios;
-                    }
+                    $cartorio = $cartorio->findByColumn(['documento', $documento]);
 
                     $cartorio->nome = $item->nome;
                     $cartorio->razao = $item->razao;
@@ -89,6 +85,5 @@ class XMLController extends Controller
             'type' => 'error',
             'reload' => false
         ];
-
     }
 }

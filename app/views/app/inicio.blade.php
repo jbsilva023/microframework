@@ -4,7 +4,7 @@
     <div class="container">
         <div class="card mt-4">
             <div class="card-body">
-                <h4 class="card-title">Listagem de cartórios</h4>
+                <h4 class="card-title">Listagem de Cartórios</h4>
                 <div class="row">
                     <div class="col text-right">
                         <button class="btn btn-success" data-target="#create-cartorio" data-toggle="modal">

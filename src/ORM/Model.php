@@ -134,7 +134,9 @@ abstract class Model
             ->exec()
             ->first();
 
-        $this->setAll($data);
+        if ($data) {
+            $this->setAll($data);
+        }
 
         return $this;
     }
@@ -143,7 +145,7 @@ abstract class Model
      * @param $id
      * @return Model
      */
-    public function findForColumn($condition = [])
+    public function findByColumn($condition = [])
     {
         $conditions[] = $condition;
 
@@ -154,10 +156,9 @@ abstract class Model
 
         if ($data) {
             $this->setAll($data);
-            return $this;
         }
 
-        return false;
+        return $this;
     }
 
     public function paginate(int $num_registers = 10, $current_page = 1, array $orderBy = [])

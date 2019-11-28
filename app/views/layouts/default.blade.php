@@ -48,16 +48,17 @@
                         Arquivos</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li class="dropdown-submenu">
-                            <a class="dropdown-item dropdown-toggle" href="javascript:void(0)">XML</a>
+                            <a class="dropdown-item dropdown-toggle" href="javascript:void(0)">Importar</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/arquivos/upload/xml">Importar</a></li>
+                                <li><a class="dropdown-item" href="/arquivos/upload/xml">XML</a></li>
+                                <li><a class="dropdown-item" href="/arquivos/upload/excel">Excel</a></li>
                             </ul>
                         </li>
                         <li class="dropdown-submenu">
-                            <a class="dropdown-item dropdown-toggle" href="javascript:void(0)">Excel</a>
+                            <a class="dropdown-item dropdown-toggle" href="javascript:void(0)">Exportar</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/arquivos/upload/excel">Importar</a></li>
-                                <li><a class="dropdown-item" href="/arquivos/exportar/excel">Exportar</a></li>
+
+                                <li><a class="dropdown-item" href="/arquivos/exportar/excel">Excel</a></li>
                             </ul>
                         </li>
                     </ul>

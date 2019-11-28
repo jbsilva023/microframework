@@ -80,11 +80,7 @@ class XLSController extends Controller
                         str_pad($row['documento'], 14, '0', STR_PAD_RIGHT) :
                         $row['documento'];
 
-                    $cartorio = $cartorio->findForColumn(['documento', $documento]);
-
-                    if (!$cartorio) {
-                        $cartorio = new Cartorios;
-                    }
+                    $cartorio = $cartorio->findByColumn(['documento', $documento]);
 
                     $cartorio->nome = $row['nome'];
                     $cartorio->razao = $row['razao'];
@@ -135,6 +131,6 @@ class XLSController extends Controller
 
     public function exportar()
     {
-
+        echo 'chegou aqui';
     }
 }
