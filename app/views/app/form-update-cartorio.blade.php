@@ -23,7 +23,7 @@
         </div>
         <div class="col-md-6 col-sm-12">
             <label for="tipo_documento">Tipo documento: <span class="text-danger">*</span></label>
-            <select name="tipo_documento" id="tipo_documento" class="form-control required">
+            <select name="tipo_documento" id="tipo_documento" class="form-control required" readonly>
                 <option value="">Selecione...</option>
                 <option value="1"{{ $cartorio->tipo_documento === '1' ? " selected": '' }}>CPF</option>
                 <option value="2"{{ $cartorio->tipo_documento === '2' ? " selected": '' }}>CNPJ</option>

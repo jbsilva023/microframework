@@ -57,7 +57,7 @@ $(function ($) {
         $(this).find('div.modal-content .form').html('');
     });
 
-    $('select[name=tipo_documento]').on('change', function () {
+    $('div#create-cartorio, div#update-cartorio').on('change', 'select[name=tipo_documento]', function () {
         let form = $(this).closest('form');
 
         switch ($(this).val()) {
