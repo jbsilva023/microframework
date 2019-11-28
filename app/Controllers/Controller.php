@@ -12,7 +12,7 @@ class Controller
 
     protected function view($view, $data = [])
     {
-        $blade = new Blade('app/views', 'app/cache');
+        $blade = new Blade('app/views', 'app/views/cache');
         return $blade->render($view, $data);
     }
 }

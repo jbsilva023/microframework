@@ -3,7 +3,7 @@
 
 namespace App\Controllers;
 
-
+use App\Helpers\Helper;
 use App\Models\Cartorios;
 use App\Models\Enderecos;
 use PHPExcel_Cell;
@@ -66,29 +66,44 @@ class XLSController extends Controller
 
             for ($row = 1; $row <= $highestRow; ++$row) {
                 for ($col = 0; $col < $highestColumnIndex; $col++) {
-                    $rows[0][$columns[$col]] = $worksheet->getCellByColumnAndRow($col, $row)->getValue();
+                    $rows[$row][$columns[$col]] = $worksheet->getCellByColumnAndRow($col, $row)->getValue();
                 }
             }
+
+            array_shift($rows);
 
             try {
                 foreach ($rows as $row) {
                     $cartorio = new Cartorios;
+
+                    $documento = strlen($row['documento']) > 11 ?
+                        str_pad($row['documento'], 14, '0', STR_PAD_RIGHT) :
+                        $row['documento'];
+
+                    $cartorio = $cartorio->findForColumn(['documento', $documento]);
+
+                    if (!$cartorio) {
+                        $cartorio = new Cartorios;
+                    }
+
                     $cartorio->nome = $row['nome'];
                     $cartorio->razao = $row['razao'];
-                    $cartorio->tipo_documento = $row['tipo_documento'];
-                    $cartorio->documento = $row['documento'];
+                    $cartorio->telefone = Helper::unmask($row['telefone']);
+                    $cartorio->email = $row['email'];
+                    $cartorio->tipo_documento = strlen($row['documento']) > 11 ? 2 : 1;
+                    $cartorio->documento = $documento;
                     $cartorio->tabeliao = $row['tabeliao'];
-                    $cartorio->status = $row['status'];
+                    $cartorio->status = $row['status'] === "SIM" ? 1 : 0;
                     $cartorio = $cartorio->save();
 
                     if ($cartorio->id) {
-                        $endereco = new Enderecos;
-                        $endereco->cep = $row['cep'];
+                        $endereco = $cartorio->endereco();
+                        $endereco->cep = Helper::unmask($row['cep']);
                         $endereco->nome = $row['endereco'];
                         $endereco->bairro = $row['bairro'];
                         $endereco->cidade = $row['cidade'];
                         $endereco->uf = $row['uf'];
-                        $endereco->cartorio_id = $cartorio['id'];
+                        $endereco->cartorio_id = $cartorio->id;
                         $endereco->save();
                     }
                 }
@@ -101,15 +116,20 @@ class XLSController extends Controller
                 ];
 
             } catch (\Exception $e) {
-
+                return [
+                    'title' => 'Erro!',
+                    'msg' => "Não foi possível importar registros.<br/><b>Erro:</b> {$e->getMessage()}",
+                    'type' => 'error',
+                    'reload' => false
+                ];
             }
         }
 
         return [
             'title' => 'Erro!',
-            'msg' => "Faça o upload de um arquivo com a extensão .XLS ou XLSX. ",
+            'msg' => "Faça upload de um arquivo .XLS ou XLSX.",
             'type' => 'error',
-            'reload' => true
+            'reload' => false
         ];
     }
 

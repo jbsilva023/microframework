@@ -139,6 +139,27 @@ abstract class Model
         return $this;
     }
 
+    /**
+     * @param $id
+     * @return Model
+     */
+    public function findForColumn($condition = [])
+    {
+        $conditions[] = $condition;
+
+        $data = $this->driver
+            ->setQueryBuilder(new Select($this->getTable(), $conditions))
+            ->exec()
+            ->first();
+
+        if ($data) {
+            $this->setAll($data);
+            return $this;
+        }
+
+        return false;
+    }
+
     public function paginate(int $num_registers = 10, $current_page = 1, array $orderBy = [])
     {
         $collection = [];

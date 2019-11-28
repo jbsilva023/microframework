@@ -12,6 +12,7 @@
                 <h5 class="card-title">Upload arquivo XML</h5>
                 <form name="importar-registros" method="post" action="/arquivos/importar/xml" class="form-horizontal">
                     <div class="form-group">
+                        <input type="hidden" name="tipo_arquivo" value="xml">
                         <div class="col-sm-offset-2 col-sm-12">
                             <label class="file-upload btn btn-primary mt-2">
                                 Upload XML <input type="file" name="arquivo" id="arquivo"/>

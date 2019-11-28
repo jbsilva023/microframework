@@ -11,6 +11,7 @@
             <div class="card-body">
                 <h5 class="card-title">Upload arquivo Excel</h5>
                 <form name="importar-registros" method="post" action="/arquivos/importar/excel" class="form-horizontal">
+                    <input type="hidden" name="tipo_arquivo" value="excel">
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-12">
                             <label class="file-upload btn btn-primary mt-2">
