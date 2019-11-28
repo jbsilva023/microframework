@@ -3,9 +3,4 @@
 ### Example user template
 
 # IntelliJ project files
-.idea
-.idea/*.xml
-.idea/*.iml
-vendor
-*.iml
-.env
+*.php
