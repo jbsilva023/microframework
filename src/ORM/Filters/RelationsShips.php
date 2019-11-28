@@ -33,8 +33,6 @@ trait RelationsShips
 
         if ($data) {
             $class->setAll($data);
-        } else {
-            $class->setAll([]);
         }
 
         return $class;

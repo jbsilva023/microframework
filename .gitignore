@@ -8,6 +8,5 @@
 .idea/*.iml
 vendor
 *.iml
-app/cache/*.php
 .gitignore
 .env

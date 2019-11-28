@@ -1,9 +1,19 @@
+$(window).on('load', function () {
+    $('.preload').fadeOut('slow');
+});
+
 $(function ($) {
     $('.date').mask('00/00/0000');
     $('.time').mask('00:00:00');
     $('.date_time').mask('00/00/0000 00:00:00');
     $('.cep').mask('00000-000');
-    $('.phone').mask('0000-0000');
+    $('.phone').mask('9999-9999Z', {
+        translation: {
+            'Z': {
+                pattern: /[0-9]/, optional: true
+            }
+        }
+    });
     $('.phone_with_ddd').mask('(00) 0000-0000');
     $('.phone_us').mask('(000) 000-0000');
     $('.mixed').mask('AAA 000-S0S');
@@ -12,6 +22,23 @@ $(function ($) {
     $('.cpf_cnpj').mask(CPFCNPJMask, spOptions);
     $('.money').mask('000.000.000.000.000,00', {reverse: true});
     $('.money2').mask("#.##0,00", {reverse: true});
+
+    /* Evento que controle o submenu lateral, será exibido no momento do click
+     * no dropdown-item dropdown-toggle
+     */
+    $('.dropdown-menu a.dropdown-toggle').on('click', function(e) {
+        if (!$(this).next().hasClass('show')) {
+            $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
+        }
+        var $subMenu = $(this).next(".dropdown-menu");
+        $subMenu.toggleClass('show');
+
+        $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
+            $('.dropdown-submenu .show').removeClass("show");
+        });
+
+        return false;
+    });
 });
 
 var CPFCNPJMask = function (val) {

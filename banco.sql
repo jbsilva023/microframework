@@ -14,7 +14,7 @@ CREATE TABLE cartorios (
     email VARCHAR(100),
     documento VARCHAR(14) UNIQUE NOT NULL,
     tipo_documento char(1) NOT NULL,
-    telefone varchar (10),
+    telefone varchar (15),
     razao VARCHAR (200) NOT NULL,
     status boolean NOT NULL default 1
 );
@@ -32,6 +32,3 @@ CREATE TABLE enderecos (
 );
 
 ALTER TABLE enderecos ADD CONSTRAINT fk_cartorios FOREIGN KEY (cartorio_id) REFERENCES cartorios (id) ON DELETE CASCADE;
-
---INSERT INTO users (nome, tabeliao, email, documento, telefone, razao) VALUES ( 'Jonas Barbosa da Silva', 'João Felipe', 'jbsilva023@gmail.com', '02551049105', '61996470708', '1º Serventia de teste');
---INSERT INTO enderecos (nome, cep, uf, bairro, cidade, user_id) VALUES ( 'QD 23 CJ K', '71572311', 'DF', 'PARANOÁ', 'BRASILIA', 1);

@@ -6,7 +6,8 @@
         "jenssegers/blade": "^1.2",
         "vlucas/phpdotenv": "^3.6",
         "twbs/bootstrap": "4.0.0",
-        "components/jquery": "^3.3"
+        "components/jquery": "^3.3",
+        "phpoffice/phpexcel": "^1.8"
     },
     "autoload": {
         "psr-4": {

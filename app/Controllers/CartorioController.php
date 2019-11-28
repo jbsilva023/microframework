@@ -78,9 +78,9 @@ class CartorioController extends Controller
 
             return [
                 'title' => 'Erro!',
-                'msg' => "Não foi possível cadastrar o registro. <br/>Erro: {$e->getMessage()}",
+                'msg' => "Não foi possível cadastrar o registro.<br/><b>Erro:</b> {$e->getMessage()}",
                 'type' => 'error',
-                'reload' => true,
+                'reload' => false,
             ];
         }
     }
@@ -162,6 +162,21 @@ class CartorioController extends Controller
             'type' => 'error',
             'reload' => true
         ];
+    }
+
+    public function newEmail()
+    {
+        return $this->view('app.form-novo-email');
+    }
+
+    public function sendEmail()
+    {
+        $cartorios = new Cartorios;
+        $cartorios = $cartorios->all(['status', 1]);
+
+        foreach ($cartorios as $cartorio) {
+            $email = $cartorio->email;
+        }
     }
 
     protected function getUfs(): array
