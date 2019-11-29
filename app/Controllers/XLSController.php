@@ -5,7 +5,7 @@ namespace App\Controllers;
 
 use App\Helpers\Helper;
 use App\Models\Cartorios;
-use App\Models\Enderecos;
+
 use PHPExcel_Cell;
 use PHPExcel_IOFactory;
 use SpreadsheetReader;
@@ -64,7 +64,7 @@ class XLSController extends Controller
 
             $rows = [];
 
-            for ($row = 1; $row <= $highestRow; ++$row) {
+            for ($row = 1; $row <= $highestRow; $row++) {
                 for ($col = 0; $col < $highestColumnIndex; $col++) {
                     $rows[$row][$columns[$col]] = $worksheet->getCellByColumnAndRow($col, $row)->getValue();
                 }

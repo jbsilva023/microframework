@@ -201,6 +201,56 @@ $(function ($) {
         });
     });
 
+    $('form[name=enviar-email]').on('submit', function (e) {
+        e.preventDefault();
+
+        let erros = [];
+        let data = new FormData($(this)[0]);
+        let form = $(this);
+
+        form.find('input.required').each(function () {
+            $(this).removeClass('border-red');
+
+            if ($(this).val() === '') {
+                $(this).addClass('border-red');
+                erros.push('O campo <b>' + $(this).parent().find('label').text().replace(/[\*\:]/g, '')
+                    + '</b> é obrigatório.');
+            }
+        });
+
+        form.find('div.erros div.message').hide('slow');
+
+        if (!erros.length > 0) {
+            $.ajax({
+                type: "POST",
+                url: "/enviar-email",
+                data: data,
+                enctype: 'multipart/form-data',
+                processData: false,
+                contentType: false,
+                cache: false,
+                beforeSend: function () {
+                    $('.preload').fadeIn('slow');
+                },
+                success: function (response) {
+                    Swal.fire(response.title, response.msg, response.type).then(function () {
+                        if (response.reload) {
+                            window.location.href = '/';
+                        }
+                    });
+                },
+                error: function () {
+
+                },
+                complete: function () {
+                    $('.preload').fadeOut('slow');
+                }
+            });
+        } else {
+            form.find('div.erros div.message').html(erros.join('<br>')).show("slow");
+        }
+    });
+
     /*$('form[name=cartorio]').on('reset', function (event) {
         var form = $(this);
 

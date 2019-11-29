@@ -5,7 +5,6 @@ namespace App\Controllers;
 
 use App\Helpers\Helper;
 use App\Models\Cartorios;
-use App\Models\Enderecos;
 
 class XMLController extends Controller
 {

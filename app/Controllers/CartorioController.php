@@ -171,12 +171,25 @@ class CartorioController extends Controller
 
     public function sendEmail()
     {
-        $cartorios = new Cartorios;
-        $cartorios = $cartorios->all(['status', 1]);
+
+        var_dump($_FILES, $_POST); die;
+
+        $cartorio = new Cartorios;
+
+        $conditions = [
+            ['status', 1],
+            ['email','<>','']
+        ];
+
+        $cartorios = $cartorio->all($conditions);
 
         foreach ($cartorios as $cartorio) {
-            $email = $cartorio->email;
+            $emails[] = $cartorio->email;
         }
+
+        var_dump($emails); die;
+
+
     }
 
     protected function getUfs(): array
