@@ -9,7 +9,7 @@
         <div class="card mt-4">
             <div class="preload"></div>
             <div class="card-body">
-                <h5 class="card-title">Upload arquivo XML</h5>
+                <h5 class="card-title">Upload Arquivo XML</h5>
                 <form name="importar-registros" method="post" action="/arquivos/importar/xml" class="form-horizontal">
                     <div class="form-group">
                         <input type="hidden" name="tipo_arquivo" value="xml">
@@ -28,7 +28,7 @@
 
 @section('scripts')
     <script src="/app/public/js/jquery.funcoes.file-upload.js"></script>
-    <script src="/app/public/js/app/jquery.funcoes.import-xml.js"></script>
+    <script src="/app/public/js/app/jquery.funcoes.importar.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('.file-upload').file_upload();

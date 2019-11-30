@@ -16,6 +16,6 @@ $app->post('/enviar-email', 'CartorioController@sendEmail');
 $app->get('/arquivos/upload/xml', 'XMLController@index');
 $app->post('/arquivos/importar/xml', 'XMLController@importar');
 
-$app->get('/arquivos/upload/excel', 'XLSController@index');
-$app->post('/arquivos/importar/excel', 'XLSController@importar');
-$app->get('/arquivos/exportar/excel', 'XLSController@index');
+$app->get('/arquivos/upload/excel', 'ExcelController@index');
+$app->post('/arquivos/importar/excel', 'ExcelController@importar');
+$app->get('/arquivos/exportar/excel', 'ExcelController@exportar');

@@ -48,3 +48,9 @@ span.paginate-info {
     background-color: #17a2b8 !important;
     color: #FFFFFF !important;
 }
+
+select[readonly] {
+    background: #eee; /*Simular campo inativo*/
+    pointer-events: none;
+    touch-action: none;
+}

@@ -5,7 +5,6 @@ namespace App\Controllers;
 
 use App\Helpers\Helper;
 use App\Models\Cartorios;
-use App\Models\Enderecos;
 
 class XMLController extends Controller
 {
@@ -40,11 +39,7 @@ class XMLController extends Controller
                         str_pad($item->documento, 14, '0', STR_PAD_RIGHT) :
                         $item->documento;
 
-                    $cartorio = $cartorio->findForColumn(['documento', $documento]);
-
-                    if (!$cartorio) {
-                        $cartorio = new Cartorios;
-                    }
+                    $cartorio = $cartorio->findByColumn(['documento', $documento]);
 
                     $cartorio->nome = $item->nome;
                     $cartorio->razao = $item->razao;
@@ -78,7 +73,7 @@ class XMLController extends Controller
                     'title' => 'Erro!',
                     'msg' => "Não foi possível importar os registros. <br/>{$e->getMessage()}",
                     'type' => 'error',
-                    'reload' => true
+                    'reload' => false
                 ];
             }
         }
@@ -87,8 +82,7 @@ class XMLController extends Controller
             'title' => 'Erro!',
             'msg' => "Faça upload de um arquivo XML",
             'type' => 'error',
-            'reload' => true
+            'reload' => false
         ];
-
     }
 }

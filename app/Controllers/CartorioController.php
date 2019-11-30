@@ -6,6 +6,10 @@ use App\Helpers\Helper;
 use App\Models\Cartorios;
 use App\Models\Enderecos;
 
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 class CartorioController extends Controller
 {
     private $params;
@@ -29,14 +33,14 @@ class CartorioController extends Controller
         $id = $_POST['id'];
         $cartorio = new Cartorios;
         $cartorio = $cartorio->find($id);
-        $ufs = $this->getUfs();
+        $ufs = $this->getProviderDataUfs();
 
         return $this->view('app.form-update-cartorio', ['cartorio' => $cartorio, 'ufs' => $ufs]);
     }
 
     public function create()
     {
-        $ufs = $this->getUfs();
+        $ufs = $this->getProviderDataUfs();
         return $this->view('app.form-novo-cartorio', ['ufs' => $ufs]);
     }
 
@@ -169,25 +173,86 @@ class CartorioController extends Controller
         return $this->view('app.form-novo-email');
     }
 
+    /**
+     *
+     */
     public function sendEmail()
     {
-        $cartorios = new Cartorios;
-        $cartorios = $cartorios->all(['status', 1]);
+        $mail = new PHPMailer(true);
+//var_dump($_POST, $_FILES); die;
+        /*$cartorio = new Cartorios;
+
+        $conditions = [
+            ['status', 1],
+            ['email','<>','']
+        ];
+
+        $cartorios = $cartorio->all($conditions);
 
         foreach ($cartorios as $cartorio) {
-            $email = $cartorio->email;
+            $emails[] = $cartorio->email;
+        }*/
+
+        try {
+            //Server settings
+            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                // Enable verbose debug output
+            $mail->isSMTP();                                      // Send using SMTP
+            $mail->Host = 'smtp.mailtrap.io';                     // Set the SMTP server to send through
+            $mail->SMTPAuth = true;                               // Enable SMTP authentication
+            $mail->Username = '49318f5d92079d';                   // SMTP username
+            $mail->Password = '1c35c8c2be26f9';                   // SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;   // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
+            $mail->Port = 2525;                                   // TCP port to connect to
+
+            //Recipients
+            $mail->setFrom('jbsilva023@hotmail.com', 'Mailer');
+            $mail->addAddress('jbsilva023@gmail.com', 'Jonas');     // Add a recipient
+            //$mail->addAddress('ellen@example.com');               // Name is optional
+            //$mail->addReplyTo('info@example.com', 'Information');
+            //$mail->addCC('cc@example.com');
+            //$mail->addBCC('bcc@example.com');
+
+            // Attachments
+            if ($_FILES['arquivo']['tmp_name']) {
+                $mail->addAttachment($_FILES['arquivo']['tmp_name'], utf8_encode($_FILES['arquivo']['name']));         // Add attachments
+            }
+
+            //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+
+            // Content
+            $mail->isHTML(true);                                  // Set email format to HTML
+            $mail->Subject = $_POST['subject'];
+            $mail->Body = $_POST['editor1'];
+            //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+            $mail->send();
+
+            return [
+                'title' => 'Sucesso!',
+                'msg' => 'E-mails enviados dom sucesso.',
+                'type' => 'success',
+                'reload' => true
+            ];
+
+        } catch (Exception $e) {
+            return [
+                'title' => "Error!",
+                'msg' => "Não foi possível enviar os e-mail(s).<br/><b>Mailer Error:</b> {$mail->ErrorInfo}",
+                'type' => "error",
+                'reload' => false
+            ];
         }
     }
 
-    protected function getUfs(): array
+    protected function getProviderDataUfs(): array
     {
         return [
-            ["name" =>"AC", "description" => "Acre"],
+            ["name" => "AC", "description" => "Acre"],
             ["name" => "AL", "description" => "Alagoas"],
             ["name" => "AP", "description" => "Amapá"],
             ["name" => "AM", "description" => 'Amazonas'],
             ["name" => "BA", "description" => "Bahia"],
-            ["name" =>"CE", "description" => "Ceará"],
+            ["name" => "CE", "description" => "Ceará"],
             ["name" => "DF", "description" => "Distrito Federal"],
             ["name" => "ES", "description" => "Espírito Santo"],
             ["name" => "GO", "description" => "Goiás"],
@@ -197,17 +262,17 @@ class CartorioController extends Controller
             ["name" => "MG", "description" => "Minas Gerais"],
             ["name" => "PA", "description" => "Pará"],
             ["name" => "PB", "description" => "Paraíba"],
-            ["name" =>"PR", "description" => "Paraná"],
+            ["name" => "PR", "description" => "Paraná"],
             ["name" => "PE", "description" => "Pernambuco"],
             ["name" => "PI", "description" => "Piauí"],
             ["name" => "RJ", "description" => "Rio de Janeiro"],
             ["name" => "RN", "description" => "Rio Grande do Norte"],
-            ["name" =>"RS", "description" => "Rio Grande do Sul"],
+            ["name" => "RS", "description" => "Rio Grande do Sul"],
             ["name" => "RO", "description" => "Rondônia"],
             ["name" => "RR", "description" => "Roraima"],
             ["name" => "SC", "description" => "Santa Catarina"],
             ["name" => "SP", "description" => "São Paulo"],
-            ["name" =>"SE", "description" => "Sergipe"],
+            ["name" => "SE", "description" => "Sergipe"],
             ["name" => "TO", "description" => "Tocantins"],
             ["name" => "EX", "description" => "Estrangeiro"]
         ];

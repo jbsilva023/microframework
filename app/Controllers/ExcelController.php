@@ -5,12 +5,13 @@ namespace App\Controllers;
 
 use App\Helpers\Helper;
 use App\Models\Cartorios;
-use App\Models\Enderecos;
+
+use Carbon\Carbon;
 use PHPExcel_Cell;
 use PHPExcel_IOFactory;
 use SpreadsheetReader;
 
-class XLSController extends Controller
+class ExcelController extends Controller
 {
     private $params;
 
@@ -64,7 +65,7 @@ class XLSController extends Controller
 
             $rows = [];
 
-            for ($row = 1; $row <= $highestRow; ++$row) {
+            for ($row = 1; $row <= $highestRow; $row++) {
                 for ($col = 0; $col < $highestColumnIndex; $col++) {
                     $rows[$row][$columns[$col]] = $worksheet->getCellByColumnAndRow($col, $row)->getValue();
                 }
@@ -80,11 +81,7 @@ class XLSController extends Controller
                         str_pad($row['documento'], 14, '0', STR_PAD_RIGHT) :
                         $row['documento'];
 
-                    $cartorio = $cartorio->findForColumn(['documento', $documento]);
-
-                    if (!$cartorio) {
-                        $cartorio = new Cartorios;
-                    }
+                    $cartorio = $cartorio->findByColumn(['documento', $documento]);
 
                     $cartorio->nome = $row['nome'];
                     $cartorio->razao = $row['razao'];
@@ -135,6 +132,58 @@ class XLSController extends Controller
 
     public function exportar()
     {
+        $objPHPExcel = new \PHPExcel;
+        $cartorio = new Cartorios;
+        $cartorios = $cartorio->all();
 
+        $objPHPExcel->setActiveSheetIndex(0);
+
+        $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'NOME');
+        $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'RAZÃO');
+        $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'DOCUMENTO');
+        $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'CEP');
+        $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'ENDEREÇO');
+        $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'BAIRRO');
+        $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'CIDADE');
+        $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'UF');
+        $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'TELEFONE');
+        $objPHPExcel->getActiveSheet()->SetCellValue('J1', 'E-MAIL');
+        $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'TABELIÃO');
+        $objPHPExcel->getActiveSheet()->SetCellValue('L1', 'ATIVO');
+
+        $objPHPExcel->getActiveSheet()->getStyle("A1:L1")->getFont()->setBold(true);
+
+        $count = 2;
+        foreach ($cartorios as $cartorio) {
+            $objPHPExcel->getActiveSheet()->SetCellValue('A' . $count, $cartorio->nome);
+            $objPHPExcel->getActiveSheet()->SetCellValue('B' . $count, $cartorio->razao);
+            $objPHPExcel->getActiveSheet()->SetCellValue('C' . $count, $cartorio->documento);
+            $objPHPExcel->getActiveSheet()->SetCellValue('D' . $count, $cartorio->endereco()->cep);
+            $objPHPExcel->getActiveSheet()->SetCellValue('E' . $count, $cartorio->endereco()->nome);
+            $objPHPExcel->getActiveSheet()->SetCellValue('F' . $count, $cartorio->endereco()->bairro);
+            $objPHPExcel->getActiveSheet()->SetCellValue('G' . $count, $cartorio->endereco()->cidade);
+            $objPHPExcel->getActiveSheet()->SetCellValue('H' . $count, $cartorio->endereco()->uf);
+            $objPHPExcel->getActiveSheet()->SetCellValue('I' . $count, $cartorio->telefone);
+            $objPHPExcel->getActiveSheet()->SetCellValue('J' . $count, $cartorio->email);
+            $objPHPExcel->getActiveSheet()->SetCellValue('K' . $count, $cartorio->tabeliao);
+            $objPHPExcel->getActiveSheet()->SetCellValue('L' . $count, ($cartorio->status == 1 ? "SIM" : "NÃO"));
+            $count++;
+        }
+
+        $tmpfile = tempnam('php://output', 'phpxltmp');
+
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+        $objWriter->save($tmpfile);
+
+        $excel = file_get_contents($tmpfile);
+        unlink($tmpfile);
+
+        return [
+            'title' => 'Sucesso!',
+            'msg' => 'Arquivo gerado com sucesso.',
+            'type' => 'success',
+            'file' => "data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64," . base64_encode($excel),
+            'name' => 'Cartorios_' . Carbon::now()->format('d-m-Y_H-i-s') . '.xlsx'
+        ];
     }
 }
