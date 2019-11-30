@@ -15,8 +15,8 @@
                         <div class="message alert alert-danger" style="display: none"></div>
                     </div>
                     <div class="col-md-6 col-sm-12">
-                        <label for="subjetc">Assunto: <span class="text-danger">*</span></label>
-                        <input type="text" name="subject" id="subjetc" class="form-control required mb-2" value="">
+                        <label for="subject">Assunto: <span class="text-danger">*</span></label>
+                        <input type="text" name="subject" id="subject" class="form-control required mb-2" value="">
                     </div>
 
                     <div class="col-md-12 col-sm-12">
