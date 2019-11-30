@@ -58,7 +58,7 @@
                             <a class="dropdown-item dropdown-toggle" href="javascript:void(0)">Exportar</a>
                             <ul class="dropdown-menu">
 
-                                <li><a class="dropdown-item" href="/arquivos/exportar/excel">Excel</a></li>
+                                <li><a class="dropdown-item export-excel" href="javascript:void(0)">Excel</a></li>
                             </ul>
                         </li>
                     </ul>

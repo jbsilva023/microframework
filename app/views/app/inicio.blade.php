@@ -15,19 +15,18 @@
                 <table class="table table-responsive-lg table-hover mt-2 table-sm">
                     <thead class="table-dark">
                     <tr>
-                        {{--<th width="20%">Nome</th>--}}
-                        <th width="25%">Razão</th>
-                        <th width="15%">Documeto</th>
+                        <th width="22%">Razão</th>
+                        <th width="12%">Documeto</th>
                         <th width="10%">telefone</th>
-                        <th width="15%">E-mail</th>
+                        <th width="12%">E-mail</th>
                         <th width="25%">Endereco</th>
-                        <th width="10%">Ações</th>
+                        <th width="8%">Status</th>
+                        <th width="11%">Ações</th>
                     </tr>
                     </thead>
                     <tbody>
                     @forelse($cartorios as $cartorio)
                         <tr>
-                            {{--<td>{{ $cartorio->nome }}</td>--}}
                             <td>{{ $cartorio->razao }}</td>
                             <td><span class="cpf_cnpj">{{ $cartorio->documento }}</span></td>
                             <td><span class="phone">{{ $cartorio->telefone }}</span></td>
@@ -37,6 +36,7 @@
                                 {{ $cartorio->endereco()->cidade }} - {{ $cartorio->endereco()->uf }}
                                 , <span class="cep">{{ $cartorio->endereco()->cep }}</span>
                             </td>
+                            <td>{{ $cartorio->status ? 'Ativo' : 'Inativo' }}</td>
                             <td>
                                 <a href="javascript:void(0)" class="btn btn-primary" data-idcartorio="{{ $cartorio->id }}"
                                    data-nome="{{ $cartorio->nome }}"

@@ -250,14 +250,4 @@ $(function ($) {
             form.find('div.erros div.message').html(erros.join('<br>')).show("slow");
         }
     });
-
-    /*$('form[name=cartorio]').on('reset', function (event) {
-        var form = $(this);
-
-        form.find('input.required, select.required').each(function () {
-            $(this).removeClass('border-red');
-        });
-
-        form.find('div.erros div.message').hide('slow');
-    });*/
 });
