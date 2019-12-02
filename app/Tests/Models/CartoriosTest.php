@@ -11,50 +11,89 @@ use PHPUnit\Framework\TestCase;
 
 class CartoriosTest extends TestCase
 {
-    /**
-     * @dataProvider getProvidedData
-     */
-    public function testCartorioStore($nome, $tabeliao, $email, $documento, $tipo_documento, $telefone, $razao, $status)
+    protected $cartorio;
+
+    public function setUp()
     {
-        $cartorio = new Cartorios;
-        $cartorio->setDriver(new Sqlite);
-
-        $this->assertInstanceOf(Cartorios::class, $cartorio);
-
-        $cartorio->nome = $nome;
-        $cartorio->tabeliao = $tabeliao;
-        $cartorio->email = $email;
-        $cartorio->documento = $documento;
-        $cartorio->tipo_documento = $tipo_documento;
-        $cartorio->telefone = $telefone;
-        $cartorio->razao = $razao;
-        $cartorio->status = $status;
-
-        $this->assertEquals($nome, $cartorio->nome);
-        $this->assertEquals($tabeliao, $cartorio->tabeliao);
-        $this->assertEquals($email, $cartorio->email);
-        $this->assertEquals($documento, $cartorio->documento);
-        $this->assertEquals($tipo_documento, $cartorio->tipo_documento);
-        $this->assertEquals($telefone, $cartorio->telefone);
-        $this->assertEquals($razao, $cartorio->razao);
-        $this->assertEquals($status, $cartorio->status);
-
-        $this->assertIsObject($cartorio);
+        $this->cartorio = new Cartorios;
+        $this->cartorio->setDriver(new Sqlite);
     }
 
-    public function getProvidedData(): array
+
+    public function testStore()
     {
-        return [
-            [
-                ['nome','Cartorio de teste 1'],
-                ['tabeliao','Jonas Barbosa'],
-                ['email','jbsilva023@gmail.com'],
-                ['documento','02551049105'],
-                ['tipo_documento',1],
-                ['telefone','996470708'],
-                ['razao','Cartorio de teste 1'],
-                ['status',1],
-            ]
-        ];
+        $this->assertInstanceOf(Cartorios::class, $this->cartorio);
+
+        $this->cartorio->nome = 'Carotio teste 1';
+        $this->cartorio->tabeliao = 'Jonas Barbosa da Silva';
+        $this->cartorio->email = 'jbsilva023@gmail.com';
+        $this->cartorio->documento = '02551049105';
+        $this->cartorio->tipo_documento = 1;
+        $this->cartorio->telefone = '996470708';
+        $this->cartorio->razao = 'Carotio teste 1';
+        $this->cartorio->status = 1;
+        $this->cartorio->save();
+
+        $this->assertEquals('Carotio teste 1', $this->cartorio->nome);
+        $this->assertEquals('Jonas Barbosa da Silva', $this->cartorio->tabeliao);
+        $this->assertEquals('jbsilva023@gmail.com', $this->cartorio->email);
+        $this->assertEquals('02551049105', $this->cartorio->documento);
+        $this->assertEquals(1, $this->cartorio->tipo_documento);
+        $this->assertEquals('996470708', $this->cartorio->telefone);
+        $this->assertEquals('Carotio teste 1', $this->cartorio->razao);
+        $this->assertEquals(1, $this->cartorio->status);
+    }
+
+    public function testFind()
+    {
+        $cartorio = $this->cartorio->find(1);
+        $this->assertInstanceOf(Cartorios::class, $cartorio);
+
+        $this->assertEquals('Carotio teste 1', $cartorio->nome);
+        $this->assertEquals('Jonas Barbosa da Silva', $cartorio->tabeliao);
+        $this->assertEquals('jbsilva023@gmail.com', $cartorio->email);
+        $this->assertEquals('02551049105', $cartorio->documento);
+        $this->assertEquals(1, $cartorio->tipo_documento);
+        $this->assertEquals('996470708', $cartorio->telefone);
+        $this->assertEquals('Carotio teste 1', $cartorio->razao);
+        $this->assertEquals(1, $cartorio->status);
+    }
+
+    public function testUpdate()
+    {
+        $cartorio = $this->cartorio->find(1);
+        $this->assertInstanceOf(Cartorios::class, $cartorio);
+
+        $cartorio->nome = 'Carotio teste 2';
+        $cartorio->tabeliao = 'João Barbosa da Silva';
+        $cartorio->email = 'joao.silva023@gmail.com';
+        $cartorio->documento = '03654104910963';
+        $cartorio->tipo_documento = 2;
+        $cartorio->telefone = '992251051';
+        $cartorio->razao = 'Carotio teste 2';
+        $cartorio->status = 0;
+        $cartorio->save();
+
+        $this->assertEquals('Carotio teste 2', $cartorio->nome);
+        $this->assertEquals('João Barbosa da Silva', $cartorio->tabeliao);
+        $this->assertEquals('joao.silva023@gmail.com', $cartorio->email);
+        $this->assertEquals('03654104910963', $cartorio->documento);
+        $this->assertEquals(2, $cartorio->tipo_documento);
+        $this->assertEquals('992251051', $cartorio->telefone);
+        $this->assertEquals('Carotio teste 2', $cartorio->razao);
+        $this->assertEquals(0, $cartorio->status);
+    }
+
+    public function testDelete()
+    {
+        $cartorio = $this->cartorio->find(1);
+        $cartorio = $cartorio->delete();
+        $this->assertNotInstanceOf(Cartorios::class, $cartorio);
+    }
+
+    public function testFindAll()
+    {
+        $cartorios = $this->cartorio->all();
+        $this->assertIsArray($cartorios);
     }
 }
