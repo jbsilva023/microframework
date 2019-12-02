@@ -19,5 +19,5 @@
  _DB_CONNECTION=mysql_ <br/>
  _DB_HOST=yourhost_ <br/>
  _DB_DATABASE=yourdatabasename_ <br/>
- _DB_USERNAME=ypurusername_ <br/>
+ _DB_USERNAME=yourusername_ <br/>
  _DB_PASSWORD=yourpassowrd_
