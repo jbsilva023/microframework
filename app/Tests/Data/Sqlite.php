@@ -33,7 +33,7 @@ class Sqlite implements DriverInterface
         return $this;
     }
 
-    public function exec(string $query)
+    public function exec(string $query = null)
     {
         $this->stmt = $this->pdo->prepare((string)$this->query);
         $this->stmt->execute($this->query->getValues());
