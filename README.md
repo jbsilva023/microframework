@@ -11,7 +11,7 @@
  **Banco de dados SQL de script** <br />
   - Script para criar banco de dados:<br/> _app/config/banco.sql_
   
- **Servidor de Desenvolvimento Local** <br/>
+ **Servidor de desenvolvimento local** <br/>
  - Comando de execução:<br/> _php -S localhost:9999_
  
  **Configurar conexão com o banco de dados** <br/>
