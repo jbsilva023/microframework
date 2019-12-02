@@ -5,7 +5,7 @@
  - PHP PDO Extension
  - PHP XML Extension
  
- **Install Dependencys** <br />
+ **Install Dependencies** <br />
  composer install
  
  **Script SQL Database** <br />
