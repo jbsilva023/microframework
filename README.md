@@ -1,23 +1,27 @@
 # Microframework
 
- **Server Requirements** <br/>
+ **Requisitos do servidor** <br/>
  - PHP >= 7.2.0
  - PHP PDO Extension
  - PHP XML Extension
  
- **Install Dependencies** <br />
- - Run command:<br/> _composer install_
+ **Instalar dependências** <br />
+ - Comando de execução:<br/> _composer install_
  
- **Script SQL Database** <br />
-  - Script for create database:<br/> _app/config/banco.sql_
+ **Banco de dados SQL de script** <br />
+  - Script para criar banco de dados:<br/> _app/config/banco.sql_
   
- **Local Development Server** <br/>
- - Run command:<br/> _php -S localhost:9999_
+ **Servidor de desenvolvimento local** <br/>
+ - Comando de execução:<br/> _php -S localhost:9999_
  
- **Set up database connection** <br/>
- - Remove the **.example** extension from the **.env**<br/> file and enter the information for your database:<br/>
+ **Configurar conexão com o banco de dados** <br/>
+ - Remova a extensão **.example** do arquivo **.env** <br/> e insira as informações do seu banco de dados:<br/>
  _DB_CONNECTION=mysql_ <br/>
  _DB_HOST=yourhost_ <br/>
  _DB_DATABASE=yourdatabasename_ <br/>
  _DB_USERNAME=yourusername_ <br/>
  _DB_PASSWORD=yourpassowrd_
+ 
+ **Arquivos necessários** <br/>
+  - <a href='https://github.com/p21sistemas/vikings/blob/master/Cart%C3%B3rios.xlsx'>Planilha excel</a> - Planilha atualizada com a lista de cartórios
+  - <a href='https://github.com/p21sistemas/vikings/blob/master/Cart%C3%B3rios-CNJ.xml'>Arquivo XML</a> - Arquivo XML para importação
