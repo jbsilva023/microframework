@@ -123,9 +123,9 @@ class ExcelController extends Controller
         }
 
         return [
-            'title' => 'Erro!',
+            'title' => 'Atenção!',
             'msg' => "Faça upload de um arquivo .XLS ou XLSX.",
-            'type' => 'error',
+            'type' => 'info',
             'reload' => false
         ];
     }
