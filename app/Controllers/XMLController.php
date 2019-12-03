@@ -79,7 +79,7 @@ class XMLController extends Controller
         }
 
         return [
-            'title' => 'Atensão!',
+            'title' => 'Atenção!',
             'msg' => "Faça upload de um arquivo XML",
             'type' => 'info',
             'reload' => false

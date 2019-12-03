@@ -123,7 +123,7 @@ class ExcelController extends Controller
         }
 
         return [
-            'title' => 'Atensão!',
+            'title' => 'Atenção!',
             'msg' => "Faça upload de um arquivo .XLS ou XLSX.",
             'type' => 'info',
             'reload' => false
