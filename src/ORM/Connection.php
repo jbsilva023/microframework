@@ -3,8 +3,6 @@
 
 namespace JbSilva\ORM;
 
-use Dotenv\Dotenv;
-
 abstract class Connection
 {
     public static $pdo;
@@ -12,9 +10,6 @@ abstract class Connection
     //método conexão abre a conexão com o Banco
     public static function init()
     {
-        $dotenv = Dotenv::create(__DIR__ . '/../../');
-        $dotenv->load();
-
         try {
             if (!isset(self::$pdo)) {
                 self::$pdo = new \PDO(

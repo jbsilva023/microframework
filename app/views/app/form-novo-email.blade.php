@@ -20,12 +20,14 @@
                     </div>
 
                     <div class="col-md-12 col-sm-12">
-                        <label for="editor1">Mensagem: <span class="text-danger">*</span></label>
-                        <textarea name="editor1" id="editor1" rows="10" cols="80" class="required"></textarea>
+                        <label for="editor">Mensagem: <span class="text-danger">*</span></label>
+                        <textarea name="mensagem" id="editor" class="required"></textarea>
                         <script>
-                            // Replace the <textarea id="editor1"> with a CKEditor
-                            // instance, using default configuration.
-                            CKEDITOR.replace('editor1');
+                            ClassicEditor
+                                .create(document.querySelector('#editor'))
+                                .catch(error => {
+                                    console.error( error );
+                                });
                         </script>
                     </div>
                     <div class="form-group">
@@ -50,7 +52,8 @@
 @stop
 
 @section('scripts')
-    <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/15.0.0/classic/ckeditor.js"></script>
+    {{--<script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>--}}
     <script src="/app/public/js/jquery.funcoes.file-upload.js"></script>
     <script src="/app/public/js/app/jquery.funcoes.cartorio.js"></script>
     <script type="text/javascript">
