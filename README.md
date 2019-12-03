@@ -1,7 +1,7 @@
 # Microframework
 
  **Requisitos do servidor**
- - PHP >= 7.2.0
+ - PHP >= 7.2.25
  - PHP PDO Extension
  - PHP XML Extension
  
