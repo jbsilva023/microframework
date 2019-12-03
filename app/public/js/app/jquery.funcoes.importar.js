@@ -34,7 +34,7 @@ $(function ($) {
                 }
             });
         } else {
-            Swal.fire("Atenção", "Realize o upload de um arquivo XML", "info");
+            Swal.fire("Atenção", "Realize o upload de um arquivo " + tipo_arquivo.toUpperCase(), "info");
         }
     });
 });
