@@ -6,7 +6,6 @@ use App\Helpers\Helper;
 use App\Models\Cartorios;
 use App\Models\Enderecos;
 
-use Dotenv\Dotenv;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -174,9 +173,6 @@ class CartorioController extends Controller
         return $this->view('app.form-novo-email');
     }
 
-    /**
-     *
-     */
     public function sendEmail()
     {
         $mail = new PHPMailer(true);
@@ -206,15 +202,6 @@ class CartorioController extends Controller
             //Recipients
             $mail->setFrom(getenv('MAIL_FROM'));
 
-            foreach ($cartorios as $cartorio) {
-                $mail->addAddress($cartorio->email, $cartorio->nome);     // Add a recipient
-            }
-
-            //$mail->addAddress('ellen@example.com');               // Name is optional
-            //$mail->addReplyTo('info@example.com', 'Information');
-            //$mail->addCC('cc@example.com');
-            //$mail->addBCC('bcc@example.com');
-
             // Attachments
             if ($_FILES['arquivo']['tmp_name']) {
                 $mail->addAttachment($_FILES['arquivo']['tmp_name'], utf8_encode($_FILES['arquivo']['name']));         // Add attachments
@@ -226,11 +213,22 @@ class CartorioController extends Controller
             $mail->Body = $_POST['mensagem'];
             //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
-            $mail->send();
+            if (count($cartorio) > 0) {
+                foreach ($cartorios as $cartorio) {
+                    $mail->clearAddresses();
+                    $mail->addAddress($cartorio->email, $cartorio->nome);     // Add a recipient
+                    $mail->send();
+                }
+            }
+
+            //$mail->addAddress('ellen@example.com');               // Name is optional
+            //$mail->addReplyTo('info@example.com', 'Information');
+            //$mail->addCC('cc@example.com');
+            //$mail->addBCC('bcc@example.com');
 
             return [
                 'title' => 'Sucesso!',
-                'msg' => 'E-mails enviados dom sucesso.',
+                'msg' => 'E-mail(s) enviado(s) com sucesso.',
                 'type' => 'success',
                 'reload' => true
             ];
