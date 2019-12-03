@@ -1,11 +1,11 @@
-DROP DATABASE vikings;
+DROP DATABASE IF EXISTS vikings;
 
 CREATE DATABASE vikings;
 
 use vikings;
 
 
-DROP TABLE cartorios;
+DROP TABLE IF EXISTS  cartorios;
 
 CREATE TABLE cartorios (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -19,7 +19,7 @@ CREATE TABLE cartorios (
     status boolean NOT NULL default 1
 );
 
-DROP TABLE enderecos;
+DROP TABLE IF EXISTS enderecos;
 
 CREATE TABLE enderecos (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
