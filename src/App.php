@@ -2,8 +2,9 @@
 
 namespace JbSilva;
 
-use JbSilva\Router\Router;
+use Dotenv\Dotenv;
 use JbSilva\DI\Resolver;
+use JbSilva\Router\Router;
 use JbSilva\Rederer\PHPRedererInterface;
 
 class App
@@ -36,6 +37,8 @@ class App
 
     public function run()
     {
+        (Dotenv::create(__DIR__ . '/../'))->load();
+
         $route = $this->router->run();
         $resolver = new Resolver;
 

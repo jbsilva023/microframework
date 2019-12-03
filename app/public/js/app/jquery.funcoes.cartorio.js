@@ -84,7 +84,8 @@ $(function ($) {
 
             if ($(this).val() === '') {
                 $(this).addClass('border-red');
-                erros.push('O campo <b>' + $(this).parent().find('label').text().replace(/[\*\:]/g, '') + '</b> é obrigatório.');
+                erros.push('O campo <b>' + $(this).parent().find('label[for=' + $(this).attr('id') + ']').text()
+                    .replace(/[\*\:]/g, '') + '</b> é obrigatório.');
             }
         });
 
@@ -126,8 +127,8 @@ $(function ($) {
 
             if ($(this).val() === '') {
                 $(this).addClass('border-red');
-                erros.push('O campo <b>' + $(this).parent().find('label').text().replace(/[\*\:]/g, '')
-                    + '</b> é obrigatório.');
+                erros.push('O campo <b>' + $(this).parent().find('label[for=' + $(this).attr('id') + ']').text()
+                        .replace(/[\*\:]/g, '') + '</b> é obrigatório.');
             }
         });
 
@@ -208,13 +209,13 @@ $(function ($) {
         let data = new FormData($(this)[0]);
         let form = $(this);
 
-        form.find('input.required').each(function () {
+        form.find('input.required, textarea.required').each(function () {
             $(this).removeClass('border-red');
 
             if ($(this).val() === '') {
                 $(this).addClass('border-red');
-                erros.push('O campo <b>' + $(this).parent().find('label').text().replace(/[\*\:]/g, '')
-                    + '</b> é obrigatório.');
+                erros.push('O campo <b>' + $(this).parent().find('label[for=' + $(this).attr('id') + ']').text()
+                        .replace(/[\*\:]/g, '') + '</b> é obrigatório.');
             }
         });
 

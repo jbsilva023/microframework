@@ -6,6 +6,7 @@ use App\Helpers\Helper;
 use App\Models\Cartorios;
 use App\Models\Enderecos;
 
+use Dotenv\Dotenv;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -17,6 +18,8 @@ class CartorioController extends Controller
     public function __construct($params)
     {
         $this->params = $params;
+
+        (Dotenv::create(__DIR__ . '/../../'))->load();
     }
 
     public function index()
@@ -179,8 +182,8 @@ class CartorioController extends Controller
     public function sendEmail()
     {
         $mail = new PHPMailer(true);
-//var_dump($_POST, $_FILES); die;
-        /*$cartorio = new Cartorios;
+
+        $cartorio = new Cartorios;
 
         $conditions = [
             ['status', 1],
@@ -189,24 +192,26 @@ class CartorioController extends Controller
 
         $cartorios = $cartorio->all($conditions);
 
-        foreach ($cartorios as $cartorio) {
-            $emails[] = $cartorio->email;
-        }*/
-
         try {
             //Server settings
-            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                // Enable verbose debug output
+            //$mail->SMTPDebug = SMTP::DEBUG_SERVER;                // Enable verbose debug output
+            $mail->setLanguage('pt');
+
             $mail->isSMTP();                                      // Send using SMTP
-            $mail->Host = 'smtp.mailtrap.io';                     // Set the SMTP server to send through
+            $mail->Host = getenv('MAIL_HOST');           // Set the SMTP server to send through
             $mail->SMTPAuth = true;                               // Enable SMTP authentication
-            $mail->Username = '49318f5d92079d';                   // SMTP username
-            $mail->Password = '1c35c8c2be26f9';                   // SMTP password
+            $mail->Username = getenv('MAIL_USERNAME');   // SMTP username
+            $mail->Password = getenv('MAIL_PASSWORD');   // SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;   // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
-            $mail->Port = 2525;                                   // TCP port to connect to
+            $mail->Port = getenv('MAIL_PORT');           // TCP port to connect to
 
             //Recipients
-            $mail->setFrom('jbsilva023@hotmail.com', 'Mailer');
-            $mail->addAddress('jbsilva023@gmail.com', 'Jonas');     // Add a recipient
+            $mail->setFrom(getenv('MAIL_FROM'));
+
+            foreach ($cartorios as $cartorio) {
+                $mail->addAddress($cartorio->email, $cartorio->nome);     // Add a recipient
+            }
+
             //$mail->addAddress('ellen@example.com');               // Name is optional
             //$mail->addReplyTo('info@example.com', 'Information');
             //$mail->addCC('cc@example.com');
@@ -217,12 +222,10 @@ class CartorioController extends Controller
                 $mail->addAttachment($_FILES['arquivo']['tmp_name'], utf8_encode($_FILES['arquivo']['name']));         // Add attachments
             }
 
-            //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
-
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
             $mail->Subject = $_POST['subject'];
-            $mail->Body = $_POST['editor1'];
+            $mail->Body = $_POST['mensagem'];
             //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
             $mail->send();
@@ -237,7 +240,7 @@ class CartorioController extends Controller
         } catch (Exception $e) {
             return [
                 'title' => "Error!",
-                'msg' => "Não foi possível enviar os e-mail(s).<br/><b>Mailer Error:</b> {$mail->ErrorInfo}",
+                'msg' => "Não foi possível enviar o(s) e-mail(s).<br/><b>Erro:</b> {$mail->ErrorInfo}",
                 'type' => "error",
                 'reload' => false
             ];
