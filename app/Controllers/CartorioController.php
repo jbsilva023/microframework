@@ -18,8 +18,6 @@ class CartorioController extends Controller
     public function __construct($params)
     {
         $this->params = $params;
-
-        (Dotenv::create(__DIR__ . '/../../'))->load();
     }
 
     public function index()
