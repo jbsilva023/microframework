@@ -170,7 +170,8 @@ class ExcelController extends Controller
             $count++;
         }
 
-        $tmpfile = tempnam('php://output', 'phpxltmp');
+        $tmpfile = tempnam(sys_get_temp_dir(), 'phpxltmp');
+//        $tmpfile = tempnam('php://output', 'phpxltmp');
 
         $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
         $objWriter->save($tmpfile);
