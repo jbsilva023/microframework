@@ -3,25 +3,7 @@ $(window).on('load', function () {
 });
 
 $(function ($) {
-    $('.date').mask('00/00/0000');
-    $('.time').mask('00:00:00');
-    $('.date_time').mask('00/00/0000 00:00:00');
-    $('.cep').mask('00000-000');
-    $('.phone').mask('9999-9999Z', {
-        translation: {
-            'Z': {
-                pattern: /[0-9]/, optional: true
-            }
-        }
-    });
-    $('.phone_with_ddd').mask('(00) 0000-0000');
-    $('.phone_us').mask('(000) 000-0000');
-    $('.mixed').mask('AAA 000-S0S');
-    $('.cpf').mask('000.000.000-00', {reverse: true});
-    $('.cnpj').mask('00.000.000/0000-00', {reverse: true});
-    $('.cpf_cnpj').mask(CPFCNPJMask, spOptions);
-    $('.money').mask('000.000.000.000.000,00', {reverse: true});
-    $('.money2').mask("#.##0,00", {reverse: true});
+    mask_init();
 
     /* Evento que controle o submenu lateral, será exibido no momento do click
      * no dropdown-item dropdown-toggle
@@ -81,4 +63,26 @@ function download(response) {
     document.body.appendChild(a);
     a.click();
     a.remove();
+}
+
+function mask_init() {
+    $('.date').mask('00/00/0000');
+    $('.time').mask('00:00:00');
+    $('.date_time').mask('00/00/0000 00:00:00');
+    $('.cep').mask('00000-000');
+    $('.phone').mask('9999-9999Z', {
+        translation: {
+            'Z': {
+                pattern: /[0-9]/, optional: true
+            }
+        }
+    });
+    $('.phone_with_ddd').mask('(00) 0000-0000');
+    $('.phone_us').mask('(000) 000-0000');
+    $('.mixed').mask('AAA 000-S0S');
+    $('.cpf').mask('000.000.000-00', {reverse: true});
+    $('.cnpj').mask('00.000.000/0000-00', {reverse: true});
+    $('.cpf_cnpj').mask(CPFCNPJMask, spOptions);
+    $('.money').mask('000.000.000.000.000,00', {reverse: true});
+    $('.money2').mask("#.##0,00", {reverse: true});
 }

@@ -72,4 +72,3 @@
         </div>
     </div>
 </form>
-<script src="/app/public/js/jquery.funcoes.js"></script>

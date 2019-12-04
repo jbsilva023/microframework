@@ -15,6 +15,7 @@ $(function ($) {
                 },
                 success: function (response) {
                     $('div#update-cartorio').find('div.modal-content .form').html(response);
+                    mask_init();
                 },
                 error: function () {
 
@@ -42,6 +43,7 @@ $(function ($) {
             },
             success: function (response) {
                 $('div#create-cartorio').find('div.modal-content .form').html(response);
+                mask_init();
             },
             error: function () {
 
