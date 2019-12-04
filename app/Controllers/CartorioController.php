@@ -104,6 +104,7 @@ class CartorioController extends Controller
                 $cartorio->tipo_documento = $_POST['tipo_documento'];
                 $cartorio->telefone = Helper::unmask($_POST['telefone']);
                 $cartorio->razao = $_POST['razao'];
+                $cartorio->status = $_POST['status'];
                 $cartorio->save();
 
                 $endereco = $cartorio->endereco();
@@ -213,7 +214,7 @@ class CartorioController extends Controller
             $mail->Body = $_POST['mensagem'];
             //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
-            if (count($cartorio) > 0) {
+            if (count($cartorios) > 0) {
                 foreach ($cartorios as $cartorio) {
                     $mail->clearAddresses();
                     $mail->addAddress($cartorio->email, $cartorio->nome);     // Add a recipient
