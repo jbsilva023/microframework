@@ -272,7 +272,7 @@ class Paginator
             return '';
         }
         $html = '<nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-center">';
+                    <ul class="pagination justify-content-center flex-wrap">';
         if ($this->getPrevUrl()) {
             $html .= '<li class="page-item"><a class="page-link" href="'
                 . htmlspecialchars($this->getPrevUrl()) . '" aria-label="Previous">&laquo; '
